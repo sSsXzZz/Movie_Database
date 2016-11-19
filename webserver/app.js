@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var db = require('./db');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -24,6 +25,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+db.connect( function(err) {
+    if (err){
+        console.log('Unable to establish connection to Database');
+        process.exit(1);
+    }
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
