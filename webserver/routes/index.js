@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
         var movies = rows.map(function(movie) {
             return movie.movie_title;
         });
-        res.render('index', { title: 'Express', movies: movies });
+        res.render('index', { title: 'Homepage', movies: movies });
     });
 });
 
