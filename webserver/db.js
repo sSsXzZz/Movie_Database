@@ -8,17 +8,17 @@ var state = {
   pool: null,
 }
 
-exports.connect = function(done) {
-  state.pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'vishnu1',
-    database: 'imdb',
-  })
+exports.connect = function(callback) {
+    state.pool = mysql.createPool({
+        host: 'localhost',
+        user: 'root',
+        password: 'vishnu1',
+        database: 'imdb',
+    })
 
-  done()
+    callback()
 }
 
 exports.get = function() {
-  return state.pool
+    return state.pool
 }
