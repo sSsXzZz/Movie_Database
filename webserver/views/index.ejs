@@ -7,5 +7,10 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <ul>
+        <% movies.forEach(function(movie){ %>
+            <li><%= movie %></li>
+        <% }); %>
+    </ul>
   </body>
 </html>
