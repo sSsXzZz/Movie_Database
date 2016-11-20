@@ -13,9 +13,6 @@ data = data.drop(['num_critic_for_reviews','movie_facebook_likes', 'color', 'dir
 
 movies = data[['language','title_year','content_rating','movie_title','duration','gross']]
 movies = movies.rename(columns={'title_year': 'year', 'gross': 'revenue'})
-movies['movie_title'] = movies['movie_title'].astype('str')
-for index, rows in movies.iterrows():
-    rows['movie_title'].rstrip()
 
 movies.to_sql('Movies', con=engine, if_exists = 'append', index = False,
                   dtype={'language': sqlalchemy.types.VARCHAR(length=10),
@@ -25,6 +22,7 @@ movies.to_sql('Movies', con=engine, if_exists = 'append', index = False,
                             'duration': sqlalchemy.types.INTEGER(),
                             'revenue': sqlalchemy.types.INTEGER()})
 #UPDATE Movies SET movie_title = SUBSTRING(movie_title, 1, CHAR_LENGTH(movie_title) -1);
+
 data['genres'] = data['genres'].astype('str') 
 data['plot_keywords'] = data['plot_keywords'].astype('str') 
 genres = pd.DataFrame(columns=['name','mid'])
