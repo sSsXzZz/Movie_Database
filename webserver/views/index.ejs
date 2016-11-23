@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-<title><%= title %></title>
+<title>W3.CSS Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/style.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
@@ -16,100 +17,7 @@ body, html {
     line-height: 1.8;
 }
 
-/* Create a Parallax Effect */
-.bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
-/* First image (Logo. Full height) */
-.bgimg-1 {
-    background-image: url('http://wallpapers.style/images/blur-wallpaper/blur-wallpaper-6.jpg');
-    min-height: 100%;
-}
-
-/* Second image (Portfolio) */
-.bgimg-2 {
-    background-image: url("/w3images/parallax2.jpg");
-    min-height: 400px;
-}
-
-/* Third image (Contact) */
-.bgimg-3 {
-    background-image: url("/w3images/parallax3.jpg");
-    min-height: 400px;
-}
-
-.search_span {
-	background-color: #FFFFFF;
-}
-
-.searching {
-	background-color: #CCF5FF;
-}
-
-.w3-wide {letter-spacing: 10px;}
-.w3-hover-opacity {cursor: pointer;}
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    margin: auto;
-    top: 0;
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#movie_list {
-  height:500px;
-  overflow-y:scroll;
-}
-
-li {
-  list-style-type: none;
-}
-
-.movie_item {
-  display:block;
-  width:100%;
-  list-style-position: inside;
-  border: 1px solid black;
-  float:left;
-}
-
-.alphabet {
-  background-color: #CCF2FF;
-}
 
 /* Turn off parallax scrolling for tablets and phones */
 @media only screen and (max-device-width: 1024px) {
@@ -153,78 +61,144 @@ li {
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div style="display: flex; flex-direction: column;">
     <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:10%">
-    	<div class="input-group">
-    		<div class="input-group-btn">
-    			<button type="button" class="btn btn-default type">A</button>
-    			<button type="button" class="btn btn-default type">M</button>
-    			<button type="button" class="btn btn-default type">D</button>
-    		</div>
-    		<input type="text" class="form-control"/>
-    	</div>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default type">A</button>
+          <button type="button" class="btn btn-default type">M</button>
+          <button type="button" class="btn btn-default type">D</button>
+        </div>
+        <input type="text" class="form-control"/>
+      </div>
     </div>
     <div class="w3-display-topmiddle" style="white-space:nowrap; margin-top:20%; border-radius:5px; background-color: #FFFFFF;">
       <div>
-        <button type="button" class="btn btn-default alphabet">A</button>
-        <button type="button" class="btn btn-default alphabet">B</button>
-        <button type="button" class="btn btn-default alphabet">C</button>
-        <button type="button" class="btn btn-default alphabet">D</button>
-        <button type="button" class="btn btn-default alphabet">E</button>
-        <button type="button" class="btn btn-default alphabet">F</button>
-        <button type="button" class="btn btn-default alphabet">G</button>
-        <button type="button" class="btn btn-default alphabet">H</button>
-        <button type="button" class="btn btn-default alphabet">I</button>
-        <button type="button" class="btn btn-default alphabet">J</button>
-        <button type="button" class="btn btn-default alphabet">K</button>
-        <button type="button" class="btn btn-default alphabet">L</button>
-        <button type="button" class="btn btn-default alphabet">M</button>
-        <button type="button" class="btn btn-default alphabet">N</button>
-        <button type="button" class="btn btn-default alphabet">O</button>
-        <button type="button" class="btn btn-default alphabet">P</button>
-        <button type="button" class="btn btn-default alphabet">Q</button>
-        <button type="button" class="btn btn-default alphabet">R</button>
-        <button type="button" class="btn btn-default alphabet">S</button>
-        <button type="button" class="btn btn-default alphabet">T</button>
-        <button type="button" class="btn btn-default alphabet">U</button>
-        <button type="button" class="btn btn-default alphabet">V</button>
-        <button type="button" class="btn btn-default alphabet">W</button>
-        <button type="button" class="btn btn-default alphabet">X</button>
-        <button type="button" class="btn btn-default alphabet">Y</button>
-        <button type="button" class="btn btn-default alphabet">Z</button>
+        <a href=""><button type="button" class="btn btn-default alphabet">#</button></a>
+        <a href="#"><button type="button" class="btn btn-default alphabet">A</button></a>
+        <a href="#b_anchor"><button type="button" class="btn btn-default alphabet">B</button></a>
+        <a href="#c_anchor"><button type="button" class="btn btn-default alphabet">C</button></a>
+        <a href="#d_anchor"><button type="button" class="btn btn-default alphabet">D</button></a>
+        <a href="#e_anchor"><button type="button" class="btn btn-default alphabet">E</button></a>
+        <a href="#f_anchor"><button type="button" class="btn btn-default alphabet">F</button></a>
+        <a href="#g_anchor"><button type="button" class="btn btn-default alphabet">G</button></a>
+        <a href="#h_anchor"><button type="button" class="btn btn-default alphabet">H</button></a>
+        <a href="#i_anchor"><button type="button" class="btn btn-default alphabet">I</button></a>
+        <a href="#j_anchor"><button type="button" class="btn btn-default alphabet">J</button></a>
+        <a href="#k_anchor"><button type="button" class="btn btn-default alphabet">K</button></a>
+        <a href="#l_anchor"><button type="button" class="btn btn-default alphabet">L</button></a>
+        <a href="#m_anchor"><button type="button" class="btn btn-default alphabet">M</button></a>
+        <a href="#n_anchor"><button type="button" class="btn btn-default alphabet">N</button></a>
+        <a href="#o_anchor"><button type="button" class="btn btn-default alphabet">O</button></a>
+        <a href="#p_anchor"><button type="button" class="btn btn-default alphabet">P</button></a>
+        <a href="#q_anchor"><button type="button" class="btn btn-default alphabet">Q</button></a>
+        <a href="#r_anchor"><button type="button" class="btn btn-default alphabet">R</button></a>
+        <a href="#s_anchor"><button type="button" class="btn btn-default alphabet">S</button></a>
+        <a href="#t_anchor"><button type="button" class="btn btn-default alphabet">T</button></a>
+        <a href="#u_anchor"><button type="button" class="btn btn-default alphabet">U</button></a>
+        <a href="#v_anchor"><button type="button" class="btn btn-default alphabet">V</button></a>
+        <a href="#w_anchor"><button type="button" class="btn btn-default alphabet">W</button></a>
+        <a href="#x_anchor"><button type="button" class="btn btn-default alphabet">X</button></a>
+        <a href="#y_anchor"><button type="button" class="btn btn-default alphabet">Y</button></a>
+        <a href="#z_anchor"><button type="button" class="btn btn-default alphabet">Z</button></a>
       </div>
-      <div>
-        <!--- <ul>
-          <% movies.forEach(function(movie){ %>
-            <li><a class="movie_item" href="#"><%= movie %></li>
-          <% }); %>
-        </ul> -->
+
+
+      <div id="movie_list">
+          <table id="my_table" class="table table-striped">
+              <% 
+                var letter='';
+                movies.forEach(function(movie){
+                  if (!movie[0].match(/[a-zA-Z]/i)){
+                    letter = '#';
+                  }
+                  if (movie[0].toUpperCase() !== letter ||  movie===movie[0] ){
+                      letter = movie[0].toUpperCase();
+              %>
+                <a href="#"><tr id="<%= movie[0].toUpperCase() %>_anchor"><td><%= movie %></td></tr></a>
+              <%
+                  } else {
+              %>
+                <tr><td><%= movie %></td></tr>
+              <%
+                  }});
+              %>
+              
+          </table>
+      </div>
+
+
+
+      <!-- <div>
         <ul id="movie_list">
           <li><a class="movie_item" href="#">Here</a></li>
           <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" id="a_anchor" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+          <li><a class="movie_item" href="#">Here</a></li>
+          <li><a class="movie_item" href="#">Sahil is the greatest</a></li>
+
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
-</div>
+</div>Clarke
 
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
-	<div class="modal-content"> <!-- this is the container wrapper -->
-		<span class="close">x</span>
-		<div class="input-group" style="margin:auto;">
-			Returning User?
-			<input type="text" class="form-control" placeholder="Username">
-			<input type="password" class="form-control" placeholder="Password">
-			<button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
-		</div>
-		<div style="margin:auto;">
-			<button type="button" class="btn btn-default" style="display:block; margin:auto; margin-top:50px;" id="sign_button">Sign Up</button>
-		</div>
-		<div class="input-group" style="margin:auto; display:none" id="register_div">
-			<input type="text" class="form-control" placeholder="Username">
-			<input type="password" class="form-control" placeholder="Password">
-			<button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
-		</div>
-	</div>
-	</div>
+  <div class="modal-content container"> <!-- this is the container wrapper -->
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+        <span class="close">x</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group" style="margin:auto;">
+
+        <input type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+        <input type="password" class="form-control" placeholder="Password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
+      </div>
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
+      </div>
+    </div>
+<!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
+      <input type="text" class="form-control" placeholder="Username">
+      <input type="password" class="form-control" placeholder="Password">
+      <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
+    </div> -->
+  </div>
+  </div>
 </div>
 
 <!-- Container (About Section) -->
@@ -421,16 +395,31 @@ window.onclick = function(event) {
 }
 
 $("#sign_button").click(function(){
-	if ($("#register_div").css('display') == 'none')
-	{
-		console.log("True");
-		$("#register_div").css('display', 'block');
-	}
+  if ($("#register_div").css('display') == 'none')
+  {
+    console.log("True");
+    $("#register_div").css('display', 'block');
+  }
+});
+
+var container = $("#movie_list");
+var scrollTo = $("#a_anchor");
+// console.log(scrollTo.offset().top);
+// console.log("HI");
+
+$(".alphabet").click(function() {
+  var letter = $(this).text();
+  var anchor_string = "#" + letter + "_anchor";
+  var scrollTo = $(anchor_string);
+
+  container.animate({
+    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+  });
+
 });
 
 </script>
 
 </body>
 </html>
-
 
