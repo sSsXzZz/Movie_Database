@@ -17,7 +17,7 @@ router.post('/login', function(req,res,next){
     if (!req.body.username || !req.body.password){
         res.status(400).send('No username or password specified!');
     }
-    var query_string = "SELECT 1 FROM Users WHERE "
+    var query_string = "SELECT uid FROM Users WHERE "
         + "username='" + req.body.username
         + "' AND password='" + req.body.password + "'";
     db.get().query(query_string, function(err,rows,fields){
@@ -26,7 +26,7 @@ router.post('/login', function(req,res,next){
             res.status(403).send('Invalid credentials!');
         } else{
             console.log("User " + req.body.username + " has logged in\n");
-            res.send(200);
+            res.status(200).send(rows[0].uid.toString());
         }
     });
 });
