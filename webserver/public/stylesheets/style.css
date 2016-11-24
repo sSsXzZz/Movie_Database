@@ -1,4 +1,11 @@
 /* Create a Parallax Effect */
+
+body {
+  transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+}
+
 .bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: fixed;
     background-position: center;
@@ -231,3 +238,63 @@ li {
 #owl-demo .item:hover{
   opacity: 0.5;
 }
+
+.user_sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0%; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  margin-right:-17px;
+  background-color: #B2EBF2; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-y: hidden;
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* Position and style the close button (top right corner) */
+.user_sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.user_sidebar_item {
+  position: relative;
+  transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_sidebar_item:hover {
+  background-color: #00BCD4;
+}
+
+.open_sans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.middle_text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200px;
+  height: 200px;
+}
+
+.scope_one {
+  font-family: 'Scope One', serif;
+}
+

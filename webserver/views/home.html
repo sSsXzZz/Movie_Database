@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.transitions.css">
 <link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.theme.css">
+<link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
 <script src="../public/javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -43,9 +44,9 @@ body, html {
       </a>
     </li>
     <li class="w3-left-align"><a href="#home">HOME</a></li>
-    <li class="w3-hide-small"><a href="#about"><i class="fa fa-user"></i> ABOUT</a></li>
-    <li class="w3-hide-small"><a href="#contact"><i class="fa fa-envelope"></i> CONTACT</a></li>
-    <li class="w3-hide-small w3-right">
+    <li class="w3-hide-small"><a href="#" onclick="openNav()"><i class="fa fa-user"></i> USER</a></li>
+    <li class="w3-hide-small"><a href="#about"><i class="fa fa-envelope"></i> ABOUT</a></li>
+    <li class="w3-hide-small">
       <a href="#0" class="w3-hover-red" id="login_button">
         LOGIN
       </a>
@@ -231,6 +232,24 @@ body, html {
   </div>
 </div>
 
+
+<div class="user_sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">
+    <div class="user_sidebar_item scope_one" style="width:100%; height:10%; margin-top:20%; font-size: 50px;">
+     <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
+      Settings
+    </div>
+  </a>
+  <a href="#">
+    <div class="user_sidebar_item scope_one" style="width:100%; height:10%; font-size: 50px;">
+     <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
+      History
+    </div>
+  </a>
+</div>
+
+
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
   <div class="modal-content"> <!-- this is the container wrapper -->
     <span class="close" style="float:right;">x</span>
@@ -372,7 +391,7 @@ $(document).ready(function() {
  
   $("#owl-demo").owlCarousel({
  
-      autoPlay: 3000, //Set AutoPlay to 3 seconds
+      autoPlay: 6000, //Set AutoPlay to 3 seconds
  
       items : 4,
       itemsDesktop : [1199,3],
@@ -517,6 +536,7 @@ $(".alphabet").click(function() {
 //   }, 10);
 
 </script>
+<script src="../public/javascripts/user_sidebar.js"></script>
 
 </body>
 </html>
