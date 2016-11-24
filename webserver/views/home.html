@@ -9,7 +9,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.transitions.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.theme.css">
+<script src="../public/javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
@@ -21,11 +26,11 @@ body, html {
 
 
 /* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1024px) {
+/*@media only screen and (max-device-width: 1024px) {
     .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: scroll;
     }
-}
+}*/
 </style>
 <body>
 
@@ -101,32 +106,79 @@ body, html {
         <a href="#y_anchor"><button type="button" class="btn btn-default alphabet">Y</button></a>
         <a href="#z_anchor"><button type="button" class="btn btn-default alphabet">Z</button></a>
       </div> -->
-      <div class="slider" style="margin-top:20%; margin-right:20%">
-          <div id="left1" class="left">&lt;</div>
-          <div id="right1" class="right">&gt;</div>
-          <div class="track" id="track1">
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-              <div class="book">
-                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
-              </div>
-          </div>
+      <div style="position:absolute; margin-top: 15%;">
       </div>
+<!--       <div class="slider" style="margin-top:20%; margin-right:20%">
+        <div id="left1" class="left"></div>
+        <div id="right1" class="right"></div>
+        <div class="track" id="track1">
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%; border-radius: 5px;">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+            <div class="book" id="the-last">
+              <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            </div>
+        </div>
+      </div> -->
 
-
+      <div id="owl-demo" style="width:80%; margin:auto; margin-top:20%; padding:20px; background-color: #FFFFFF; border-radius: 10px;">
+                
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+        <div class="item" id="the-last">
+          <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+        </div>
+       
+      </div>
 <!--       <div id="movie_list">
           <table id="my_table" class="table table-striped">
               <tr id='row_1'><td>1</td></tr>
@@ -180,39 +232,27 @@ body, html {
 </div>
 
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
-  <div class="modal-content container"> <!-- this is the container wrapper -->
-    <div class="row">
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-4">
-        <span class="close">x</span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-group" style="margin:auto;">
+  <div class="modal-content"> <!-- this is the container wrapper -->
+    <span class="close" style="float:right;">x</span>
 
-        <input type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
-        <input type="password" class="form-control" placeholder="Password">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
+    <div class="input-group" style="margin:auto;">
+
+      <input id="username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+      <input type="password" class="form-control" placeholder="Password">
+      <div style="float:left;">
         <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
       </div>
-      <div class="col-md-6">
-      </div>
-      <div class="col-md-3">
+      <div style="float:right;">
         <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
       </div>
+    </div>
     </div>
 <!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
       <input type="text" class="form-control" placeholder="Username">
       <input type="password" class="form-control" placeholder="Password">
       <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
     </div> -->
-  </div>
+</div>
   </div>
 </div>
 
@@ -319,8 +359,7 @@ body, html {
   <p>Powered by <a href="http://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
  
-<!-- Add Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+
 <script>
 
 $('.type').click(function(){
@@ -331,28 +370,44 @@ $('.type').click(function(){
     }
 });
 
-<!-- Google Map Location -->
-var myCenter = new google.maps.LatLng(41.878114, -87.629798);
-
-function initialize() {
-var mapProp = {
-  center: myCenter,
-  zoom: 12,
-  scrollwheel: false,
-  draggable: false,
-  mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-
-var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-var marker = new google.maps.Marker({
-  position: myCenter,
+$(document).ready(function() {
+ 
+  $("#owl-demo").owlCarousel({
+ 
+      autoPlay: 3000, //Set AutoPlay to 3 seconds
+ 
+      items : 4,
+      itemsDesktop : [1199,3],
+ 
+  });
+ 
 });
 
-marker.setMap(map);
-}
+// var username_width = $("#username").width();
+// $('.modal-content').css("width", username_width + 50);
 
-google.maps.event.addDomListener(window, 'load', initialize);
+// <!-- Google Map Location -->
+// var myCenter = new google.maps.LatLng(41.878114, -87.629798);
+
+// function initialize() {
+// var mapProp = {
+//   center: myCenter,
+//   zoom: 12,
+//   scrollwheel: false,
+//   draggable: false,
+//   mapTypeId: google.maps.MapTypeId.ROADMAP
+//   };
+
+// var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+// var marker = new google.maps.Marker({
+//   position: myCenter,
+// });
+
+// marker.setMap(map);
+// }
+
+// google.maps.event.addDomListener(window, 'load', initialize);
 
 // Modal Image Gallery
 function onClick(element) {
@@ -433,18 +488,35 @@ $(".alphabet").click(function() {
 
 });
 
-setInterval(function() {
-    var left1 = parseInt($('#track1').css('left')),
-        left2 = parseInt($('#track2').css('left')),
-        left3 = parseInt($('#track3').css('left'));
+// var slider_width = $('.slider').width();
+// var track_width = $("#track1").width();
+
+// console.log(track_width);
+
+// setInterval(function() {
+//     var left1 = parseInt($('#track1').css('left'));
     
-    if ($('#left1').is(":hover")) {
-        $('#track1').css('left', left1+2);
-    }
-    else if ($('#right1').is(":hover")) {
-        $('#track1').css('left', left1-2);
-    }
-  }, 10);
+//     if ($('#left1').is(":hover")) {
+//       if (parseInt($('#track1').css('left')) >= 2)
+//       {
+//         $('#track1').css('left', 2);
+//       }
+//       else
+//       {
+//         $('#track1').css('left', left1+2);
+//       }
+//     }
+//     else if ($('#right1').is(":hover")) {
+//       var left_val = parseInt($("#track1").css('left'));
+//       if (left_val + track_width <= slider_width)
+//       {
+//         //$('#track1').css('left', slider_width);
+//       }
+//       else {
+//         $('#track1').css('left', left1-2);
+//       }
+//     }
+//   }, 10);
 
 </script>
 

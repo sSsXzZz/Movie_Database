@@ -29,7 +29,7 @@
 }
 
 .searching {
-  background-color: #E0F7FA;
+  background-color: #4DD0E1 !important;
 }
 
 .w3-wide {letter-spacing: 10px;}
@@ -55,6 +55,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 40%;
+    overflow: hidden;
 }
 
 /* The Close Button */
@@ -146,6 +147,7 @@ li {
     bottom: 10px;
     left: 10px;
     margin: 0;
+    margin-left: 2%;
     padding: 0;
     border: 0;
     width: 1500px;
@@ -200,10 +202,11 @@ li {
 }*/
 .left, .right {
     position: absolute;
-    color: black;
     font-size: 48px;
-    top: 57px;
-    
+    bottom: 0px;
+    height: 100%;
+    background-color: #80DEEA;
+    width: 2%;
     cursor: pointer;
     z-index: 1;
 }
@@ -212,4 +215,19 @@ li {
 }
 .right {
     right: 0;
+}
+
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+#owl-demo .item{
+  margin: 5px;
+}
+
+#owl-demo .item:hover{
+  opacity: 0.5;
 }
