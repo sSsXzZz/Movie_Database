@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../public/stylesheets/style.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -70,8 +71,9 @@ body, html {
         <input type="text" class="form-control"/>
       </div>
     </div>
-    <div class="w3-display-topmiddle" style="white-space:nowrap; margin-top:20%; border-radius:5px; background-color: #FFFFFF;">
+<!--     <div class="w3-display-topmiddle" style="white-space:nowrap; margin-top:20%; border-radius:5px; background-color: #FFFFFF;">
       <div>
+        <a href="#"><button type="button" class="btn btn-default alphabet">#</button></a>
         <a href="#"><button type="button" class="btn btn-default alphabet">A</button></a>
         <a href="#b_anchor"><button type="button" class="btn btn-default alphabet">B</button></a>
         <a href="#c_anchor"><button type="button" class="btn btn-default alphabet">C</button></a>
@@ -98,10 +100,34 @@ body, html {
         <a href="#x_anchor"><button type="button" class="btn btn-default alphabet">X</button></a>
         <a href="#y_anchor"><button type="button" class="btn btn-default alphabet">Y</button></a>
         <a href="#z_anchor"><button type="button" class="btn btn-default alphabet">Z</button></a>
+      </div> -->
+      <div class="slider" style="margin-top:20%; margin-right:20%">
+          <div id="left1" class="left">&lt;</div>
+          <div id="right1" class="right">&gt;</div>
+          <div class="track" id="track1">
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+              <div class="book">
+                <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+              </div>
+          </div>
       </div>
 
 
-      <div id="movie_list">
+<!--       <div id="movie_list">
           <table id="my_table" class="table table-striped">
               <tr id='row_1'><td>1</td></tr>
               <tr id='row_2'><td>2</td></tr>
@@ -113,7 +139,7 @@ body, html {
               <tr id='row_8'><td>8</td></tr>
               <a href="#"><tr id="A_anchor"><td>9</td></tr>
           </table>
-      </div>
+      </div> -->
 
 
 
@@ -150,9 +176,8 @@ body, html {
 
         </ul>
       </div> -->
-    </div>
   </div>
-</div>Clarke
+</div>
 
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
   <div class="modal-content container"> <!-- this is the container wrapper -->
@@ -407,6 +432,19 @@ $(".alphabet").click(function() {
   });
 
 });
+
+setInterval(function() {
+    var left1 = parseInt($('#track1').css('left')),
+        left2 = parseInt($('#track2').css('left')),
+        left3 = parseInt($('#track3').css('left'));
+    
+    if ($('#left1').is(":hover")) {
+        $('#track1').css('left', left1+2);
+    }
+    else if ($('#right1').is(":hover")) {
+        $('#track1').css('left', left1-2);
+    }
+  }, 10);
 
 </script>
 

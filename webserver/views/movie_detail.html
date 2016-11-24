@@ -8,6 +8,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../public/stylesheets/style.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:600i" rel="stylesheet">
+<link rel="stylesheet" href="../public/stylesheets/rating.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -37,7 +39,7 @@ body, html {
     <li class="w3-left-align"><a href="#home">HOME</a></li>
     <li class="w3-hide-small"><a href="#about"><i class="fa fa-user"></i> ABOUT</a></li>
     <li class="w3-hide-small"><a href="#contact"><i class="fa fa-envelope"></i> CONTACT</a></li>
-    <li class="w3-hide-small w3-right">
+    <li class="w3-hide-small w3">
       <a href="#0" class="w3-hover-red" id="login_button">
         LOGIN
       </a>
@@ -55,13 +57,23 @@ body, html {
   </div>
 </div>
 
-<div id="sidebar" class="side_detail">
+<div id="sidebar" class="side_detail" style="text-align:center;">
+  <div style="background-color: #00BCD4;">
+    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:15px; overflow-x:visible;"><i>Hi Guejkj;kj;st!</i></p>
+    <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
+  </div>
+  <div id="shop"></div>
+  <textarea rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:30px"></textarea>
+  <button type="button" class="btn btn-default" style="margin: 0 auto;">Submit Comments</button>
+<!--   <div class="rating">
+    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+  </div> -->
 </div>
 
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div style="display: flex; flex-direction: column;">
-    <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:10%">
+    <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:5%">
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="btn btn-default type">A</button>
@@ -69,6 +81,12 @@ body, html {
           <button type="button" class="btn btn-default type">D</button>
         </div>
         <input type="text" class="form-control"/>
+      </div>
+      <div style="background-color:#E0F7FA; border-radius:5px; margin-top:30px; padding:15px;">
+        <p style="font-family: 'Open Sans', sans-serif; font-size:50px;"><i>MOVIE TITLE</i></p>
+        <p id="content_rating" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Content Rating: PG-13</p>
+        <p id="length" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Length: 115 min</p>
+        <p id="Languages" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Length: 115 min</p>
       </div>
     </div>
   </div>
@@ -206,6 +224,61 @@ body, html {
   <p>Powered by <a href="http://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
  
+
+<script src="../public/javascripts/rating.js"></script>
+<script>
+(function() {
+
+    'use strict';
+
+    // SHOP ELEMENT
+    var shop = document.querySelector('#shop');
+
+    // DUMMY DATA
+    var data = [
+      {
+        title: "",
+        description: "",
+        rating: 0
+      },
+    ];
+
+    // INITIALIZE
+    (function init() {
+      for (var i = 0; i < data.length; i++) {
+        addRatingWidget(buildShopItem(data[i]), data[i]);
+      }
+    })();
+
+    // BUILD SHOP ITEM
+    function buildShopItem(data) {
+      var shopItem = document.createElement('div');
+
+      var html = '<div class="c-shop-item__img"></div>' +
+        '<div class="c-shop-item__details">' +
+          '<p style="left:10px; font-family: ' + "'Open Sans', sans-serif; font-size:30px;" + '">' + data.title + '</h3>' +
+          '<p class="c-shop-item__description">' + data.description + '</p>' +
+          '<ul class="c-rating" style="margin-left:5%"></ul>' +
+        '</div>';
+
+      shopItem.classList.add('c-shop-item');
+      shopItem.innerHTML = html;
+      shop.appendChild(shopItem);
+
+      return shopItem;
+    }
+
+    // ADD RATING WIDGET
+    function addRatingWidget(shopItem, data) {
+      var ratingElement = shopItem.querySelector('.c-rating');
+      var currentRating = data.rating;
+      var maxRating = 5;
+      var callback = function(rating) { alert(rating); };
+      var r = rating(ratingElement, currentRating, maxRating, callback);
+    }
+
+  })();
+</script>
 <!-- Add Google Maps -->
 <script>
 
