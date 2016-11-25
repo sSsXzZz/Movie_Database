@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="../public/stylesheets/rating.css">
 <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../public/javascripts/masonry.pkgd.min.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
@@ -61,12 +60,10 @@ body, html {
 
 <div id="sidebar" class="side_detail" style="text-align:center;">
   <div style="background-color: #00BCD4;">
-    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:15px; overflow-x:visible;"><i>Hi Anonymous!</i></p>
+    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:15px; overflow-x:visible;"><i>Hi Guejkj;kj;st!</i></p>
     <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
   </div>
-  <div id="shop">
-    
-  </div>
+  <div id="shop"></div>
   <textarea rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:30px"></textarea>
   <button type="button" class="btn btn-default" style="margin: 0 auto;">Submit Comments</button>
 <!--   <div class="rating">
@@ -87,10 +84,10 @@ body, html {
         <input type="text" class="form-control"/>
       </div>
       <div style="background-color:#E0F7FA; border-radius:5px; margin-top:30px; padding:15px;">
-        <div class="scope_one" style="font-size:50px; padding:10px; display:inline-block;"><b>MOVIE TITLE</b></div>
-        <div class="scope_one" style="font-size:50px; padding:10px; display:inline-block;"><b>LENGTH</b></div>
-        <br>
-        <div class="scope_one" style="font-size:50px; padding:10px; display:inline-block;"><b>LENGTH</b></div>
+        <p style="font-family: 'Open Sans', sans-serif; font-size:50px;"><i>MOVIE TITLE</i></p>
+        <p id="content_rating" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Content Rating: PG-13</p>
+        <p id="length" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Length: 115 min</p>
+        <p id="Languages" style="font-family: 'Open Sans', sans-serif; font-size:15px;">Length: 115 min</p>
       </div>
     </div>
   </div>
@@ -114,26 +111,31 @@ body, html {
 
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
   <div class="modal-content"> <!-- this is the container wrapper -->
-    <span class="close" style="float:right;">x</span>
-    <div class="input-group scope_one" style="margin:auto;">
-      <input id="username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+    <span class="close">x</span>
+    <div class="input-group" style="margin:auto;">
+      Returning User?
+      <input type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
       <input type="password" class="form-control" placeholder="Password">
-      <div style="float:left;">
-        <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Login</button>
-      </div>
-      <div style="float:right;">
-        <button type="button" class="btn btn-default scope_one" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
-      </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
+        </div>
+        <div class="col-md-offset-6">
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
+        </div>
+      </div>
     </div>
 <!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
       <input type="text" class="form-control" placeholder="Username">
       <input type="password" class="form-control" placeholder="Password">
       <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
     </div> -->
-</div>
   </div>
-</div>
+  </div>
 </div>
 
 <!-- Footer -->
@@ -263,10 +265,8 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
 </script>
 <script src="../public/javascripts/user_sidebar.js"></script>
 
 </body>
 </html>
-

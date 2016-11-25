@@ -118,9 +118,7 @@ li {
 }
 
 #movie_img {
-  height:auto;
-  width:auto;
-  max-width:100%;
+  width: 100%;
 }
 
 .rating > span:hover:before {
@@ -233,6 +231,9 @@ li {
 
 #owl-demo .item{
   margin: 5px;
+  transition: opacity 0.25s linear;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
 }
 
 #owl-demo .item:hover{
@@ -298,3 +299,21 @@ li {
   font-family: 'Scope One', serif;
 }
 
+.menu-outer {
+  height: 84px;
+  background: url(images/bar-bg.jpg) repeat-x;
+}
+
+.table {
+  display: table;   /* Allow the centering to work */
+  margin: 0 auto;
+}
+
+ul#horizontal-list {
+  min-width: 696px;
+  list-style: none;
+  padding-top: 20px;
+  }
+  ul#horizontal-list li {
+    display: inline;
+  }

@@ -155,7 +155,7 @@ body, html {
         </div>
       </div> -->
 
-      <div id="owl-demo" style="width:80%; margin:auto; margin-top:20%; padding:20px; background-color: #FFFFFF; border-radius: 10px;">
+      <div id="owl-demo" style="width:80%; margin:auto; margin-top:15%; padding:20px; background-color: #FFFFFF; border-radius: 10px;">
                 
         <div class="item">
           <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
@@ -235,13 +235,13 @@ body, html {
 
 <div class="user_sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">
+  <a href="#" id="settings_button">
     <div class="user_sidebar_item scope_one" style="width:100%; height:10%; margin-top:20%; font-size: 50px;">
      <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
       Settings
     </div>
   </a>
-  <a href="#">
+  <a href="#" id="history_button">
     <div class="user_sidebar_item scope_one" style="width:100%; height:10%; font-size: 50px;">
      <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
       History
@@ -253,17 +253,17 @@ body, html {
 <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
   <div class="modal-content"> <!-- this is the container wrapper -->
     <span class="close" style="float:right;">x</span>
-    <div class="input-group" style="margin:auto;">
+    <div class="input-group scope_one" style="margin:auto;">
       <input id="username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
-      <input type="password" class="form-control" placeholder="Password">
+      <input id="password" type="password" class="form-control" placeholder="Password">
       <div style="float:left;">
-        <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
+        <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Login</button>
       </div>
       <div style="float:right;">
-        <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
+        <button type="button" class="btn btn-default scope_one" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
       </div>
     </div>
-    </div>
+  </div>
 <!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
       <input type="text" class="form-control" placeholder="Username">
       <input type="password" class="form-control" placeholder="Password">
@@ -272,6 +272,48 @@ body, html {
 </div>
   </div>
 </div>
+
+<div class="modal" id="settings_modal"> <!-- this is the entire modal form, including the background -->
+  <div class="modal-content"> <!-- this is the container wrapper -->
+    <span class="close" style="float:right;" id="settings_button">x</span>
+    <div class="input-group scope_one" style="margin:auto;">
+      Change Password:
+      <input id="change_username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+      <input type="password" id="old_password" class="form-control" placeholder="Old Password">
+      <input type="password" id="new_password" class="form-control" placeholder="New Password" style="margin-top: 5px;">
+      <div style="float:left;">
+        <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Update</button>
+      </div>
+    </div>
+  </div>
+<!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
+      <input type="text" class="form-control" placeholder="Username">
+      <input type="password" class="form-control" placeholder="Password">
+      <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
+    </div> -->
+</div>
+
+<div class="modal" id="history_modal"> <!-- this is the entire modal form, including the background -->
+  <div class="modal-content"> <!-- this is the container wrapper -->
+    <span class="close" style="float:right;" id="settings_button">x</span>
+    <div class="input-group scope_one" style="margin:auto;">
+      Change Password:
+      <input id="change_username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+      <input type="password" id="old_password" class="form-control" placeholder="Old Password">
+      <input type="password" id="new_password" class="form-control" placeholder="New Password" style="margin-top: 5px;">
+      <div style="float:left;">
+        <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Update</button>
+      </div>
+    </div>
+  </div>
+<!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
+      <input type="text" class="form-control" placeholder="Username">
+      <input type="password" class="form-control" placeholder="Password">
+      <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
+    </div> -->
+</div>
+
+
 
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64" id="about">
@@ -393,7 +435,7 @@ $(document).ready(function() {
  
       autoPlay: 6000, //Set AutoPlay to 3 seconds
  
-      items : 4,
+      items : 6,
       itemsDesktop : [1199,3],
  
   });
@@ -480,6 +522,33 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+// Get the settings modal
+var modal = document.getElementById('settings_modal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("settings_button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("settings_close");
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 
 $("#sign_button").click(function(){
   if ($("#register_div").css('display') == 'none')
