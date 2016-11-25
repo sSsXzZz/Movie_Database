@@ -57,11 +57,11 @@ body {
 
 /* Modal Content */
 .modal-content {
+    display:inline-block;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
     overflow: hidden;
 }
 
@@ -317,3 +317,25 @@ ul#horizontal-list {
   ul#horizontal-list li {
     display: inline;
   }
+
+.history {
+  width:80%;
+  height:80%;
+  overflow-y: scroll;
+}
+
+.history_item {
+/*  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -webkit-transition: opacity 0.2s;*/
+  transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+}
+
+.history_item:hover {
+  /*opacity: 0.5;*/
+  background-color: #80DEEA;
+}
