@@ -19,8 +19,9 @@ $(document).ready(function(){
     });
 
     if (typeof Cookies.get('uid') !== "undefined"){
-        $("#login_button").text("Account");
-        $("#login_button").attr("href","account_link");
+        $("#login_button").text("LOGOUT");
+        $("#login_button").attr("href","#");
+        $("#login_button").attr("id","logout_button");
     }
 });
 
