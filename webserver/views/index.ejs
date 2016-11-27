@@ -17,6 +17,8 @@
 <script src="javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+<script src="javascripts/login.js"></script>
+<script src="javascripts/js-cookie.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -284,10 +286,10 @@ body, html {
       <div class="modal-content"> <!-- this is the container wrapper -->
         <span class="close" style="float:right;">x</span>
         <div class="input-group scope_one" style="margin:auto;">
-          <input id="username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
-          <input id="password" type="password" class="form-control" placeholder="Password">
+          <input id="username_textfield" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+          <input id="password_textfield" type="password" class="form-control" placeholder="Password">
           <div style="float:left;">
-            <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Login</button>
+            <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;" id="login_request_button">Login</button>
           </div>
           <div style="float:right;">
             <button type="button" class="btn btn-default scope_one" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
