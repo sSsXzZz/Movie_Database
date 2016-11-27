@@ -8,8 +8,8 @@ $(document).ready(function(){
                 username: $("#username_textfield").val(),
                 password: $("#password_textfield").val(),
             },
-            success: login_success,
-            error: login_error
+            success: loginSuccess,
+            error: loginError
         });
     });
     $("#username_textfield,#password_textfield").keypress(function(e){
@@ -19,18 +19,27 @@ $(document).ready(function(){
     });
 
     if (typeof Cookies.get('uid') !== "undefined"){
-        $("#login_button").text("LOGOUT");
-        $("#login_button").attr("href","#");
-        $("#login_button").attr("id","logout_button");
+        changeLoginToLogout();
     }
+
+    $("#logout_button").on('click', function(){
+        Cookies.remove('uid');
+    });
 });
 
-function login_success(data, textStatus, jqXHR){
+function loginSuccess(data, textStatus, jqXHR){
     // the responseText should contain the uid
     Cookies.set('uid',jqXHR.responseText);
+    changeLoginToLogout();
     location.reload();
 }
 
-function login_error(jqXHR, textStatus, errorThrown){
+function loginError(jqXHR, textStatus, errorThrown){
     alert(jqXHR.responseText);
+}
+
+function changeLoginToLogout(){
+    $("#login_button").text("LOGOUT");
+    $("#login_button").attr("href","#");
+    $("#login_button").attr("id","logout_button");
 }
