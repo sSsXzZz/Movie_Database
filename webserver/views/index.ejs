@@ -165,7 +165,7 @@ body, html {
             <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
           </div>
           <div class="item">
-            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+            <img src="http://www.fatmovieguy.com/wp-content/uploads/2014/12/300-Movie-Poster.jpg"  style="width:100%; height: 100%">
           </div>
           <div class="item">
             <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
@@ -585,14 +585,28 @@ body, html {
   $(document).ready(function() {
    
     $("#movies").owlCarousel({
-   
+        
         autoPlay: 6000, //Set AutoPlay to 3 seconds
    
         items : 6,
         itemsDesktop : [1199,3],
-   
-    });
+        
+        afterUpdate: function() {
+            updateSize();
+        },
 
+        afterInit: function(){
+            updateSize();
+        }
+    });
+    function updateSize(){
+        var minHeight = parseInt($('.owl-item').eq(0).css('height'));
+        $('.owl-item').each(function () {
+            var thisHeight = parseInt($(this).css('height'));
+            minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
+        });
+        $('.owl-wrapper-outer').css('height', minHeight+'px');
+    }
     // $("#actors").owlCarousel({
    
     //     autoPlay: 6000, //Set AutoPlay to 3 seconds
