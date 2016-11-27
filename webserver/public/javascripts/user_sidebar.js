@@ -9,3 +9,11 @@ function closeNav() {
     $(".user_sidebar").css('width', '0%');
     document.body.style.backgroundColor = "white";
 }
+
+function openSettings() {
+	
+}
+
+function closeSettings() {
+	
+}

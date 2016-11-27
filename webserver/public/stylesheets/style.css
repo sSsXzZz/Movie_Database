@@ -222,21 +222,39 @@ li {
     right: 0;
 }
 
-#owl-demo .item img{
+#movies .item img{
   display: block;
   width: 100%;
   height: auto;
 }
 
 
-#owl-demo .item{
+#movies .item{
   margin: 5px;
   transition: opacity 0.25s linear;
   -webkit-transition: opacity 0.25s linear;
   -moz-transition: opacity 0.25s linear;
 }
 
-#owl-demo .item:hover{
+#movies .item:hover{
+  opacity: 0.5;
+}
+
+#actors .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+#actors .item{
+  margin: 5px;
+  transition: opacity 0.25s linear;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+}
+
+#actors .item:hover{
   opacity: 0.5;
 }
 
