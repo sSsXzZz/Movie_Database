@@ -39,9 +39,9 @@ actor_data = []
 #comments = ["I really like this movie","My son really enjoyed this movie","A family movie indeed","Bravo!","Impeccable character progression","Ingenious movie direction",
 #        "Not appropriate for the whole family","Too Romanticized","Kids didn't enjoy the movie","The director should go back to director school"]
 comments = ['Wow!','Great!','Cool!','Terrible!']
-for i in range(1,random.randint(1,10)):
-		#for j in range(1,6256)
-        for j in range(1,5):
+#for j in range(1,6256)
+for j in range(1,5):
+	for i in range(1,random.randint(1,10)):
                 tup = (j,random.randint(1,5),random.randint(1,5),random.choice(comments),randomDate("1/1/2008 1:30 PM","10/31/2016 4:50 AM", random.random()))
                 actor_data.append(tup)
 #print actor_data
