@@ -40,13 +40,16 @@ $(document).ready(function(){
     // logout
     $("#logout_button").on('click', function(){
         Cookies.remove('uid');
+        Cookies.remove('username');
         location.reload();
     });
 });
 
 function loginSuccess(data, textStatus, jqXHR){
     // the responseText should contain the uid
-    Cookies.set('uid',jqXHR.responseText, {expires: 1});
+    var response = JSON.parse(jqXHR.responseText);
+    Cookies.set('uid',response.id, {expires: 1});
+    Cookies.set('username', response.username, {expires: 1});
     location.reload();
 }
 
