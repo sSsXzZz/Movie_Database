@@ -37,10 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
 <link rel="stylesheet" href="/stylesheets/tipsy.css">
 <script src="/javascripts/jquery.tipsy.js"></script>
-<script src="/javascripts/login.js"></script>
-<script src="/javascripts/js-cookie.js"></script>
-<script src="/javascripts/modal.js"></script>
-<script src="/javascripts/user_sidebar.js"></script>
+<% include partials/essential_scripts.ejs %>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -214,32 +211,6 @@ function toggleFunction() {
         x.className += " w3-show";
     } else {
         x.className = x.className.replace(" w3-show", "");
-    }
-}
-
-// Get the modal
-var modal = document.getElementById('modal1');
-
-// Get the button that opens the modal
-var btn = document.getElementById("login_button");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
     }
 }
 
