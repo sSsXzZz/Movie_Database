@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title><%= data.movie_title %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -79,12 +79,13 @@ body, html {
   <div class="container-fluid" style="padding-top:15%;">
     <div class="row">
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
-        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Frozen</p><br>
-        <p class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">PG-13</p>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">2013</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">English</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">115 Min</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Color</div>
+        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;" title="Movie Title"><%= data.movie_title %></p><br>
+        <p class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;" title="Content Rating"><%= data.content_rating %></p>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Year"><%= data.year %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Language"><%= data.language %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Duration"><%= data.duration %>Min</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue">$<%= data.revenue %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="BW vs Color">Color</div>
 
         <div class="row">
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
@@ -147,6 +148,9 @@ $('.grid').masonry({
  
 
 <script>
+
+$(".type, .item_hoverable").tipsy({gravity: "n"});
+
 (function() {
 
     'use strict';
