@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/stylesheets/style.css">
+<link rel="stylesheet" href="../public/stylesheets/rating.css">
+<link rel="stylesheet" href="../public/stylesheets/grid.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.transitions.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.theme.css">
+<link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+<script src="../public/javascripts/owl-carousel/owl.carousel.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
+<link rel="stylesheet" href="../public/stylesheets/tipsy.css">
+<script src="../public/javascripts/jquery.tipsy.js"></script>
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <ul class="w3-navbar" id="myNavbar">
+    <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+      <a class="w3-hover-black" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+        <i class="fa fa-bars"></i>
+      </a>
+    </li>
+    <li class="w3-left-align"><a href="#home">HOME</a></li>
+    <li class="w3-hide-small"><a href="#about"><i class="fa fa-user"></i> ABOUT</a></li>
+    <li class="w3-hide-small"><a href="#contact"><i class="fa fa-envelope"></i> CONTACT</a></li>
+    <li class="w3-hide-small w3">
+      <a href="#0" class="w3-hover-red" id="login_button">
+        LOGIN
+      </a>
+    </li>
+  </ul>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium">
+    <ul class="w3-navbar w3-left-align w3-white">
+      <li><a href="#about" onclick="toggleFunction()">ABOUT</a></li>
+      <li><a href="#portfolio" onclick="toggleFunction()">PORTFOLIO</a></li>
+      <li><a href="#contact" onclick="toggleFunction()">CONTACT</a></li>
+      <li><a href="#">SEARCH</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="detail">
+  <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:5%; padding-right:10%; width:60%; text-align:center;">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button title="Actors" id="actor_btn" type="button" class="btn btn-default type">A</button>
+        <button title="Movies" type="button" class="btn btn-default type">M</button>
+        <button title="Directors" type="button" class="btn btn-default type">D</button>
+      </div>
+      <input type="text" class="form-control"/>
+    </div>
+
+  </div>
+  <div class="container-fluid" style="padding-top:10%;">
+    <div class="row scope_one" style="text-align:center; font-size:40px; color:#FFFFFF;">
+      <div>Movies</div>
+    </div>
+    <div class="row">
+      <div id="movies" style="width:80%; margin:auto; margin-bottom:5%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">    
+        <div class="item" title="Frozen">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item" title="Deez Nuts">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+      </div>
+    </div>
+    <div class="row scope_one" style="text-align:center; font-size:40px; color:#FFFFFF;">
+      <div>Actors</div>
+    </div>
+    <div class="row">
+      <div id="actors" style="width:80%; margin:auto; margin-bottom:5%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">    
+        <div class="item" title="Frozen">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item" title="300">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+      </div>
+    </div>
+    <div class="row scope_one" style="text-align:center; font-size:40px; color:#FFFFFF;">
+      <div>Directors</div>
+    </div>
+    <div class="row">
+      <div id="directors" style="width:80%; margin:auto; margin-bottom:5%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">    
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+        <div class="item">
+          <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
+  <div class="modal-content"> <!-- this is the container wrapper -->
+    <span class="close">x</span>
+    <div class="input-group" style="margin:auto;">
+      Returning User?
+      <input type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+      <input type="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
+        </div>
+        <div class="col-md-offset-6">
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
+        </div>
+      </div>
+    </div>
+<!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
+      <input type="text" class="form-control" placeholder="Username">
+      <input type="password" class="form-control" placeholder="Password">
+      <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
+    </div> -->
+  </div>
+  </div>
+</div>
+
+<script>
+$('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
+</script>
+ 
+
+<script src="../public/javascripts/rating.js"></script>
+<!-- Add Google Maps -->
+<script>
+
+$(document).ready(function () {
+
+  $("#movies").owlCarousel({
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  $("#actors").owlCarousel({
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  $("#directors").owlCarousel({
+
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  function updateSize(){
+      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
+      $('.owl-item').each(function () {
+          var thisHeight = parseInt($(this).css('height'));
+          if (thisHeight < 100) return;
+          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
+      });
+      $('.owl-wrapper-outer').css('height',minHeight+'px');
+      //console.log(minHeight);
+  }
+});
+
+
+$('.type').click(function(){
+    if($(this).hasClass('searching')){
+        $(this).removeClass('searching')
+    } else {
+        $(this).addClass('searching')
+    }
+});
+
+$('.item').tipsy({gravity: 'n'});
+
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// Get the modal
+var modal = document.getElementById('modal1');
+
+// Get the button that opens the modal
+var btn = document.getElementById("login_button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+$('.type').tipsy({gravity: 'n'});
+
+</script>
+
+</body>
+</html>

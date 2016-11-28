@@ -16,7 +16,7 @@ body {
 /* First image (Logo. Full height) */
 .bgimg-1 {
     background-color: #4DD0E1;
-    min-height: 100%;
+    min-height: 125%;
 }
 
 /* Second image (Portfolio) */
@@ -177,6 +177,12 @@ li {
     -webkit-transition: opacity 0.2s;
 }
 
+.owl-carousel .owl-item img {
+    height:auto;
+    width:100%;
+    display: block;
+}
+
 .book.resize {
   height: 450px;
 }
@@ -224,8 +230,8 @@ li {
 
 #movies .item img{
   display: block;
-  width: 100%;
   height: auto;
+  height: 100%;
 }
 
 
@@ -255,6 +261,24 @@ li {
 }
 
 #actors .item:hover{
+  opacity: 0.5;
+}
+
+#directors .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+#directors .item{
+  margin: 5px;
+  transition: opacity 0.25s linear;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+}
+
+#directors .item:hover{
   opacity: 0.5;
 }
 
@@ -343,7 +367,7 @@ ul#horizontal-list {
 }
 
 .history_item {
-/*  -webkit-transition: opacity 0.2s;
+/*  -webkit-transition: opaicty 0.2s;
   -moz-transition: opacity 0.2s;
   -ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
@@ -356,4 +380,20 @@ ul#horizontal-list {
 .history_item:hover {
   /*opacity: 0.5;*/
   background-color: #80DEEA;
+}
+
+.source_sans {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.item_hoverable {
+  -webkit-transition: opaicty 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -webkit-transition: opacity 0.2s;
+}
+
+.item_hoverable:hover {
+  opacity: 0.25;
 }

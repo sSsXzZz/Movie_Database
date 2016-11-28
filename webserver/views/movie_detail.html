@@ -5,17 +5,25 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
- <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../public/stylesheets/style.css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:600i" rel="stylesheet">
 <link rel="stylesheet" href="../public/stylesheets/rating.css">
 <link rel="stylesheet" href="../public/stylesheets/grid.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.transitions.css">
+<link rel="stylesheet" href="../public/javascripts/owl-carousel/owl.theme.css">
+<script src="../public/javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
+<link rel="stylesheet" href="../public/stylesheets/tipsy.css">
+<script src="../public/javascripts/jquery.tipsy.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
@@ -68,8 +76,10 @@ body, html {
     <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
   </div>
   <div id="shop"></div>
-  <textarea rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px"></textarea>
-  <button type="button" class="btn btn-default" style="margin: 0 auto;">Submit Comments</button>
+  <div style="margin:auto; width:90%;">
+    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px"></textarea>
+  </div>
+  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;">Submit Comments</button>
 <!--   <div class="rating">
     <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
   </div> -->
@@ -80,44 +90,68 @@ body, html {
   <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:5%; padding-right:10%; width:60%;">
     <div class="input-group">
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default type">A</button>
-        <button type="button" class="btn btn-default type">M</button>
-        <button type="button" class="btn btn-default type">D</button>
+        <button title="Actors" id="actor_btn" type="button" class="btn btn-default type">A</button>
+        <button title="Movies" type="button" class="btn btn-default type">M</button>
+        <button title="Directors" type="button" class="btn btn-default type">D</button>
       </div>
       <input type="text" class="form-control"/>
     </div>
-    <div class="grid" style="margin-top: 5%;">
-      <div class="grid-sizer"></div>
-      <!--Dynamically do this + genres -->
-      <div class="grid-item grid-item1">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word;  font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">PG-13</div>
+
+  </div>
+  <div class="container-fluid" style="padding-top:15%;">
+    <div class="row">
+      <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
+        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Frozen</p><br>
+        <p class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">PG-13</p>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">2013</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">English</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">115 Min</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Color</div>
+
+        <div class="row">
+          <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
+                  
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <img src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%;">
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-7" style="text-align:center;">
+            Actors
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            Director
+          </div>
+        </div>
+        <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
+          <div style="text-align:center">
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-time"></span></button>
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-usd"></span></button>
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span></button>
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span></button>
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-star-empty"></span></button>
+            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tags"></span></button>
+          </div>
+        </div>
       </div>
-      <div class="grid-item grid-item2">
-          <div style="position: absolute;top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:200%; color: #000000;">Avatar</div>
-      </div>
-      <div class="grid-item grid-item3">
-        <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">English</div>
-      </div>
-      <div class="grid-item grid-item4">
-       <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">115 Min</div>
-      </div>
-      <div class="grid-item grid-item5">
-        <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">$760.5M</div>
-      </div>
-      <div class="grid-item grid-item6">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">2013</div>
-      </div>
-      <div class="grid-item grid-item7">
-              <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">James Cameron (D)</div>
-      </div>
-      <div class="grid-item grid-item8">
-         <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">CCH Pounder (A)</div>
-      </div>
-      <div class="grid-item grid-item9">
-         <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">Joel David Moore (A)</div>
-      </div>
-      <div class="grid-item grid-item10">
-         <div style="position: absolute;     top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); white-space: normal;  word-wrap: break-word; font-family: 'Roboto Condensed', sans-serif; font-size:150%; color: #000000;">Wes Studi (A)</div>
+      <div class="col-md-4">
       </div>
     </div>
   </div>
@@ -148,7 +182,6 @@ body, html {
       <input type="password" class="form-control" placeholder="Password">
       <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
     </div> -->
-  </div>
   </div>
 </div>
 
@@ -218,6 +251,51 @@ $('.grid').masonry({
 <!-- Add Google Maps -->
 <script>
 
+$(document).ready(function () {
+
+  $("#movies").owlCarousel({
+
+      autoPlay: 6000, //Set AutoPlay to 3 seconds
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  $("#actors").owlCarousel({
+
+      autoPlay: 6000, //Set AutoPlay to 3 seconds
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  function updateSize(){
+      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
+      $('.owl-item').each(function () {
+          var thisHeight = parseInt($(this).css('height'));
+          if (thisHeight < 100) return;
+          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
+      });
+      $('.owl-wrapper-outer').css('height',minHeight+'px');
+      console.log(minHeight);
+  }
+});
+
+
 $('.type').click(function(){
     if($(this).hasClass('searching')){
         $(this).removeClass('searching')
@@ -273,8 +351,10 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+$('.type').tipsy({gravity: 'n'});
+
 </script>
 
 </body>
 </html>
-
