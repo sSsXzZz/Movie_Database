@@ -35,6 +35,8 @@ $(document).ready(function(){
     // cookie found so logged in
     if (typeof Cookies.get('uid') !== "undefined"){
         changeLoginToLogout();
+        var username = Cookies.get('username');
+        $("#sidebar_username").text(username);
     }
 
     // logout
