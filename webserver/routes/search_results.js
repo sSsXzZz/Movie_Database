@@ -10,12 +10,24 @@ router.get('/', function(req, res, next) {
     for ( var param in req.query){
         if ( (param==="Movies" || param==="Actors" || param ==="Directors") && req.query[param] ==='true'){
             valid_query=true;
-            var name_field = (param ==="Movies" ? "movie_title" : "name");
+            var id_field;
+            var name_field;
+            if (param ==="Movies"){
+                id_field = "mid";
+                name_field = "movie_title";
+            } else if (param ==="Actors"){
+                id_field = "aid";
+                name_field = "name";
+            } else{ //Directors
+                id_field = "did";
+                name_field = "name";
+            }
             if (!multiple_tables){
                 sql_query += "SELECT "
                     + name_field
                     + ( name_field ==="movie_title" ? " AS name" : "")
                     + ", \"" + param + "\" as source"
+                    + ", " + id_field + " as id"
                     + " FROM "
                     +  param
                     + " WHERE "
@@ -30,6 +42,7 @@ router.get('/', function(req, res, next) {
                     + name_field
                     + ( name_field ==="movie_title" ? " AS name" : "")
                     + ", \"" + param + "\" as source"
+                    + ", " + id_field + " as id"
                     + " FROM "
                     +  param
                     + " WHERE "
