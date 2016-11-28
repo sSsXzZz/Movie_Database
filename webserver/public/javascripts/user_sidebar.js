@@ -3,6 +3,8 @@ function openNav() {
     if(typeof Cookies.get('uid') !== "undefined"){ 
         $(".user_sidebar").css('width', '20%');
         document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+    } else{
+        $("#login_button").click();
     }
 }
 
