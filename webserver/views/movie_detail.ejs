@@ -66,14 +66,7 @@ body, html {
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="detail">
   <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:5%; padding-right:10%; width:60%;">
-    <div class="input-group">
-      <div class="input-group-btn">
-        <button title="Actors" id="actor_btn" type="button" class="btn btn-default type">A</button>
-        <button title="Movies" type="button" class="btn btn-default type">M</button>
-        <button title="Directors" type="button" class="btn btn-default type">D</button>
-      </div>
-      <input type="text" class="form-control"/>
-    </div>
+    <% include partials/search.ejs %>
 
   </div>
   <div class="container-fluid" style="padding-top:15%;">
