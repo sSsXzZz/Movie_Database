@@ -8,28 +8,59 @@ $(document).ready(function(){
                 username: $("#username_textfield").val(),
                 password: $("#password_textfield").val(),
             },
-            success: login_success,
-            error: login_error
+            success: loginSuccess,
+            error: loginError
         });
     });
+
+    $("#signup_request_button").on('click',  function(){
+        $.ajax({
+            url: "users/signup",
+            type: "POST",
+            data: {
+                username: $("#username_textfield").val(),
+                password: $("#password_textfield").val(),
+            },
+            success: loginSuccess,
+            error: loginError
+        });
+    });
+
     $("#username_textfield,#password_textfield").keypress(function(e){
         if (e.keyCode ===13){
             $("#login_request_button").click();
         }
     });
 
+    // cookie found so logged in
     if (typeof Cookies.get('uid') !== "undefined"){
-        $("#login_button").text("Account");
-        $("#login_button").attr("href","account_link");
+        changeLoginToLogout();
+        var username = Cookies.get('username');
+        $("#sidebar_username").text(username);
     }
+
+    // logout
+    $("#logout_button").on('click', function(){
+        Cookies.remove('uid');
+        Cookies.remove('username');
+        location.reload();
+    });
 });
 
-function login_success(data, textStatus, jqXHR){
+function loginSuccess(data, textStatus, jqXHR){
     // the responseText should contain the uid
-    Cookies.set('uid',jqXHR.responseText);
+    var response = JSON.parse(jqXHR.responseText);
+    Cookies.set('uid',response.id, {expires: 1});
+    Cookies.set('username', response.username, {expires: 1});
     location.reload();
 }
 
-function login_error(jqXHR, textStatus, errorThrown){
+function loginError(jqXHR, textStatus, errorThrown){
     alert(jqXHR.responseText);
+}
+
+function changeLoginToLogout(){
+    $("#login_button").text("LOGOUT");
+    $("#login_button").attr("href","#");
+    $("#login_button").attr("id","logout_button");
 }
