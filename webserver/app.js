@@ -9,6 +9,7 @@ var db = require('./db');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var search_results = require('./routes/search_results');
+var movies = require('./routes/movies')
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/search_results',search_results);
+app.use('/movies',movies);
 
 db.connect( function(err) {
     if (err){
