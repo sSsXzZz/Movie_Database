@@ -2,7 +2,7 @@ $(document).ready(function(){
     // on login attempt send ajax request
     $("#login_request_button").on('click',  function(){
         $.ajax({
-            url: "users/login",
+            url: "/users/login",
             type: "POST",
             data: {
                 username: $("#username_textfield").val(),
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     $("#signup_request_button").on('click',  function(){
         $.ajax({
-            url: "users/signup",
+            url: "/users/signup",
             type: "POST",
             data: {
                 username: $("#username_textfield").val(),
