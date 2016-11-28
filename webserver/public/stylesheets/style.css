@@ -387,7 +387,7 @@ ul#horizontal-list {
 }
 
 .item_hoverable {
-  -webkit-transition: opaicty 0.2s;
+  -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
   -ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
@@ -396,4 +396,14 @@ ul#horizontal-list {
 
 .item_hoverable:hover {
   opacity: 0.25;
+}
+
+.glyph {
+  transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+}
+
+.glyph:hover {
+  background-color: #80DEEA;
 }
