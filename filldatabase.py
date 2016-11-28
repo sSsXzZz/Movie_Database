@@ -53,7 +53,7 @@ for j in range(1,5):
 try:
         #x.executemany(users,usersdata)
         #x.executemany(super_users,super_usersdata)
-        x,executemany(actor_ratings,actor_data)
+        x.executemany(actor_ratings,actor_data)
         db.commit()
 except:
         #x.execute("SELECT * FROM Actor_Ratings")
