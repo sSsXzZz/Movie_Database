@@ -1,7 +1,9 @@
 /* Set the width of the side navigation to 250px */
 function openNav() {
-    $(".user_sidebar").css('width', '20%');
-    document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+    if(typeof Cookies.get('uid') !== "undefined"){ 
+        $(".user_sidebar").css('width', '20%');
+        document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+    }
 }
 
 /* Set the width of the side navigation to 0 */
