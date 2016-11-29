@@ -22,7 +22,8 @@ movies.to_sql('Movies', con=engine, if_exists = 'append', index = False,
                             'duration': sqlalchemy.types.INTEGER(),
                             'revenue': sqlalchemy.types.INTEGER()})
 #UPDATE Movies SET movie_title = SUBSTRING(movie_title, 1, CHAR_LENGTH(movie_title) -1);
-#Fix Wall-E mid=58
+#Fix Wall-E mid=59
+#Fix Les Miserables mid=659
 
 data['genres'] = data['genres'].astype('str') 
 data['plot_keywords'] = data['plot_keywords'].astype('str') 
