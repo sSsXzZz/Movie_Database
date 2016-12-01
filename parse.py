@@ -22,7 +22,7 @@ movies.to_sql('Movies', con=engine, if_exists = 'append', index = False,
                             'duration': sqlalchemy.types.INTEGER(),
                             'revenue': sqlalchemy.types.INTEGER()})
 #UPDATE Movies SET movie_title = SUBSTRING(movie_title, 1, CHAR_LENGTH(movie_title) -1); 
-#A few need to be done manually
+#A few need to be cleaned manually
 
 data['genres'] = data['genres'].astype('str') 
 data['plot_keywords'] = data['plot_keywords'].astype('str') 
