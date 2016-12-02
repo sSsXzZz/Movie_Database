@@ -78,10 +78,13 @@ body, html {
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue">$<%= data.revenue %></div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="BW vs Color">Color</div>
         <br>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Genre</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Horror</div>
+        <% genres.forEach(function(genre){ %>
+            <div title="Genre" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= genre %></div>
+        <% }); %>
+        <br>
+        <% keywords.forEach(function(keyword){ %>
+            <div title="Keyword" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= keyword %></div>
+        <% }); %>
 
 
         <div class="row">
