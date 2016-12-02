@@ -54,23 +54,6 @@
       </div>
       <div class="row" style="padding:10px;">
         <div id="visualization"></div>
-
-        <script type="text/javascript">
-          // DOM element where the Timeline will be attached
-          var container = document.getElementById('visualization');
-
-          // Create a DataSet (allows two way data-binding)
-          var items = new vis.DataSet([
-            {id: 1, content: 'Your Movie', start: '2013-04-20'},
-            {id: 2, content: 'Average Movie', start: '1999-04-14'},
-          ]);
-
-          // Configuration for the Timeline
-          var options = {};
-
-          // Create a Timeline
-          var timeline = new vis.Timeline(container, items, options);
-        </script>
       </div>
       <div class="row" style="margin-top:5%">
         <!-- <div class="source_sans" style="font-size:30px; float:left; margin-left:1.5%;">Language Chart:</div> -->

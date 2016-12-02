@@ -19,7 +19,23 @@ length_span.onclick = function() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if ((event.target != modal) || (event.target != length_modal)) {
-        modal.style.display = "none";
+    if ((event.target == length_modal)) {
+        length_modal.style.display = "none";
     }
 }
+
+
+// DOM element where the Timeline will be attached
+var container = document.getElementById('visualization');
+
+// Create a DataSet (allows two way data-binding)
+var items = new vis.DataSet([
+{id: 1, content: 'Your Movie', start: '2013-04-20'},
+{id: 2, content: 'Average Movie', start: '1999-04-14'},
+]);
+
+// Configuration for the Timeline
+var options = {};
+
+// Create a Timeline
+var timeline = new vis.Timeline(container, items, options);
