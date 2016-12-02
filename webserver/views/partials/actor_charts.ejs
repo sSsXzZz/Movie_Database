@@ -1,0 +1,104 @@
+  <div class="modal" id="length_modal"> <!-- this is the entire modal form, including the background -->
+    <div class="modal-content container item_hoverable_less" style="overflow-y:hidden; margin-top:-5%;"> <!-- this is the container wrapper -->
+      <span class="close" style="float:right;" id="length_close">x</span>
+      <div class="row source_sans" style="margin-top:5%">
+        <div class="col-md-6" style="font-size:30px;">
+          <div style="float:left;">Your Length: 115 Min</div>
+        </div>
+        <div class="col-md-6" style="font-size:30px;">
+          <div style="float:right;">Avg Length: 112 Min</div>
+        </div>
+      </div>
+      <div class="row scope_one" id="length_chart" style="max-height:600px; display:flex; align-items:center; height:20%">
+        <div class="col-md-6">
+          <div class="progress" style="height:40px;">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span style="font-size: 30px" class="sr-only">115 Min</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="progress" style="height:40px;">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+              <span class="sr-only">112 Min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row source_sans" style="margin-top:5%">
+        <div class="col-md-6" style="font-size:30px;">
+          <div style="float:left;">Your Revenue: $53.5 M</div>
+        </div>
+        <div class="col-md-6" style="font-size:30px;">
+          <div style="float:right;">Avg Revenue: $50.2 M</div>
+        </div>
+      </div>
+      <div class="row scope_one" id="length_chart" style="max-height:600px; display:flex; align-items:center; height:20%">
+        <div class="col-md-6">
+          <div class="progress" style="height:40px;">
+            <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span style="font-size: 30px" class="sr-only">115 Min</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="progress" style="height:40px;">
+            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+              <span class="sr-only">112 Min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:5%;">
+        <div class="source_sans" style="font-size:30px; float:left; margin-left:1.5%;">Release Date Comparison:</div>
+      </div>
+      <div class="row" style="padding:10px;">
+        <div id="visualization"></div>
+      </div>
+      <div class="row" style="margin-top:5%">
+        <!-- <div class="source_sans" style="font-size:30px; float:left; margin-left:1.5%;">Language Chart:</div> -->
+      </div>
+      <div class="row" style="padding:10px;">
+        <div class="col-md-6">
+          <div class="source_sans" style="float:left; font-size:30px;">Your Language: English</div>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <div class="source_sans" style="float:left; font-size:30px;">Language Chart:</div>
+          <canvas id="language_chart" width="400" height="400"></canvas>
+          <script>
+          Chart.defaults.global.legend.display = true;
+          Chart.defaults.global.tooltips.enabled = true;
+          var ctx = document.getElementById("language_chart");
+          var data = {
+              labels: ["Red", "White", "", ""],
+              datasets: [
+                {
+                  data: [30, 20, 45, 5],
+                  backgroundColor: [
+                      "#A5D6A7",
+                      "#E1BEE7",
+                      "#FFECB3",
+                      "#FFCCBC",
+                  ],
+              }]
+          };
+          var myChart = new Chart(ctx, {
+              type: 'pie',
+
+              data: data,
+          });
+          </script>
+        </div>
+      </div>
+<!--         <div class="row" style="margin-top:5%">
+        <div class="source_sans" style="float:left; font-size:30px;/*">Genres:</div>
+      </div>
+      <div class="row">
+        <div class="item_hoverable source_sans" style="display:inline-block; font-size:20px; margin-right:5%;">Action</div>
+        <div class="item_hoverable source_sans" style="display:inline-block; font-size:20px;">Flake</div>
+      </div> -->
+    </div>
+
+  </div>
