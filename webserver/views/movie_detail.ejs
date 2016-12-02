@@ -25,6 +25,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
 <% include partials/essential_scripts.ejs %>
 <script src="/javascripts/rating.js"></script>
+<script src="/javascripts/charts-modal.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -75,6 +76,12 @@ body, html {
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Duration"><%= data.duration %>Min</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue">$<%= data.revenue %></div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="BW vs Color">Color</div>
+        <br>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Genre</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Horror</div>
+
 
         <div class="row">
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
@@ -110,12 +117,12 @@ body, html {
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
           <div style="text-align:center">
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-time"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-info-sign"></span></button>
+<!--             <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
             <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
             <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
             <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button> -->
           </div>
         </div>
       </div>
@@ -125,9 +132,12 @@ body, html {
   </div>
 </div>
 
-  <div style="text-align:center">
-    <% include partials/modal.ejs %>
-  </div>
+<div style="text-align:center">
+  <% include partials/modal.ejs %>
+  <% include partials/charts.ejs %>
+</div>
+
+
 
 <script>
 $('.grid').masonry({
