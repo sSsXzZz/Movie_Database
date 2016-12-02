@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../public/stylesheets/style.css">
 <link rel="stylesheet" href="../public/stylesheets/rating.css">
@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="../public/stylesheets/tipsy.css">
 <script src="../public/javascripts/jquery.tipsy.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css">
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -50,9 +53,9 @@ body, html {
       </a>
     </li>
     <li class="w3-left-align"><a href="#home">HOME</a></li>
-    <li class="w3-hide-small"><a href="#about"><i class="fa fa-user"></i> ABOUT</a></li>
-    <li class="w3-hide-small"><a href="#contact"><i class="fa fa-envelope"></i> CONTACT</a></li>
-    <li class="w3-hide-small w3">
+    <li class="w3-hide-small"><a href="#" onclick="openNav()"><i class="fa fa-user"></i> USER</a></li>
+    <li class="w3-hide-small"><a href="#about"><i class="fa fa-envelope"></i> ABOUT</a></li>
+    <li class="w3-hide-small">
       <a href="#0" class="w3-hover-red" id="login_button">
         LOGIN
       </a>
@@ -102,11 +105,16 @@ body, html {
     <div class="row">
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
         <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Frozen</p><br>
-        <p class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">PG-13</p>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">PG-13</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">2013</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">English</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">115 Min</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Color</div>
+        <br>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Action</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Horror</div>
 
         <div class="row">
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
@@ -142,12 +150,12 @@ body, html {
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
           <div style="text-align:center">
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-time"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button>
+            <button title="info" type="button" id="length" class="btn btn-default glyph"><span class="glyphicon glyphicon-info-sign"></span></button>
+<!--             <button type="button" id="revenue" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
+            <button type="button" id="release" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
+            <button type="button" id="langauge" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
+            <button type="button" id="rating" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
+            <button type="button" id="genres" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button> -->
           </div>
         </div>
       </div>
@@ -157,33 +165,231 @@ body, html {
   </div>
 </div>
 
-<div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
-  <div class="modal-content"> <!-- this is the container wrapper -->
-    <span class="close">x</span>
-    <div class="input-group" style="margin:auto;">
-      Returning User?
-      <input type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
-      <input type="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <button type="button" class="btn btn-default" style="display:block;margin:auto; margin-top:10px;">Login</button>
+<div style="text-align:center">
+  <div class="modal" id="modal1"> <!-- this is the entire modal form, including the background -->
+    <div class="modal-content"> <!-- this is the container wrapper -->
+      <span class="close" style="float:right;">x</span>
+      <div class="input-group scope_one" style="margin:auto;">
+        <input id="username" type="text" class="form-control" placeholder="Username" style="margin-top:5px; margin-bottom:5px">
+        <input id="password" type="password" class="form-control" placeholder="Password">
+        <div style="float:left;">
+          <button type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Login</button>
         </div>
-        <div class="col-md-offset-6">
-        </div>
-        <div class="col-md-3">
-          <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
+        <div style="float:right;">
+          <button type="button" class="btn btn-default scope_one" style="display:block; margin:auto;margin-top:10px">Sign Up</button>
         </div>
       </div>
     </div>
-<!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
-      <input type="text" class="form-control" placeholder="Username">
-      <input type="password" class="form-control" placeholder="Password">
-      <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
-    </div> -->
+  <!--<div class="input-group" style="margin:auto; display:none" id="register_div">
+        <input type="text" class="form-control" placeholder="Username">
+        <input type="password" class="form-control" placeholder="Password">
+        <button type="button" class="btn btn-default" style="display:block; margin:auto;margin-top:10px;">Register</button>
+      </div> -->
   </div>
+
+    <div class="modal" id="length_modal"> <!-- this is the entire modal form, including the background -->
+      <div class="modal-content container item_hoverable_less" style="overflow-y:hidden; margin-top:-5%;"> <!-- this is the container wrapper -->
+        <span class="close" style="float:right;" id="length_close">x</span>
+        <div class="row source_sans" style="margin-top:5%">
+          <div class="col-md-6" style="font-size:30px;">
+            <div style="float:left;">Your Length: 115 Min</div>
+          </div>
+          <div class="col-md-6" style="font-size:30px;">
+            <div style="float:right;">Avg Length: 112 Min</div>
+          </div>
+        </div>
+        <div class="row scope_one" id="length_chart" style="max-height:600px; display:flex; align-items:center; height:20%">
+          <div class="col-md-6">
+            <div class="progress" style="height:40px;">
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                <span style="font-size: 30px" class="sr-only">115 Min</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="progress" style="height:40px;">
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                <span class="sr-only">112 Min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row source_sans" style="margin-top:5%">
+          <div class="col-md-6" style="font-size:30px;">
+            <div style="float:left;">Your Revenue: $53.5 M</div>
+          </div>
+          <div class="col-md-6" style="font-size:30px;">
+            <div style="float:right;">Avg Revenue: $50.2 M</div>
+          </div>
+        </div>
+        <div class="row scope_one" id="length_chart" style="max-height:600px; display:flex; align-items:center; height:20%">
+          <div class="col-md-6">
+            <div class="progress" style="height:40px;">
+              <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                <span style="font-size: 30px" class="sr-only">115 Min</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="progress" style="height:40px;">
+              <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                <span class="sr-only">112 Min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:5%;">
+          <div class="source_sans" style="font-size:30px; float:left; margin-left:1.5%;">Release Date Comparison:</div>
+        </div>
+        <div class="row" style="padding:10px;">
+          <div id="visualization"></div>
+
+          <script type="text/javascript">
+            // DOM element where the Timeline will be attached
+            var container = document.getElementById('visualization');
+
+            // Create a DataSet (allows two way data-binding)
+            var items = new vis.DataSet([
+              {id: 1, content: 'Your Movie', start: '2013-04-20'},
+              {id: 2, content: 'Average Movie', start: '1999-04-14'},
+            ]);
+
+            // Configuration for the Timeline
+            var options = {};
+
+            // Create a Timeline
+            var timeline = new vis.Timeline(container, items, options);
+          </script>
+        </div>
+        <div class="row" style="margin-top:5%">
+          <!-- <div class="source_sans" style="font-size:30px; float:left; margin-left:1.5%;">Language Chart:</div> -->
+        </div>
+        <div class="row" style="padding:10px;">
+          <div class="col-md-6">
+            <div class="source_sans" style="float:left; font-size:30px;">Your Language: English</div>
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-4">
+            <div class="source_sans" style="float:left; font-size:30px;">Language Chart:</div>
+            <canvas id="language_chart" width="400" height="400"></canvas>
+            <script>
+            Chart.defaults.global.legend.display = true;
+            Chart.defaults.global.tooltips.enabled = true;
+            var ctx = document.getElementById("language_chart");
+            var data = {
+                labels: ["Red", "White", "", ""],
+                datasets: [
+                  {
+                    data: [30, 20, 45, 5],
+                    backgroundColor: [
+                        "#A5D6A7",
+                        "#E1BEE7",
+                        "#FFECB3",
+                        "#FFCCBC",
+                    ],
+                }]
+            };
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+
+                data: data,
+            });
+            </script>
+          </div>
+        </div>
+<!--         <div class="row" style="margin-top:5%">
+          <div class="source_sans" style="float:left; font-size:30px;/*">Genres:</div>
+        </div>
+        <div class="row">
+          <div class="item_hoverable source_sans" style="display:inline-block; font-size:20px; margin-right:5%;">Action</div>
+          <div class="item_hoverable source_sans" style="display:inline-block; font-size:20px;">Flake</div>
+        </div> -->
+      </div>
+
+    </div>
+
+    <div class="modal" id="money_modal"> <!-- this is the entire modal form, including the background -->
+      <div class="modal-content container item_hoverable_less" style="overflow-y:hidden;"> <!-- this is the container wrapper -->
+        <span class="close" style="float:right;" id="length_close">x</span>
+        <div class="row scope_one" id="length_chart" style="max-height:600px; display:flex; align-items:center">
+          <div class="col-md-3 source_sans" style="align-items: stretch; max-height: 600px; vertical-align:middle; text-align: center; font-size:40px">
+            <span>Your Length: 115 Min</span>
+          </div>
+          <div class="col-md-3">
+            <canvas id="money_chart" width="200" height="200"></canvas>
+            <script>
+            Chart.defaults.global.legend.display = true;
+            Chart.defaults.global.tooltips.enabled = true;
+            var ctx = document.getElementById("money_chart");
+            var highest = 115;
+            var ours = 115;
+            var diff = highest - ours;
+            var data = {
+                labels: ["Red", "White"],
+                datasets: [
+                    {
+                        data: [ours, diff],
+                        backgroundColor: [
+                            "#A5D6A7",
+                            "#FFFFFF",
+                        ],
+                        hoverBackgroundColor: [
+                            "#81C784",
+                            "#FFFFFF",
+                        ]
+                    }]
+            };
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+            });
+            </script>
+          </div>
+          <div class="col-md-3">
+            <canvas id="money_chart" width="200" height="200"></canvas>
+            <script>
+            Chart.defaults.global.legend.display = false;
+            Chart.defaults.global.tooltips.enabled = false;
+            var ctx = document.getElementById("money_chart");
+            var highest = 115;
+            var ours = 115;
+            var diff = highest - ours;
+            var data = {
+                labels: ["Red", "White"],
+                datasets: [
+                    {
+                        data: [ours, diff],
+                        backgroundColor: [
+                            "#A5D6A7",
+                            "#FFFFFF",
+                        ],
+                        hoverBackgroundColor: [
+                            "#81C784",
+                            "#FFFFFF",
+                        ]
+                    }]
+            };
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+            });
+            </script>
+          </div>
+          <div class="col-md-3 source_sans" style="align-items: stretch; max-height: 600px; vertical-align:middle; text-align: center; font-size:40px">
+            <span>Avg Length: 115 Min</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
 </div>
+
+
+
+
 
 <script>
 $('.grid').masonry({
@@ -291,7 +497,7 @@ $(document).ready(function () {
           minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
       });
       $('.owl-wrapper-outer').css('height',minHeight+'px');
-      console.log(minHeight);
+      //console.log(minHeight);
   }
 });
 
@@ -344,15 +550,44 @@ btn.onclick = function() {
 span.onclick = function() {
     modal.style.display = "none";
 }
+  // Get the modal
+var length_modal = document.getElementById('length_modal');
+
+// Get the button that opens the modal
+var length_btn = document.getElementById("length");
+
+// Get the <span> element that closes the modal
+var length_span = document.getElementById("length_close")
+
+// When the user clicks the button, open the modal
+length_btn.onclick = function() {
+    length_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+length_span.onclick = function() {
+    length_modal.style.display = "none";
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if ((event.target != modal) || (event.target != length_modal)) {
         modal.style.display = "none";
     }
 }
 
+
+
+
 $('.type').tipsy({gravity: 'n'});
+
+$('.length').click(function() {
+$('button').tipsy({gravity: 'n'});
+
+
+});
+
+
 
 </script>
 
