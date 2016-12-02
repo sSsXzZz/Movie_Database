@@ -224,6 +224,10 @@ body, html {
         var minHeight = parseInt($('.owl-item').eq(0).css('height'));
         $('.owl-item').each(function () {
             var thisHeight = parseInt($(this).css('height'));
+            if (thisHeight < 100)
+            {
+              return;
+            }
             minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
         });
         $('.owl-wrapper-outer').css('height', minHeight+'px');
