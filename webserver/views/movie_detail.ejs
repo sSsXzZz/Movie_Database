@@ -25,7 +25,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
 <% include partials/essential_scripts.ejs %>
 <script src="/javascripts/ratinglib.js"></script>
-<script src="/javascripts/rating.js"></script>
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
 
@@ -56,7 +55,7 @@ body, html {
     <img id="movie_img" src="<%= data.image_url %>">
   </div>
   <div id="shop"></div>
-  <div style="margin:auto; width:90%;">
+  <div style="margin:auto; width:90%;" id="comment_text_wrapper">
     <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px" id="comment_text"></textarea>
   </div>
   <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;" id="submit_comments">Submit Comments</button>
@@ -261,6 +260,9 @@ $(document).ready(function(){
                 alert(jqXHR.responseText);
             },
         });
+    } else{
+        $("#comment_text_wrapper").remove();
+        $("#submit_comments").remove();
     }
 
     $("#submit_comments").on("click", function(){
@@ -281,8 +283,6 @@ $(document).ready(function(){
         });
     });
 
-    // SHOP ELEMENT
-    var shop = document.querySelector('#shop');
 
     // INITIALIZE
     function init(data) {
@@ -293,6 +293,10 @@ $(document).ready(function(){
 
     // BUILD SHOP ITEM
     function buildShopItem(data) {
+
+      // SHOP ELEMENT
+      var shop = document.querySelector('#shop');
+
       var shopItem = document.createElement('div');
 
       var html = '<div class="c-shop-item__img"></div>' +
@@ -315,19 +319,21 @@ $(document).ready(function(){
       var currentRating = data.rating;
       var maxRating = 5;
       var callback = function(rating){
-        $.ajax({
-            url: "/users/movie_rating/update_rating/" + mid,
-            type: "POST",
-            data: {
-                uid: Cookies.get('uid'),
-                rating: rating,
-            },
-            success: function(data, textStatus, jqXHR){
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                alert(jqXHR.responseText);
-            },
-        });
+        if (typeof Cookies.get('uid') !== "undefined"){
+            $.ajax({
+                url: "/users/movie_rating/update_rating/" + mid,
+                type: "POST",
+                data: {
+                    uid: Cookies.get('uid'),
+                    rating: rating,
+                },
+                success: function(data, textStatus, jqXHR){
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
       };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
