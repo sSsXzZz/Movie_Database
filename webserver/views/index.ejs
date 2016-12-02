@@ -19,9 +19,7 @@
 <script src="javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
-<script src="javascripts/login.js"></script>
-<script src="javascripts/js-cookie.js"></script>
-<script src="javascripts/modal.js"></script>
+<% include partials/essential_scripts.ejs %>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -44,24 +42,45 @@ body, html {
 
   <% include partials/navbar.ejs %>
 
-  <div class="user_sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="user_sidebar_item scope_one" style="width:100%; height:10%; margin-top:20%; font-size: 50px;" id="sidebar_username">
-      <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
+  <!-- First Parallax Image with Logo Text -->
+  <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+    <div style="display: flex; flex-direction: column;">
+      <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:10%; width:60%;">
+        <% include partials/search.ejs %>
+      </div>
+        <div style="position:absolute; margin-top: 15%;">
+        </div>
+        <div id="movies" style="position: absolute; left:0; right: 0; width:80%; margin:auto; margin-top:15%; padding:20px; background-color: #FFFFFF; border-radius: 10px;">
+                  
+          <div class="item">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+          <div class="item">
+            <img src="http://www.fatmovieguy.com/wp-content/uploads/2014/12/300-Movie-Poster.jpg"  style="width:100%; height: 100%">
+          </div>
+          <div class="item">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+          <div class="item">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+          <div class="item">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+          <div class="item">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+          <div class="item" id="the-last">
+            <img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%">
+          </div>
+         
+        </div>
+
     </div>
-    <a href="#" id="settings_button">
-      <div class="user_sidebar_item scope_one" style="width:100%; height:10%; font-size: 50px;">
-       <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
-        Settings
-      </div>
-    </a>
-    <a href="#" id="history_button">
-      <div class="user_sidebar_item scope_one" style="width:100%; height:10%; font-size: 50px;">
-       <!--  <div class="middle_text" style="height:80%; width:90%; padding:10px">text</div> -->
-        History
-      </div>
-    </a>
   </div>
+
+  <% include partials/user_sidebar.ejs %>
+
 
   <div style="text-align:center">
     <% include partials/modal.ejs %>
@@ -331,8 +350,6 @@ body, html {
   //   }, 10);
 
   </script>
-  <script src="javascripts/user_sidebar.js"></script>
-  <script src="javascripts/panel.js"></script>
 </body>
 </html>
 

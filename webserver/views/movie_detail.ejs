@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<title><%= data.movie_title %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+<link rel="stylesheet" href="/stylesheets/rating.css">
+<link rel="stylesheet" href="/stylesheets/grid.css">
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.transitions.css">
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.theme.css">
+<script src="/javascripts/owl-carousel/owl.carousel.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/tipsy.css">
+<script src="/javascripts/jquery.tipsy.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+<% include partials/essential_scripts.ejs %>
+<script src="/javascripts/rating.js"></script>
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>
+<body>
+
+  <% include partials/navbar.ejs %>
+
+  <% include partials/user_sidebar.ejs %>
+
+<div id="sidebar" class="side_detail" style="text-align:center;">
+  <div style="background-color: #00BCD4;">
+    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:30px; overflow-x:visible;"></p>
+    <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
+  </div>
+  <div id="shop"></div>
+  <div style="margin:auto; width:90%;">
+    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px"></textarea>
+  </div>
+  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;">Submit Comments</button>
+</div>
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="detail">
+  <div class="w3-display-topmiddle" style="white-space:nowrap; padding-top:5%; padding-right:10%; width:60%;">
+    <% include partials/search.ejs %>
+
+  </div>
+  <div class="container-fluid" style="padding-top:15%;">
+    <div class="row">
+      <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
+        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;" title="Movie Title"><%= data.movie_title %></p><br>
+        <p class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;" title="Content Rating"><%= data.content_rating %></p>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Year"><%= data.year %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Language"><%= data.language %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Duration"><%= data.duration %>Min</div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue">$<%= data.revenue %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="BW vs Color">Color</div>
+
+        <div class="row">
+          <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
+                  
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+            <div class="item">
+              <img src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%; opacity:1;">
+            </div>
+            <div class="item">
+              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-7" style="text-align:center;">
+            Actors
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
+            Director
+          </div>
+        </div>
+        <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
+          <div style="text-align:center">
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-time"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
+            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div style="text-align:center">
+    <% include partials/modal.ejs %>
+  </div>
+
+<script>
+$('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+});
+</script>
+ 
+
+<script>
+
+$(".type, .item_hoverable").tipsy({gravity: "n"});
+
+(function() {
+
+    'use strict';
+
+    // SHOP ELEMENT
+    var shop = document.querySelector('#shop');
+
+    // DUMMY DATA
+    var data = [
+      {
+        title: "",
+        description: "",
+        rating: 0
+      },
+    ];
+
+    // INITIALIZE
+    (function init() {
+      for (var i = 0; i < data.length; i++) {
+        addRatingWidget(buildShopItem(data[i]), data[i]);
+      }
+    })();
+
+    // BUILD SHOP ITEM
+    function buildShopItem(data) {
+      var shopItem = document.createElement('div');
+
+      var html = '<div class="c-shop-item__img"></div>' +
+        '<div class="c-shop-item__details">' +
+          '<p style="left:10px; font-family: ' + "'Open Sans', sans-serif; font-size:30px;" + '">' + data.title + '</h3>' +
+          '<p class="c-shop-item__description">' + data.description + '</p>' +
+          '<ul class="c-rating" style="margin:5% 0 0 32.5% "></ul>' +
+        '</div>';
+
+      shopItem.classList.add('c-shop-item');
+      shopItem.innerHTML = html;
+      shop.appendChild(shopItem);
+
+      return shopItem;
+    }
+
+    // ADD RATING WIDGET
+    function addRatingWidget(shopItem, data) {
+      var ratingElement = shopItem.querySelector('.c-rating');
+      var currentRating = data.rating;
+      var maxRating = 5;
+      var callback = function(rating) { alert(rating); };
+      var r = rating(ratingElement, currentRating, maxRating, callback);
+    }
+
+  })();
+</script>
+<!-- Add Google Maps -->
+<script>
+
+$(document).ready(function () {
+
+  $("#movies").owlCarousel({
+
+      autoPlay: 6000, //Set AutoPlay to 3 seconds
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  $("#actors").owlCarousel({
+
+      autoPlay: 6000, //Set AutoPlay to 3 seconds
+ 
+      items : 5,
+      itemsDesktop : [1199,3],
+
+      afterUpdate: function () {
+          updateSize();
+      },
+      afterInit:function(){
+          updateSize();
+      }
+  });
+
+  function updateSize(){
+      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
+      $('.owl-item').each(function () {
+          var thisHeight = parseInt($(this).css('height'));
+          if (thisHeight < 100) return;
+          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
+      });
+      $('.owl-wrapper-outer').css('height',minHeight+'px');
+      console.log(minHeight);
+  }
+});
+
+
+$('.type').click(function(){
+    if($(this).hasClass('searching')){
+        $(this).removeClass('searching')
+    } else {
+        $(this).addClass('searching')
+    }
+});
+
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+$('.type').tipsy({gravity: 'n'});
+
+</script>
+
+</body>
+</html>
