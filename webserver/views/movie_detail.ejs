@@ -57,9 +57,9 @@ body, html {
   </div>
   <div id="shop"></div>
   <div style="margin:auto; width:90%;">
-    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px"></textarea>
+    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px" id="comment_text"></textarea>
   </div>
-  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;">Submit Comments</button>
+  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;" id="submit_comments">Submit Comments</button>
 </div>
 
 <!-- First Parallax Image with Logo Text -->
@@ -236,26 +236,60 @@ $('.type').tipsy({gravity: 'n'});
 $(document).ready(function(){
     'use strict';
 
+    // get user comments & ratings
+    if( typeof Cookies.get('uid') !== "undefined"){
+        var mid = document.URL.split("/").pop().split("?")[0];
+        $.ajax({
+            url: "/users/movie_rating/" + mid,
+            type: "POST",
+            data: {
+                uid: Cookies.get('uid'),
+            },
+            success: function(data, textStatus, jqXHR){
+                var response = JSON.parse(jqXHR.responseText);
+                $("#comment_text").attr("placeholder", response.comments);
+                var data = [
+                  {
+                    title: "",
+                    description: "",
+                    rating: response.rating
+                  },
+                ];
+                init(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+    }
+
+    $("#submit_comments").on("click", function(){
+        $.ajax({
+            url: "/users/movie_rating/update_comments/" + mid,
+            type: "POST",
+            data: {
+                uid: Cookies.get('uid'),
+                comments: $("#comment_text").val(),
+            },
+            success: function(data, textStatus, jqXHR){
+                $("#comment_text").val("");
+                location.reload()
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+    });
+
     // SHOP ELEMENT
     var shop = document.querySelector('#shop');
 
-    //console.log(<%= director %>);
-
-    // DUMMY DATA
-    var data = [
-      {
-        title: "",
-        description: "",
-        rating: 0
-      },
-    ];
-
     // INITIALIZE
-    (function init() {
+    function init(data) {
       for (var i = 0; i < data.length; i++) {
         addRatingWidget(buildShopItem(data[i]), data[i]);
       }
-    })();
+    };
 
     // BUILD SHOP ITEM
     function buildShopItem(data) {
@@ -280,7 +314,21 @@ $(document).ready(function(){
       var ratingElement = shopItem.querySelector('.c-rating');
       var currentRating = data.rating;
       var maxRating = 5;
-      var callback = function(rating) { alert(rating); };
+      var callback = function(rating){
+        $.ajax({
+            url: "/users/movie_rating/update_rating/" + mid,
+            type: "POST",
+            data: {
+                uid: Cookies.get('uid'),
+                rating: rating,
+            },
+            success: function(data, textStatus, jqXHR){
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+      };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
 });

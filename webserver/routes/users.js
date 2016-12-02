@@ -2,17 +2,6 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db');
 
-/*
-router.get('/', function(req, res, next) {
-    db.get().query("SELECT movie_title FROM Movies ORDER BY movie_title", function (err, rows, fields){
-        if (err) throw err;
-        var movies = rows.map(function(movie) {
-            return movie.movie_title;
-        });
-        res.render('index', { title: 'Homepage', movies: movies });
-    });
-});
-*/
 router.post('/login', function(req,res,next){
     if (!req.body.username || !req.body.password){
         res.status(400).send('No username or password specified!');
@@ -51,6 +40,53 @@ router.post('/signup', function(req,res,next){
             }, res);
             console.log("User " + req.body.username + " created!\n");
         }
+    });
+});
+
+router.post('/movie_rating/:key',function(req, res, next){
+    if (!req.body.uid){
+        res.status(400).send("No uid given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var query_string = "SELECT rating, comments "
+    + "FROM Movie_Ratings "
+    + "WHERE mid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,rows,fields){
+        if (err) throw err;
+        res.status(200).send(rows[0]);
+    });
+});
+
+router.post('/movie_rating/update_rating/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.rating){
+        res.status(400).send("No uid or rating given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var rating = req.body.rating;
+    var query_string = "UPDATE Movie_Ratings SET"
+    + " rating=" + rating
+    + " WHERE mid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Rating Updated!");
+    });
+});
+
+router.post('/movie_rating/update_comments/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.comments){
+        res.status(400).send("No uid given or comments!");
+        return;
+    }
+    var uid = req.body.uid;
+    var comments = req.body.comments;
+    var query_string = "UPDATE Movie_Ratings SET"
+    + " comments=\"" + comments + "\""
+    + " WHERE mid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Comments Updated!");
     });
 });
 
