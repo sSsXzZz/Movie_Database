@@ -407,3 +407,13 @@ ul#horizontal-list {
 .glyph:hover {
   background-color: #80DEEA;
 }
+
+.item_hoverable_less {
+  transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+}
+
+.item_hoverable_less:hover {
+  background-color: #E0F7FA;
+}

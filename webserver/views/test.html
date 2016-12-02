@@ -1,0 +1,66 @@
+          <div class="col-md-3 source_sans" style="align-items: stretch; max-height: 600px; vertical-align:middle; text-align: center; font-size:40px">
+            <span>Your Length: 115 Min</span>
+          </div>
+          <div class="col-md-3">
+            <canvas id="length_chart_1" width="200" height="200"></canvas>
+            <script>
+            Chart.defaults.global.legend.display = false;
+            Chart.defaults.global.tooltips.enabled = false;
+            var ctx = document.getElementById("length_chart_1");
+            var highest = 115;
+            var ours = 115;
+            var diff = highest - ours;
+            var data = {
+                labels: ["Red", "White"],
+                datasets: [
+                    {
+                        data: [ours, diff],
+                        backgroundColor: [
+                            "#A5D6A7",
+                            "#FFFFFF",
+                        ],
+                        hoverBackgroundColor: [
+                            "#81C784",
+                            "#FFFFFF",
+                        ]
+                    }]
+            };
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+            });
+            </script>
+          </div>
+          <div class="col-md-3">
+            <canvas id="length_chart_2" width="200" height="200"></canvas>
+            <script>
+            Chart.defaults.global.legend.display = false;
+            Chart.defaults.global.tooltips.enabled = false;
+            var ctx = document.getElementById("length_chart_2");
+            var highest = 115;
+            var ours = 115;
+            var diff = highest - ours;
+            var data = {
+                labels: ["Red", "White"],
+                datasets: [
+                    {
+                        data: [ours, diff],
+                        backgroundColor: [
+                            "#A5D6A7",
+                            "#FFFFFF",
+                        ],
+                        hoverBackgroundColor: [
+                            "#81C784",
+                            "#FFFFFF",
+                        ]
+                    }]
+            };
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+            });
+            </script>
+          </div>
+          <div class="col-md-3 source_sans" style="align-items: stretch; max-height: 600px; vertical-align:middle; text-align: center; font-size:40px">
+            <span>Avg Length: 115 Min</span>
+          </div>
