@@ -68,10 +68,9 @@ router.post('/movie_rating/update_rating/:key',function(req, res, next){
     var rating = req.body.rating;
     var now = new Date();
     var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
-
     var query_string = "UPDATE Movie_Ratings SET"
-    + " rating=" + rating
-    + " WHERE mid=" + req.params.key + " AND uid=" + uid + " AND timestamp=\"" + timestamp + "\"";
+    + " rating=" + rating + ", timestamp=\"" + timestamp + "\""
+    + " WHERE mid=" + req.params.key + " AND uid=" + uid;
     console.log(query_string);
     db.get().query(query_string, function(err,results){
         if (err) res.status(400).send("Error updating rating!");
@@ -86,8 +85,10 @@ router.post('/movie_rating/update_comments/:key',function(req, res, next){
     }
     var uid = req.body.uid;
     var comments = req.body.comments;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
     var query_string = "UPDATE Movie_Ratings SET"
-    + " comments=\"" + comments + "\""
+    + " comments=\"" + comments + "\"" + ", timestamp=\"" + timestamp + "\""
     + " WHERE mid=" + req.params.key + " AND uid=" + uid;
     db.get().query(query_string, function(err,results){
         if (err) res.status(400).send("Error updating rating!");
