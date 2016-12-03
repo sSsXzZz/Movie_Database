@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title><%= data.movie_title %></title> <!--CHANGE THIS-->
+<title><%= data.name %></title> <!--CHANGE THIS-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -52,7 +52,7 @@ body, html {
 <div id="sidebar" class="side_detail" style="text-align:center;">
   <div style="background-color: #00BCD4;">
     <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:30px; overflow-x:visible;"></p>
-    <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
+    <img id="movie_img" src="<%= data.image_url %>">
   </div>
   <div id="shop"></div>
   <div style="margin:auto; width:90%;">
@@ -70,40 +70,26 @@ body, html {
   <div class="container-fluid" id="first_div" style="padding-top:15%; display:block;">
     <div class="row">
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
-        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Director Name</p><br>
+        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;"><%= data.name %></p><br>
         <div class="row">
           <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Movies</div><br>
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
                   
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
+            <% movies.forEach(function(movie){ %>
+                <div class="item" title="<%= movie.movie_title %>">
+                  <a href="/movies/<%= movie.mid %>"><img src="<%= movie.image_url %>" style="width:100%; height: 100%;"></a>
+                </div>
+            <% }); %>
           </div>
         </div>
         <div class="row">
           <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Actors</div><br>
           <div id="directors" style="width:90%; margin:auto; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">                  
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            <% actors.forEach(function(actor){ %>
+            <div class="item" title="<%= actor.name %>">
+              <a href="/actors/<%= actor.aid %>"><img src="<%= actor.image_url %>" style="width:100%; height: 100%;"></a>
             </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
+            <% }); %>
           </div>
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
@@ -165,7 +151,7 @@ $('.grid').masonry({
 
 <script>
 
-$(".type, .item_hoverable").tipsy({gravity: "n"});
+$(".type, .item_hoverable, .item").tipsy({gravity: "n"});
 
 (function() {
 
