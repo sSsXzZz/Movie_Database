@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
+var dateFormat = require('dateformat');
 
 router.post('/login', function(req,res,next){
     if (!req.body.username || !req.body.password){
@@ -65,9 +66,13 @@ router.post('/movie_rating/update_rating/:key',function(req, res, next){
     }
     var uid = req.body.uid;
     var rating = req.body.rating;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+
     var query_string = "UPDATE Movie_Ratings SET"
     + " rating=" + rating
-    + " WHERE mid=" + req.params.key + " AND uid=" + uid;
+    + " WHERE mid=" + req.params.key + " AND uid=" + uid + " AND timestamp=\"" + timestamp + "\"";
+    console.log(query_string);
     db.get().query(query_string, function(err,results){
         if (err) res.status(400).send("Error updating rating!");
         res.status(200).send("Rating Updated!");
