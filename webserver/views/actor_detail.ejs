@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title><%= data.movie_title %></title> <!--CHANGE THIS-->
+<title><%= data.name %></title> <!--CHANGE THIS-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -24,7 +24,7 @@
 <script src="/javascripts/jquery.tipsy.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
 <% include partials/essential_scripts.ejs %>
-<script src="/javascripts/rating.js"></script>
+<script src="/javascripts/ratinglib.js"></script>
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
 
@@ -52,13 +52,13 @@ body, html {
 <div id="sidebar" class="side_detail" style="text-align:center;">
   <div style="background-color: #00BCD4;">
     <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:30px; overflow-x:visible;"></p>
-    <img id="movie_img" src="http://vignette2.wikia.nocookie.net/disney/images/5/58/Frozen-movie-poster.jpg/revision/latest?cb=20160606223222">
+    <img id="actor_img" src="<%= data.image_url %>">
   </div>
   <div id="shop"></div>
-  <div style="margin:auto; width:90%;">
-    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px"></textarea>
+  <div style="margin:auto; width:90%;" id="comment_text_wrapper">
+    <textarea class="form-control" rows="6" columns="100" style="overflow-y:scroll; width:100%; margin:5px; margin-top:15px" id="comment_text"></textarea>
   </div>
-  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;">Submit Comments</button>
+  <button type="button" class="btn btn-default" style="margin: 0 auto; margin-top: 2.5%;" id="submit_comments">Submit Comments</button>
 </div>
 
 <!-- First Parallax Image with Logo Text -->
@@ -70,40 +70,25 @@ body, html {
   <div class="container-fluid" id="first_div" style="padding-top:15%; display:block;">
     <div class="row">
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
-        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Actor Name</p><br>
+        <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;"><%= data.name %></p><br>
         <div class="row">
           <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Movies</div><br>
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
-                  
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
+            <% movies.forEach(function(movie){ %>
+                <div class="item" title="<%= movie.movie_title %>">
+                  <a href="/movies/<%= movie.mid %>"><img src="<%= movie.image_url %>" style="width:100%; height: 100%;"></a>
+                </div>
+            <% }); %>
           </div>
         </div>
         <div class="row">
           <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Directors</div><br>
           <div id="directors" style="width:90%; margin:auto; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">                  
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            <% directors.forEach(function(director){ %>
+            <div class="item" title="<%= director.name %>">
+              <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" style="width:100%; height: 100%;"></a>
             </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
-            <div class="item">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
+            <% }); %>
           </div>
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
@@ -165,33 +150,73 @@ $('.grid').masonry({
 
 <script>
 
-$(".type, .item_hoverable").tipsy({gravity: "n"});
+$(".type, .item_hoverablem, .item").tipsy({gravity: "n"});
 
-(function() {
-
+$(document).ready(function(){
     'use strict';
 
-    // SHOP ELEMENT
-    var shop = document.querySelector('#shop');
+    var aid = document.URL.split("/").pop().split("?")[0];
+    // get user comments & ratings
+    if( typeof Cookies.get('uid') !== "undefined"){
+        $.ajax({
+            url: "/users/actor_rating/" + aid,
+            type: "POST",
+            data: {
+                uid: Cookies.get('uid'),
+            },
+            success: function(data, textStatus, jqXHR){
+                var response = JSON.parse(jqXHR.responseText);
+                $("#comment_text").attr("placeholder", response.comments);
+                var data = [
+                  {
+                    title: "",
+                    description: "",
+                    rating: response.rating
+                  },
+                ];
+                init(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+    } else{
+        $("#comment_text_wrapper").remove();
+        $("#submit_comments").remove();
+    }
 
-    // DUMMY DATA
-    var data = [
-      {
-        title: "",
-        description: "",
-        rating: 0
-      },
-    ];
+    $("#submit_comments").on("click", function(){
+        $.ajax({
+            url: "/users/actor_rating/update_comments/" + aid,
+            type: "POST",
+            data: {
+                uid: Cookies.get('uid'),
+                comments: $("#comment_text").val(),
+            },
+            success: function(data, textStatus, jqXHR){
+                $("#comment_text").val("");
+                location.reload()
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+    });
+
 
     // INITIALIZE
-    (function init() {
+    function init(data) {
       for (var i = 0; i < data.length; i++) {
         addRatingWidget(buildShopItem(data[i]), data[i]);
       }
-    })();
+    };
 
     // BUILD SHOP ITEM
     function buildShopItem(data) {
+
+      // SHOP ELEMENT
+      var shop = document.querySelector('#shop');
+
       var shopItem = document.createElement('div');
 
       var html = '<div class="c-shop-item__img"></div>' +
@@ -213,11 +238,26 @@ $(".type, .item_hoverable").tipsy({gravity: "n"});
       var ratingElement = shopItem.querySelector('.c-rating');
       var currentRating = data.rating;
       var maxRating = 5;
-      var callback = function(rating) { alert(rating); };
+      var callback = function(rating){
+        if (typeof Cookies.get('uid') !== "undefined"){
+            $.ajax({
+                url: "/users/actor_rating/update_rating/" + aid,
+                type: "POST",
+                data: {
+                    uid: Cookies.get('uid'),
+                    rating: rating,
+                },
+                success: function(data, textStatus, jqXHR){
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
+      };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
-
-  })();
+});
 </script>
 <!-- Add Google Maps -->
 <script>
@@ -310,8 +350,6 @@ function toggleFunction() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
-
-$('.type').tipsy({gravity: 'n'});
 
 </script>
 
