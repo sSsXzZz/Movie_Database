@@ -22,38 +22,21 @@ router.get('/', function(req, res, next) {
                 id_field = "did";
                 name_field = "name";
             }
-            if (!multiple_tables){
-                sql_query += "SELECT "
-                    + name_field
-                    + ( name_field ==="movie_title" ? " AS name" : "")
-                    + ", \"" + param + "\" as source"
-                    + ", " + id_field + " as id"
-                    + " FROM "
-                    +  param
-                    + " WHERE "
-                    + name_field
-                    + " LIKE \"%"
-                    + req.query['q']
-                    + "%\"";
-                multiple_tables = true;
-            } else {
-                sql_query += " UNION" 
-                    + " SELECT "
-                    + name_field
-                    + ( name_field ==="movie_title" ? " AS name" : "")
-                    + ", \"" + param + "\" as source"
-                    + ", " + id_field + " as id"
-                    + " FROM "
-                    +  param
-                    + " WHERE "
-                    + name_field
-                    + " LIKE \"%"
-                    + req.query['q']
-                    + "%\"";
-            }
+            sql_query += ( multiple_tables ? " UNION " : "")
+                + "SELECT "
+                + name_field
+                + ( name_field ==="movie_title" ? " AS name" : "")
+                + ", \"" + param + "\" as source"
+                + ", " + id_field + " as id"
+                + ", image_url"
+                + " FROM " +  param
+                + " WHERE " + name_field
+                + " LIKE \"%" + req.query['q'] + "%\"";
+            multiple_tables = true;
         }
     }
     sql_query += " ) AS search_results ORDER BY name";
+    console.log(sql_query);
     if(valid_query){
         db.get().query(sql_query, function (err, rows, fields){
             if (err) throw err;
