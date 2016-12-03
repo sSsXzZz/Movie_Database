@@ -71,7 +71,6 @@ router.post('/movie_rating/update_rating/:key',function(req, res, next){
     var query_string = "UPDATE Movie_Ratings SET"
     + " rating=" + rating + ", timestamp=\"" + timestamp + "\""
     + " WHERE mid=" + req.params.key + " AND uid=" + uid;
-    console.log(query_string);
     db.get().query(query_string, function(err,results){
         if (err) res.status(400).send("Error updating rating!");
         res.status(200).send("Rating Updated!");
@@ -96,10 +95,111 @@ router.post('/movie_rating/update_comments/:key',function(req, res, next){
     });
 });
 
+router.post('/director_rating/:key',function(req, res, next){
+    if (!req.body.uid){
+        res.status(400).send("No uid given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var query_string = "SELECT rating, comments "
+    + "FROM Director_Ratings "
+    + "WHERE did=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,rows,fields){
+        if (err) throw err;
+        res.status(200).send(rows[0]);
+    });
+});
+
+router.post('/director_rating/update_rating/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.rating){
+        res.status(400).send("No uid or rating given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var rating = req.body.rating;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+    var query_string = "UPDATE Director_Ratings SET"
+    + " rating=" + rating + ", timestamp=\"" + timestamp + "\""
+    + " WHERE did=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Rating Updated!");
+    });
+});
+
+router.post('/director_rating/update_comments/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.comments){
+        res.status(400).send("No uid given or comments!");
+        return;
+    }
+    var uid = req.body.uid;
+    var comments = req.body.comments;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+    var query_string = "UPDATE Director_Ratings SET"
+    + " comments=\"" + comments + "\"" + ", timestamp=\"" + timestamp + "\""
+    + " WHERE did=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Comments Updated!");
+    });
+});
+
+router.post('/actor_rating/:key',function(req, res, next){
+    if (!req.body.uid){
+        res.status(400).send("No uid given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var query_string = "SELECT rating, comments "
+    + "FROM Actor_Ratings "
+    + "WHERE aid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,rows,fields){
+        if (err) throw err;
+        res.status(200).send(rows[0]);
+    });
+});
+
+router.post('/actor_rating/update_rating/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.rating){
+        res.status(400).send("No uid or rating given!");
+        return;
+    }
+    var uid = req.body.uid;
+    var rating = req.body.rating;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+    var query_string = "UPDATE Actor_Ratings SET"
+    + " rating=" + rating + ", timestamp=\"" + timestamp + "\""
+    + " WHERE aid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Rating Updated!");
+    });
+});
+
+router.post('/actor_rating/update_comments/:key',function(req, res, next){
+    if (!req.body.uid || !req.body.comments){
+        res.status(400).send("No uid given or comments!");
+        return;
+    }
+    var uid = req.body.uid;
+    var comments = req.body.comments;
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+    var query_string = "UPDATE Actor_Ratings SET"
+    + " comments=\"" + comments + "\"" + ", timestamp=\"" + timestamp + "\""
+    + " WHERE aid=" + req.params.key + " AND uid=" + uid;
+    db.get().query(query_string, function(err,results){
+        if (err) res.status(400).send("Error updating rating!");
+        res.status(200).send("Comments Updated!");
+    });
+});
+
 function addNewUser(user_object,res){
     db.get().query("INSERT INTO Users SET ?", user_object, function(err,result){
             if (err) throw err;
-            console.log(result.insertId);
             res.status(200).send({
                 id: result.insertId.toString(),
                 username: user_object.username,
