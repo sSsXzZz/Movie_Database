@@ -91,15 +91,15 @@ body, html {
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
                   
             <% actors.forEach(function(actor){ %>
-            <div class="item" title="<%= actor %>">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
-            </div>
+                <div class="item" title="<%= actor.name %>">
+                  <a href="/actors/<%= actor.aid %>"><img src="<%= actor.image_url %>" style="width:100%; height: 100%;"></a>
+                </div>
             <% }); %>
             <div class="item">
               <img src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%; opacity:1;">
             </div>
-            <div class="item" title="<%= director %>">
-              <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
+            <div class="item" title="<%= director.name %>">
+              <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" style="width:100%; height: 100%;"></a>
             </div>
           </div>
         </div>
@@ -282,9 +282,9 @@ $('.type').tipsy({gravity: 'n'});
 $(document).ready(function(){
     'use strict';
 
+    var mid = document.URL.split("/").pop().split("?")[0];
     // get user comments & ratings
     if( typeof Cookies.get('uid') !== "undefined"){
-        var mid = document.URL.split("/").pop().split("?")[0];
         $.ajax({
             url: "/users/movie_rating/" + mid,
             type: "POST",

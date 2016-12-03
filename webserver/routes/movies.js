@@ -8,7 +8,7 @@ router.get("/:key", function(req, res, next) {
         res.status(400).send("Requested movie does not exist!");
         return;
     }
-    var query_string = "SELECT M.*, A.name as \"actor_name\", D.name as \"director_name\", G.name as \"genre\", K.keyword " 
+    var query_string = "SELECT M.*, A.name as \"actor_name\", A.aid, A.image_url as \"actor_url\", D.name as \"director_name\", D.did, D.image_url as \"director_url\", G.name as \"genre\", K.keyword " 
     + "FROM Movies M, Actors A, Actor_Movie AM, Directors D, Director_Movie DM, Genres G, Movie_Keywords K " 
     + "WHERE M.mid=" + moviekey + " AND AM.mid=" + moviekey + " AND A.aid=AM.aid" + " AND DM.mid=" + moviekey + " AND D.did=DM.did" + " AND G.mid=" + moviekey + " AND K.mid=" + moviekey;
     db.get().query(query_string,function(err,rows, fields){
@@ -17,9 +17,18 @@ router.get("/:key", function(req, res, next) {
         var actors = [];
         var genres = [];
         var keywords = [];
+        var director = {
+            did: rows[0].did,
+            name: rows[0].director_name,
+            image_url: rows[0].image_url,
+        };
         rows.forEach(function(entry){
-            if (actors.indexOf(entry.actor_name) === -1){
-                actors.push(entry.actor_name);
+            if ( objectArrayIndexOf(actors,entry.aid,"aid") === -1){
+                actors.push({
+                    aid: entry.aid,
+                    name: entry.actor_name,
+                    image_url: entry.actor_url,
+                });
             }
             if (genres.indexOf(entry.genre) === -1){
                 genres.push(entry.genre);
@@ -31,11 +40,18 @@ router.get("/:key", function(req, res, next) {
         res.render('movie_detail.ejs', {
             data: rows[0],
             actors: actors,
-            director: rows[0].director_name,
+            director: director,
             genres: genres,
             keywords: keywords,
         });
     });
 });
+
+function objectArrayIndexOf(myArray, searchTerm, property) {
+    for(var i = 0, len = myArray.length; i < len; i++) {
+        if (myArray[i][property] === searchTerm) return i;
+    }
+    return -1;
+}
 
 module.exports = router;
