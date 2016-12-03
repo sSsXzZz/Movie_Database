@@ -72,6 +72,7 @@ body, html {
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px">
         <p class="item_hoverable" style="font-size: 50px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-bottom: 0%;">Actor Name</p><br>
         <div class="row">
+          <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Movies</div><br>
           <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
                   
             <div class="item">
@@ -89,7 +90,8 @@ body, html {
           </div>
         </div>
         <div class="row">
-          <div id="directors" style="width:90%; margin:auto; margin-top:1%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">                  
+          <div class="source_sans item_hoverable" style="font-size:30px; margin-left: 3%; display:inline-block">Directors</div><br>
+          <div id="directors" style="width:90%; margin:auto; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">                  
             <div class="item">
               <a href="#"><img src="https://thepoisonedmartini.files.wordpress.com/2014/11/frozen-dvd-cover.jpg" style="width:100%; height: 100%;"></a>
             </div>
@@ -131,7 +133,8 @@ body, html {
         <button id="back_btn" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
         <input type="text" id="u_name" class="form-control" style="font-size: 20px; display:inline-block; margin-left:10px; margin-bottom: 0%; margin-top:1.5%; width:400px;" placeholder="Actor Name"><br>
         <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Img URL"><br>
-        <input type="text" id="u_movie_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Movies">
+        <input type="text" id="u_movie_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Movies"><br>
+        <button class="btn btn-default" style="margin-top:1.5%">Submit</button>
         <p class="small">Insert Movies comma delimited, in order</p>
 <!--         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Action</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
@@ -147,7 +150,6 @@ body, html {
 
 <div style="text-align:center">
   <% include partials/modal.ejs %>
-  <!-- <% include partials/actor_charts.ejs %> -->
 </div>
 
 

@@ -9,7 +9,9 @@ var db = require('./db');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var search_results = require('./routes/search_results');
-var movies = require('./routes/movies')
+var movies = require('./routes/movies');
+var actors = require('./routes/actors');
+var directors = require('./routes/directors');
 
 var app = express();
 
@@ -28,6 +30,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/search_results',search_results);
 app.use('/movies',movies);
+app.use('/actors',actors);
+app.use('/directors',directors);
 
 db.connect( function(err) {
     if (err){
