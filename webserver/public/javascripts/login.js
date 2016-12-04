@@ -9,7 +9,7 @@ $(document).ready(function(){
                 password: $("#password_textfield").val(),
             },
             success: loginSuccess,
-            error: loginError
+            error: alertError
         });
     });
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
                 password: $("#password_textfield").val(),
             },
             success: loginSuccess,
-            error: loginError
+            error: alertError
         });
     });
 
@@ -45,6 +45,23 @@ $(document).ready(function(){
         Cookies.remove('username');
         location.reload();
     });
+
+    $("#password_update_button").on("click", function(){
+        var username = $("#change_username").val();
+        var old_pass = $("#old_password").val();
+        var new_pass = $("#new_password").val();
+        $.ajax({
+            url: "/users/change_password",
+            type: "POST",
+            data: {
+                username: username,
+                old_pass: old_pass,
+                new_pass: new_pass,
+            },
+            success: passwordChangeSuccess,
+            error: alertError,
+        });
+    });
 });
 
 function loginSuccess(data, textStatus, jqXHR){
@@ -55,7 +72,11 @@ function loginSuccess(data, textStatus, jqXHR){
     location.reload();
 }
 
-function loginError(jqXHR, textStatus, errorThrown){
+function passwordChangeSuccess(data, textStatus, jqXHR){
+    alert(data);
+}
+
+function alertError(jqXHR, textStatus, errorThrown){
     alert(jqXHR.responseText);
 }
 
