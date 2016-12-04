@@ -165,7 +165,12 @@ $(document).ready(function(){
                 uid: Cookies.get('uid'),
             },
             success: function(data, textStatus, jqXHR){
-                var response = JSON.parse(jqXHR.responseText);
+                var response;
+                if (jqXHR.responseText){
+                    response = JSON.parse(jqXHR.responseText);
+                } else{
+                    response = {rating:0, comments: ""};
+                }
                 $("#comment_text").attr("placeholder", response.comments);
                 var data = [
                   {
