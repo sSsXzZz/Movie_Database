@@ -79,7 +79,7 @@ router.post('/rating_history', function(req,res,next){
         + " UNION SELECT D.name, D.image_url, DR.rating, DR.comments, DR.timestamp"
         + " FROM Directors D, Director_Ratings DR"
         + " WHERE DR.uid=" + req.body.uid + " AND DR.did=D.did"
-        + " ) as history order by timestamp DESC";
+        + " ) as history order by timestamp DESC limit 10";
     db.get().query(query_string, function(err,rows,fields){
         if (err) throw err;
         res.send(rows);
