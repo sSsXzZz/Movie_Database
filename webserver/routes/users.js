@@ -44,6 +44,29 @@ router.post('/signup', function(req,res,next){
     });
 });
 
+router.post('/change_password', function(req,res,next){
+    console.log("HELLO!\n");
+    if (!req.body.username || !req.body.old_pass || !req.body.new_pass){
+        res.status(400).send('Please send all fields!');
+    }
+    var query_string = "SELECT uid FROM Users WHERE "
+        + "username='" + req.body.username + "' AND password='" + req.body.old_pass + "'";
+    db.get().query(query_string, function(err,rows,fields){
+        if (err) throw err;
+        if (rows.length <= 0){
+            res.status(403).send('Invalid username or password!');
+            return;
+        }
+        query_string = "UPDATE Users SET"
+            + " password='" + req.body.new_pass + "' WHERE uid=" + rows[0].uid;
+        console.log(query_string);
+        db.get().query(query_string, function(err, results){
+            if (err) throw err;
+            res.status(200).send("Updated password!");
+        });
+    });
+});
+
 router.post('/movie_rating/:key',function(req, res, next){
     if (!req.body.uid){
         res.status(400).send("No uid given!");
