@@ -10,10 +10,10 @@ var state = {
 
 exports.connect = function(callback) {
     state.pool = mysql.createPool({
-        host: 'localhost',
-        user: 'root',
-        password: 'vishnu1',
-        database: 'imdb',
+        host: 'us-cdbr-iron-east-04.cleardb.net',
+        user: 'bb0c7ff2a4027d',
+        password: 'f152a9b0',
+        database: 'heroku_ba9f20b2b2fb039',
     })
 
     callback()
