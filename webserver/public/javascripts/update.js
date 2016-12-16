@@ -16,7 +16,7 @@ function updateSize(){
         var ratio = 0;
         var width = pict.width();
         var height = pict.height();
-
+        console.log("Orig Width: " + width + "Orig Height: " + height);
         if (height > maxHeight){
             ratio = maxHeight / height;
             pict.css("height", maxHeight);
@@ -36,6 +36,10 @@ function updateSize(){
 
         pict.css('display', 'block');
         pict.css('margin', 'auto');
+
+        var nw = pict.width();
+        var nh = pict.height();
+        console.log("New width: " + nw + "New Height: " + nh);
 
         //$(this).find('img').css('height', 200 + 'px');
     });
