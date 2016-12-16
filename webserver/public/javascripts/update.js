@@ -25,6 +25,9 @@ function updateSize(){
             height = height * ratio;
         }
 
+        pict.css('display', 'block');
+        pict.css('margin', 'auto');
+
         //$(this).find('img').css('height', 200 + 'px');
     });
     $('.owl-wrapper-outer').css('height', 220 + 'px');
