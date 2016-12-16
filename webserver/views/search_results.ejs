@@ -37,6 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
 <link rel="stylesheet" href="/stylesheets/tipsy.css">
 <script src="/javascripts/jquery.tipsy.js"></script>
+<script src="javascripts/update.js"></script>
 <% include partials/essential_scripts.ejs %>
 
 <style>
@@ -168,16 +169,16 @@ $(document).ready(function () {
       }
   });
 
-  function updateSize(){
-      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
-      $('.owl-item').each(function () {
-          var thisHeight = parseInt($(this).css('height'));
-          if (thisHeight < 100) return;
-          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
-      });
-      $('.owl-wrapper-outer').css('height',minHeight+'px');
-      //console.log(minHeight);
-  }
+  // function updateSize(){
+  //     var minHeight=parseInt($('.owl-item').eq(0).css('height'));
+  //     $('.owl-item').each(function () {
+  //         var thisHeight = parseInt($(this).css('height'));
+  //         if (thisHeight < 100) return;
+  //         minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
+  //     });
+  //     $('.owl-wrapper-outer').css('height',minHeight+'px');
+  //     //console.log(minHeight);
+  // }
 });
 
 

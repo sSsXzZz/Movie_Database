@@ -27,6 +27,7 @@
 <script src="/javascripts/ratinglib.js"></script>
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
+<script src="javascripts/update.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -220,40 +221,40 @@ $(document).ready(function () {
       }
   });
 
-  function updateSize(){
-    var minHeight = 300;
+  // function updateSize(){
+  //   var minHeight = 300;
     
-    var count = 0;
+  //   var count = 0;
 
-    $('.owl-item').each(function () {
-        if ($(this).find('img').hasClass('blank'))
-        {
-            return;
-        }
-        var thisHeight = parseInt($(this).find('img').css('height'));
-        console.log(count + ',' + thisHeight);
-        count += 1;
-        if (thisHeight < 100)
-        {
-          return;
-        }
-        minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
-    });
+  //   $('.owl-item').each(function () {
+  //       if ($(this).find('img').hasClass('blank'))
+  //       {
+  //           return;
+  //       }
+  //       var thisHeight = parseInt($(this).find('img').css('height'));
+  //       console.log(count + ',' + thisHeight);
+  //       count += 1;
+  //       if (thisHeight < 100)
+  //       {
+  //         return;
+  //       }
+  //       minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
+  //   });
 
-    var maxHeight = minHeight;
+  //   var maxHeight = minHeight;
 
     
 
-    $('.owl-item').each(function(){
+  //   $('.owl-item').each(function(){
         
-        $(this).css('height', minHeight+'px');
-    });
+  //       $(this).css('height', minHeight+'px');
+  //   });
 
 
-    minHeight += 20;
-    $('.owl-wrapper-outer').css('height', minHeight+'px');
-    console.log(minHeight);
-  }
+  //   minHeight += 20;
+  //   $('.owl-wrapper-outer').css('height', minHeight+'px');
+  //   console.log(minHeight);
+  // }
 
   $('#back_btn').click(function(){
     $('#second_div').css('display', 'none');
