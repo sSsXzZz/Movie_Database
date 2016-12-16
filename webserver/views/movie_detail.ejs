@@ -96,7 +96,7 @@ body, html {
                 </div>
             <% }); %>
             <div class="item">
-              <img src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%; opacity:1;">
+              <img class="blank" src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%; opacity:1;">
             </div>
             <div class="item" title="<%= director.name %>">
               <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" style="width:100%; height: 100%;"></a>
@@ -221,20 +221,38 @@ $(document).ready(function () {
   });
 
   function updateSize(){
-    var minHeight = parseInt($('.owl-item').eq(0).css('height'));
+    var minHeight = 300;
+    
+    var count = 0;
+
     $('.owl-item').each(function () {
-        var thisHeight = parseInt($(this).css('height'));
+        if ($(this).find('img').hasClass('blank'))
+        {
+            return;
+        }
+        var thisHeight = parseInt($(this).find('img').css('height'));
+        console.log(count + ',' + thisHeight);
+        count += 1;
         if (thisHeight < 100)
         {
           return;
         }
         minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
     });
+
+    var maxHeight = minHeight;
+
+    
+
     $('.owl-item').each(function(){
-      $(this).css('height', minHeight+'px');
-    })
-    var minHeight += 20;
+        
+        $(this).css('height', minHeight+'px');
+    });
+
+
+    minHeight += 20;
     $('.owl-wrapper-outer').css('height', minHeight+'px');
+    console.log(minHeight);
   }
 
   $('#back_btn').click(function(){

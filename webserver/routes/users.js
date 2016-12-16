@@ -15,10 +15,23 @@ router.post('/login', function(req,res,next){
         if (rows.length < 1){
             res.status(403).send('Invalid credentials!');
         } else{
-            console.log("User " + req.body.username + " has logged in\n");
-            res.status(200).send({
-                id: rows[0].uid.toString(),
-                username: rows[0].username,
+            var user_info = rows[0];
+            query_string = "SELECT 1 FROM Super_Users WHERE uid="
+                + rows[0].uid
+                + " limit 1";
+
+            // check if they are a super user
+            db.get().query(query_string, function(err, rows, fields){
+                if (err) throw err;
+                var user_object = {
+                    id: user_info.uid.toString(),
+                    username: user_info.username,
+                }
+                if (rows.length >= 0){
+                    user_object["super_user"] = 1;
+                }
+                console.log("User " + req.body.username + " has logged in\n");
+                res.status(200).send(user_object);
             });
         }
     });
