@@ -221,13 +221,20 @@ $(document).ready(function () {
   });
 
   function updateSize(){
-      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
-      $('.owl-item').each(function () {
-          var thisHeight = parseInt($(this).css('height'));
-          if (thisHeight < 100) return;
-          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
-      });
-      $('.owl-wrapper-outer').css('height',minHeight+'px');
+    var minHeight = parseInt($('.owl-item').eq(0).css('height'));
+    $('.owl-item').each(function () {
+        var thisHeight = parseInt($(this).css('height'));
+        if (thisHeight < 100)
+        {
+          return;
+        }
+        minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
+    });
+    $('.owl-item').each(function(){
+      $(this).css('height', minHeight+'px');
+    })
+    var minHeight += 20;
+    $('.owl-wrapper-outer').css('height', minHeight+'px');
   }
 
   $('#back_btn').click(function(){
