@@ -25,6 +25,15 @@ function updateSize(){
             height = height * ratio;
         }
 
+        if (height < maxHeight)
+        {
+            ratio = maxHeight / height;
+            pict.css("height", maxHeight);
+            pict.css("width", width*ratio);
+            width = width*ratio;
+            height = height * ratio;
+        }
+
         pict.css('display', 'block');
         pict.css('margin', 'auto');
 
