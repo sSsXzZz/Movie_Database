@@ -229,6 +229,10 @@ body, html {
             }
             minHeight = (minHeight <= thisHeight ? minHeight:thisHeight);
         });
+        $('.owl-item').each(function(){
+          $(this).css('height', minHeight+'px');
+        })
+        var minHeight += 20;
         $('.owl-wrapper-outer').css('height', minHeight+'px');
     }
     // $("#actors").owlCarousel({
