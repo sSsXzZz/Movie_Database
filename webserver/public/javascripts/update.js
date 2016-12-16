@@ -70,7 +70,6 @@ function updateSize(){
 
     $('.owl-item').each(function(){
         
-        $(this).css('height', minHeight+'px');
         var pict = $(this).find('img');
 
         var ratio = 0;
@@ -96,6 +95,7 @@ function updateSize(){
 
         var nw = pict.width();
         var nh = pict.height();
+        $(this).css('height', minHeight+'px');
         console.log("New width: " + nw + "New Height: " + nh);
     });
 
