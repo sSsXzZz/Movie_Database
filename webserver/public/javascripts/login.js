@@ -43,6 +43,7 @@ $(document).ready(function(){
     $("#logout_button").on('click', function(){
         Cookies.remove('uid');
         Cookies.remove('username');
+        Cookies.remove('super_user');
         location.reload();
     });
 
@@ -69,6 +70,7 @@ function loginSuccess(data, textStatus, jqXHR){
     var response = JSON.parse(jqXHR.responseText);
     Cookies.set('uid',response.id, {expires: 1});
     Cookies.set('username', response.username, {expires: 1});
+    Cookies.set('super_user', response.super_user, {expires: 1});
     location.reload();
 }
 

@@ -27,9 +27,12 @@ router.post('/login', function(req,res,next){
                     id: user_info.uid.toString(),
                     username: user_info.username,
                 }
-                if (rows.length >= 0){
+                if (rows.length > 0){
                     user_object["super_user"] = 1;
+                } else {
+                    user_object["super_user"] = 0;
                 }
+                console.log(user_object);
                 console.log("User " + req.body.username + " has logged in\n");
                 res.status(200).send(user_object);
             });
