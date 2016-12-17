@@ -62,22 +62,37 @@ router.post("/update/:key", function(req, res, next) {
         }
     }
 
-    console.log(update_info);
-    db.get().query(query_string, update_info, function(err, results){
-        if (err) throw err;
-        var now = new Date();
-        var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
-        query_string = " INSERT INTO Movie_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
-            + timestamp + "'";
-        var insert_info = { 
-            timestamp: timestamp,
-            uid: req.body.uid,
-            mid: req.params.key
-        }
-        db.get().query(query_string, insert_info, function(err, results){
+    // UPDATE Movie fields
+    if (Object.keys(update_info).length > 0 ){
+        db.get().query(query_string, update_info, function(err, results){
             if (err) throw err;
-            res.status(200).send();
         });
+    }
+
+    // Update keywords
+    if (req.body.keywords.length > 0){
+        console.log( req.body.keywords.split(","));
+        /*
+        query_string = "DELETE FROM Movie_Keywords where mid=" + req.params.key;
+        db.query(query_string, function(err,results){
+            if (err) throw err;
+        });
+        */
+    }
+
+    // add log in Movie_Edits
+    var now = new Date();
+    var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+    query_string = " INSERT INTO Movie_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
+        + timestamp + "'";
+    var insert_info = { 
+        timestamp: timestamp,
+        uid: req.body.uid,
+        mid: req.params.key
+    }
+    db.get().query(query_string, insert_info, function(err, results){
+        if (err) throw err;
+        res.status(200).send();
     });
 });
 
