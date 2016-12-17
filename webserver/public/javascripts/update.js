@@ -108,6 +108,6 @@
 function updateSize() {
 
     $('.owl-item').each(function(){
-        $(this).removeProperty('width');
+        $(this).css('width', )
     });
 }
