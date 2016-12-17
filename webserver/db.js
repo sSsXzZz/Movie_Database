@@ -9,7 +9,7 @@ var state = {
 }
 
 exports.connect = function(callback) {
-    state.pool = mysql.createPool({
+    state.pool = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: 'vishnu1',

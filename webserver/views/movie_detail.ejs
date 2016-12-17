@@ -124,7 +124,7 @@ body, html {
         </div>
         <div class="row">
           <div id="directors" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
-            <div class="item-director">
+            <div class="item">
               <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" title="<%= director.name %>" style="height: 200px; width:auto;"></a>
             </div>
 <!--             <div class="item">
@@ -176,7 +176,7 @@ body, html {
         <p class="small">Insert genres comma delimited</p>
         <input type="text" id="u_keywords" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Keywords">
         <p class="small">Insert keywords comma delimited</p>
-        <input type="text" id="u_actor_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Actors">
+        <input type="text" id="u_actors" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Actors">
         <p class="small">Insert Actors comma delimited, in order</p>
         <input type="text" id="u_director" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Director">
         <p class="small">Insert Director Name</p>
@@ -210,7 +210,7 @@ $('.grid').masonry({
 
 <script>
 
-$(".type, .item_hoverable, .item").tipsy({gravity: "n"});
+$(".type, .item_hoverable, .item, .item-director").tipsy({gravity: "n"});
 
 </script>
 <!-- Add Google Maps -->
