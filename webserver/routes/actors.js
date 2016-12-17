@@ -32,10 +32,16 @@ router.get("/:key", function(req, res, next) {
                 });
             }
         });
-        res.render('actor_detail.ejs', {
-            data: rows[0],
-            directors: directors,
-            movies: movies,
+        var actor_data = rows[0];
+        query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Actor_Ratings WHERE aid=" + moviekey + ") t1";
+        db.get().query(query_string, function(err,rows, fields){
+            res.render('actor_detail.ejs', {
+                data: actor_data,
+                directors: directors,
+                movies: movies,
+                avg_rating: rows[0].avg_rating,
+                rating_count: rows[0].count
+            });
         });
     });
 });
