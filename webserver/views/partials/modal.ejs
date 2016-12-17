@@ -68,10 +68,12 @@
   <div class="modal-content" style="width:70%"> <!-- this is the container wrapper -->
     <span class="close" style="float:right;" id="superuser_close">x</span>
     <div class="input-group scope_one" style="margin:auto;">
-      <button id="back_button" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
-      <button id="m_btn" class="scope_one">Movie</button>
-      <button id="m_btn" class="scope_one">Actor</button>
-      <button id="m_btn" class="scope_one">Director</button>
+      <button id="back_button" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0; display:none;"><span class="glyphicon glyphicon-chevron-left"></span></button>
+      <div id="b_div">
+        <button id="m_btn" class="scope_one">Movie</button>
+        <button id="a_btn" class="scope_one">Actor</button>
+        <button id="d_btn" class="scope_one">Director</button>
+      </div>
       <div id="m_div" style="display:none;">
         Add a Movie:
         <input id="movie_name" type="text" class="form-control" placeholder="Movie Title" style="margin-top:5px; margin-bottom:5px">
@@ -112,6 +114,20 @@
       </div>
     </div>
   </div>
+  <script>
+    
+    $("#m_btn").click(function(){
+      $("#b_div").css('display', 'block');
+    });
+
+    $("#a_btn").click(function(){
+      $("#a_div").css('display', 'block');
+    });
+
+    $("#d_btn").click(function(){
+      $("#d_div").css('display', 'block');
+    });
+  </script>
 <!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
       <input type="text" class="form-control" placeholder="Username">
       <input type="password" class="form-control" placeholder="Password">
