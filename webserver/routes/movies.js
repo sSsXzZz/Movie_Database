@@ -14,6 +14,10 @@ router.get("/:key", function(req, res, next) {
     + "WHERE M.mid=" + moviekey + " AND AM.mid=" + moviekey + " AND A.aid=AM.aid" + " AND DM.mid=" + moviekey + " AND D.did=DM.did" + " AND G.mid=" + moviekey + " AND K.mid=" + moviekey;
     db.get().query(query_string,function(err,rows, fields){
         if (err) throw err;
+        if (rows <= 0){
+            res.status(400).send("Couldn't load all the information for the movie!");
+            return;
+        }
         var actors = [];
         var genres = [];
         var keywords = [];
@@ -174,6 +178,8 @@ router.post("/update/:key", function(req, res, next) {
                         throw err;
                     });
                 }
+                console.log("TEST");
+                console.log(results);
 
                 query_string = "SELECT did, name from Directors where name=\"" + director + "\"";
 
@@ -189,17 +195,24 @@ router.post("/update/:key", function(req, res, next) {
                         return db.get().rollback(function() {
                         });
                     }
-                    query_string = "INSERT INTO Director_Movie (mid,did) VALUES ?";
-                    var values =[];
-                    values.push([parseInt(request_key), rows[0].did]);
+                    console.log("TEST2");
+                    console.log(rows);
+                    query_string = "INSERT INTO Director_Movie SET ? ON DUPLICATE KEY UPDATE"
+                        + " did=" + rows[0].did;
+                    var insert_value ={
+                        did: rows[0].did,
+                        mid: request_key,
+                    };
 
                     // Insert new director
-                    db.get().query(query_string, [values], function(err,results){
+                    db.get().query(query_string, insert_value, insert_value, function(err,results){
                         if (err) {
+                            console.log("I GUESS WE GOT IT");
                             return db.get().rollback(function() {
                                 throw err;
                             });
                         }
+                        console.log(results);
                         db.get().commit(function(err){
                             if (err) {
                                 return db.get().rollback(function(){
