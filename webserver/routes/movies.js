@@ -14,10 +14,12 @@ router.get("/:key", function(req, res, next) {
     + "WHERE M.mid=" + moviekey + " AND AM.mid=" + moviekey + " AND A.aid=AM.aid" + " AND DM.mid=" + moviekey + " AND D.did=DM.did" + " AND G.mid=" + moviekey + " AND K.mid=" + moviekey;
     db.get().query(query_string,function(err,rows, fields){
         if (err) throw err;
+
         if (rows <= 0){
             res.status(400).send("Couldn't load all the information for the movie!");
             return;
         }
+
         var actors = [];
         var genres = [];
         var keywords = [];
@@ -41,12 +43,19 @@ router.get("/:key", function(req, res, next) {
                 keywords.push(entry.keyword);
             }
         });
-        res.render('movie_detail.ejs', {
-            data: rows[0],
-            actors: actors,
-            director: director,
-            genres: genres,
-            keywords: keywords,
+        var movie_data = rows[0];
+
+        query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Movie_Ratings WHERE mid=" + moviekey + ") t1";
+        db.get().query(query_string, function(err,rows, fields){
+            res.render('movie_detail.ejs', {
+                data: movie_data,
+                actors: actors,
+                director: director,
+                genres: genres,
+                keywords: keywords,
+                avg_rating: rows[0].avg_rating,
+                rating_count: rows[0].count
+            });
         });
     });
 });
