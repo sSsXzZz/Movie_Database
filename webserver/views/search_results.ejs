@@ -118,14 +118,6 @@ body, html {
   <div style="text-align:center">
     <% include partials/modal.ejs %>
   </div>
-
-<script>
-$('.grid').masonry({
-  itemSelector: '.grid-item',
-  columnWidth: '.grid-sizer',
-  percentPosition: true
-});
-</script>
  
 
 <!-- Add Google Maps -->
@@ -143,7 +135,7 @@ $(document).ready(function () {
     autplaySpeed: 2000,
   });
 
-  $("#actors").owlCarousel({
+  $("#actors").slick({
     dots: true,
     infinite: true,
     speed: 300,
@@ -153,7 +145,7 @@ $(document).ready(function () {
     autplaySpeed: 2000,
   });
 
-  $("#directors").owlCarousel({
+  $("#directors").slick({
     dots: true,
     infinite: true,
     speed: 300,
