@@ -28,6 +28,9 @@
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
 <script src="/javascripts/update.js"></script>
+<link rel="stylesheet" type="text/css" href="/javascripts/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/javascripts/slick/slick-theme.css"/>
+<script type="text/javascript" src="/javascripts/slick/slick.min.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -221,7 +224,7 @@ $(".type, .item_hoverable").tipsy({gravity: "n"});
 
 $(document).ready(function () {
 
-  $("#movies").owlCarousel({
+  $("#movies").slick({
     dots: true,
     infinite: true,
     speed: 300,
@@ -232,7 +235,7 @@ $(document).ready(function () {
   });
 
 
-  $("#actors").owlCarousel({
+  $("#actors").slick({
     dots: true,
     infinite: true,
     speed: 300,
