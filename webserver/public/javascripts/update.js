@@ -111,3 +111,13 @@ function updateSize() {
         $(this).css('width', 'auto');
     });
 }
+
+// function updateSize() {
+
+//     $('.owl-item').each(function(){
+//         $(this).css('width', 'auto');
+//     });
+
+    
+    
+// }

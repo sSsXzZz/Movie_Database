@@ -27,6 +27,7 @@
 <script src="/javascripts/rating.js"></script>
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
+<script src="/javascripts/update.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -252,15 +253,15 @@ $(document).ready(function () {
       }
   });
 
-  function updateSize(){
-      var minHeight=parseInt($('.owl-item').eq(0).css('height'));
-      $('.owl-item').each(function () {
-          var thisHeight = parseInt($(this).css('height'));
-          if (thisHeight < 100) return;
-          minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
-      });
-      $('.owl-wrapper-outer').css('height',minHeight+'px');
-  }
+  // function updateSize(){
+  //     var minHeight=parseInt($('.owl-item').eq(0).css('height'));
+  //     $('.owl-item').each(function () {
+  //         var thisHeight = parseInt($(this).css('height'));
+  //         if (thisHeight < 100) return;
+  //         minHeight=(minHeight<=thisHeight?minHeight:thisHeight);
+  //     });
+  //     $('.owl-wrapper-outer').css('height',minHeight+'px');
+  // }
 
   $('#back_btn').click(function(){
     $('#second_div').css('display', 'none');
