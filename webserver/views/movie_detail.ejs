@@ -93,14 +93,14 @@ body, html {
                   
             <% actors.forEach(function(actor){ %>
                 <div class="item" title="<%= actor.name %>">
-                  <a href="/actors/<%= actor.aid %>"><img src="<%= actor.image_url %>" style="width:100%; height: 100%;"></a>
+                  <a href="/actors/<%= actor.aid %>"><img src="<%= actor.image_url %>" style="height: 200px; width:auto;"></a>
                 </div>
             <% }); %>
             <div class="item">
               <img class="blank" src="http://vignette2.wikia.nocookie.net/iamamiwhoami/images/0/01/Prelude_videos.jpg/revision/20110906025246" style="width:100%; height: 100%; opacity:1;">
             </div>
             <div class="item" title="<%= director.name %>">
-              <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" style="width:100%; height: 100%;"></a>
+              <a href="/directors/<%= director.did %>"><img src="<%= director.image_url %>" style="height: 200px; width:auto;"></a>
             </div>
           </div>
         </div>
