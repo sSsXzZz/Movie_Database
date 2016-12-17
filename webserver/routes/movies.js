@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db');
 var dateFormat = require('dateformat');
-var sleep = require('sleep');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
