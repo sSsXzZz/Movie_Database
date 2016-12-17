@@ -253,6 +253,10 @@ $(document).ready(function(){
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
 
+  if (typeof Cookies.get('uid') === "undefined"){
+    $('#settings').hide();
+  }
+
   $("#button_update_fields").click(function(){
         $.ajax({
             url: "/directors/update/" + did,
