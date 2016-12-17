@@ -93,14 +93,7 @@ body, html {
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
           <div style="text-align:center">
-            <button title="info" type="button" id="length" class="btn btn-default glyph"><span class="glyphicon glyphicon-info-sign"></span></button>
             <button title="settings" type="button" id="settings" class="btn btn-default glyph"><span class="glyphicon glyphicon-cog"></span></button>
-            <!-- <button title="add" type="button" id="add" class="btn btn-default glyph"><span class="glyphicon glyphicon-plus"></span></button> -->
-<!--             <button type="button" id="revenue" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
-            <button type="button" id="release" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
-            <button type="button" id="langauge" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
-            <button type="button" id="rating" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
-            <button type="button" id="genres" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button> -->
           </div>
         </div>
       </div>
@@ -118,9 +111,7 @@ body, html {
         <button id="back_btn" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
         <input type="text" id="u_name" class="form-control" style="font-size: 20px; display:inline-block; margin-left:10px; margin-bottom: 0%; margin-top:1.5%; width:400px;" placeholder="Actor Name"><br>
         <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Img URL"><br>
-        <input type="text" id="u_movie_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Movies"><br>
-        <button class="btn btn-default" style="margin-top:1.5%">Submit</button>
-        <p class="small">Insert Movies comma delimited, in order</p>
+        <button class="btn btn-default" style="margin-top:1.5%" id="button_update_fields">Submit</button>
 <!--         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Action</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
@@ -262,6 +253,27 @@ $(document).ready(function(){
       };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
+
+  if (typeof Cookies.get('uid') === "undefined"){
+    $('#settings').hide();
+  }
+
+  $("#button_update_fields").click(function(){
+        $.ajax({
+            url: "/actors/update/" + aid,
+            type: "POST",
+            data: {
+                name: $("#u_name").val(),
+                image_url: $("#u_url").val(),
+                uid: Cookies.get('uid'),
+            },
+            success: function(data, textStatus, jqXHR){
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+  });
 });
 </script>
 <!-- Add Google Maps -->
