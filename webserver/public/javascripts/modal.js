@@ -60,12 +60,12 @@ $(document).ready(function(){
   // When the user clicks the button, open the modal
   hist_btn.onclick = function() {
       hist_modal.style.display = "block";
-  };
+  }
 
   // When the user clicks on <span> (x), close the modal
   hist_span.onclick = function() {
       hist_modal.style.display = "none";
-  };
+  }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
@@ -75,9 +75,6 @@ $(document).ready(function(){
           modal.style.display = "none"
       }
   }
-});
-
-
 
   // Get the history modal
   var sup_modal = document.getElementById('superuser_modal');
@@ -91,12 +88,12 @@ $(document).ready(function(){
   // When the user clicks the button, open the modal
   sup_btn.onclick = function() {
       sup_modal.style.display = "block";
-  };
+  }
 
   // When the user clicks on <span> (x), close the modal
   sup_span.onclick = function() {
       sup_modal.style.display = "none";
-  };
+  }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
@@ -106,7 +103,12 @@ $(document).ready(function(){
           modal.style.display = "none";
           sup_modal.style.display = "none";
       }
-  };
+  }
+});
+
+
+
+
 
 
 
