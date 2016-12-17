@@ -254,7 +254,7 @@ $(document).ready(function(){
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
 
-  if (typeof Cookies.get('uid') === "undefined"){
+  if (typeof Cookies.get('super_user') === "undefined" || Cookies.get('super_user') != 1){
     $('#settings').hide();
   }
 
