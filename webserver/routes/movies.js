@@ -49,22 +49,22 @@ router.get("/:key", function(req, res, next) {
 
 router.post("/update/:key", function(req, res, next) {
     var query_string = "UPDATE Movies SET ? WHERE mid=" + req.params.key;
-    console.log(req.body);
+    for (var key in req.body) {
+        if (req.body[key].length <= 0){
+            delete req.body[key];
+        }
+    }
 
-    // TODO
-    res.status(400).send();
-    return;
-
-    db.get().query(query_string, function(err, results){
+    db.get().query(query_string, req.body, function(err, results){
         if (err) throw err;
         var now = new Date();
         var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
-        query_string = " INSERT INTO Director_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
+        query_string = " INSERT INTO Movie_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
             + timestamp + "'";
         var insert_info = { 
             timestamp: timestamp,
             uid: req.body.uid,
-            did: req.params.key
+            mid: req.params.key
         }
         db.get().query(query_string, insert_info, function(err, results){
             if (err) throw err;
