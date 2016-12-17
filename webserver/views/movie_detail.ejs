@@ -160,6 +160,7 @@ body, html {
         <input type="text" id="u_year"class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Year"><br>
         <input type="text" id="u_lang" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Language"><br>
         <input type="text" id="u_length" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Length"><br>
+        <input type="text" id="u_revenue" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Revenue"><br>
         <input type="text" id="u_color" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Color">
         <p class="small">1 for Color, 0 for BW</p>
         <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Image URL"><br>
@@ -442,15 +443,16 @@ $(document).ready(function(){
             type: "POST",
             data: {
                 movie_title: $("#u_title").val(),
-                rating: $("#u_rating").val(),
+                content_rating: $("#u_rating").val(),
                 year: $("#u_year").val(),
                 language: $("#u_lang").val(),
-                length: $("#u_length").val(),
+                duration: $("#u_length").val(),
                 color: $("#u_color").val(),
                 image_url: $("#u_url").val(),
                 genres: $("#u_genres").val(),
                 actors: $("#u_actors").val(),
                 director: $("#u_director").val(),
+                revenue: $("#u_revenue").val(),
                 uid: Cookies.get('uid'),
             },
             success: function(data, textStatus, jqXHR){
