@@ -17,7 +17,6 @@ router.get("/:key", function(req, res, next) {
         var actors = [];
         var genres = [];
         var keywords = [];
-        console.log(rows[0]);
         var director = {
             did: rows[0].did,
             name: rows[0].director_name,
@@ -70,38 +69,79 @@ router.post("/update/:key", function(req, res, next) {
     }
 
     // Update keywords
+    var request_key = req.params.key;
     if (req.body.keywords.length > 0){
         db.get().beginTransaction(function(err){
             if (err) throw err;
 
-            query_string = "DELETE FROM Movie_Keywords where mid=" + req.params.key;
+            query_string = "DELETE FROM Movie_Keywords where mid=" + request_key;
             db.get().query(query_string, function(err,results){
-                if (err) throw err;
-            });
-            query_string = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
-            var values = [];
-            req.body.keywords.split(",").forEach( function(k){
-                values.push([ parseInt(req.params.key), k]);
-            });
-            db.get().query(query_string, [values], function(err,results){
-                if (err) throw err;
+                if (err) {
+                    return db.get().rollback(function() {
+                        throw err;
+                    });
+                }  
+
+                var query_string2 = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
+                var values = [];
+                req.body.keywords.split(",").forEach( function(k){
+                    values.push([ parseInt(request_key), k]);
+                });
+                db.get().query(query_string2, [values], function(err,results){
+                    if (err) {
+                        return db.get().rollback(function() {
+                            throw err;
+                        });
+                    }  
+                    db.get().commit(function(err){
+                        if (err) {
+                            return db.get().rollback(function(){
+                                throw err;
+                            });
+                        }
+                    });
+                });
             });
         });
     }
 
     // Update Actors
     if(req.body.actors.length > 0){
-        query_string = "DELETE FROM Actor_Movie where mid=" + req.params.key;
-        db.get().query(query_string, function(err,results){
+        db.get().beginTransaction(function(err){
             if (err) throw err;
-        });
-        query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
-        var values = [];
-        req.body.actors.split(",").forEach( function(a){
-            values.push([ parseInt(req.params.key), a]);
-        });
-        db.get().query(query_string, [values], function(err,results){
-            if (err) throw err;
+
+            query_string = "DELETE FROM Actor_Movie where mid=" + request_key;
+            db.get().query(query_string, function(err,results){
+                if (err) {
+                    return db.get().rollback(function() {
+                        throw err;
+                    });
+                }  
+
+                query_string = "SELECT aid, name from Actors where name=\"" + actors[0] + "\"";
+
+                /*
+                var query_string2 = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
+                var values = [];
+                req.body.keywords.split(",").forEach( function(k){
+                    values.push([ parseInt(request_key), k]);
+                });
+                db.get().query(query_string2, [values], function(err,results){
+                    if (err) {
+                        return db.get().rollback(function() {
+                            throw err;
+                        });
+                    }  
+                    db.get().commit(function(err){
+                        if (err) {
+                            return db.get().rollback(function(){
+                                throw err;
+                            });
+                        }
+                    });
+                });
+                */
+            });
         });
     }
 
