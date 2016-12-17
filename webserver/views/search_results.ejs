@@ -37,7 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700" rel="stylesheet">
 <link rel="stylesheet" href="/stylesheets/tipsy.css">
 <script src="/javascripts/jquery.tipsy.js"></script>
-<script src="/javascripts/update.js"></script>
+<script src="javascripts/update.js"></script>
 <% include partials/essential_scripts.ejs %>
 
 <style>
@@ -75,7 +75,7 @@ body, html {
       <div id="movies" style="width:80%; margin:auto; margin-bottom:5%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">    
         <% movie_list.forEach(function(entry){ %>
             <div class="item" title="<%= entry.name %>">
-              <a href="/movies/<%= entry.id %>"><img src="<%= entry.image_url %>" style="width:100%; height: 100%;"></a>
+              <a href="/movies/<%= entry.id %>"><img src="<%= entry.image_url %>" style="height: 200px;"></a>
             </div>
         <% }); %>
       </div>
