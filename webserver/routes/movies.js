@@ -14,10 +14,10 @@ router.get("/:key", function(req, res, next) {
     + "WHERE M.mid=" + moviekey + " AND AM.mid=" + moviekey + " AND A.aid=AM.aid" + " AND DM.mid=" + moviekey + " AND D.did=DM.did" + " AND G.mid=" + moviekey + " AND K.mid=" + moviekey;
     db.get().query(query_string,function(err,rows, fields){
         if (err) throw err;
-        //var actors = rows.map(function(a) { return a.actor_name });
         var actors = [];
         var genres = [];
         var keywords = [];
+        console.log(rows[0]);
         var director = {
             did: rows[0].did,
             name: rows[0].director_name,
@@ -71,13 +71,38 @@ router.post("/update/:key", function(req, res, next) {
 
     // Update keywords
     if (req.body.keywords.length > 0){
-        console.log( req.body.keywords.split(","));
-        /*
-        query_string = "DELETE FROM Movie_Keywords where mid=" + req.params.key;
-        db.query(query_string, function(err,results){
+        db.get().beginTransaction(function(err){
+            if (err) throw err;
+
+            query_string = "DELETE FROM Movie_Keywords where mid=" + req.params.key;
+            db.get().query(query_string, function(err,results){
+                if (err) throw err;
+            });
+            query_string = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
+            var values = [];
+            req.body.keywords.split(",").forEach( function(k){
+                values.push([ parseInt(req.params.key), k]);
+            });
+            db.get().query(query_string, [values], function(err,results){
+                if (err) throw err;
+            });
+        });
+    }
+
+    // Update Actors
+    if(req.body.actors.length > 0){
+        query_string = "DELETE FROM Actor_Movie where mid=" + req.params.key;
+        db.get().query(query_string, function(err,results){
             if (err) throw err;
         });
-        */
+        query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
+        var values = [];
+        req.body.actors.split(",").forEach( function(a){
+            values.push([ parseInt(req.params.key), a]);
+        });
+        db.get().query(query_string, [values], function(err,results){
+            if (err) throw err;
+        });
     }
 
     // add log in Movie_Edits

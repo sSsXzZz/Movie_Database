@@ -284,22 +284,24 @@ $(document).ready(function () {
 
   $("#movies").owlCarousel({
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 300,
-    slidesToShow: 200,
+    slidesToShow: 1,
     variableWidth: true,
     autoplay: true,
     autplaySpeed: 2000,
+    swipeToSlide: true,
   });
 
   $("#directors").owlCarousel({
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 300,
-    slidesToShow: 200,
+    slidesToShow: 1,
     variableWidth: true,
     autoplay: true,
     autplaySpeed: 2000,
+    swipeToSlide: true,
   });
 
   // function updateSize(){

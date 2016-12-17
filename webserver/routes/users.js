@@ -159,7 +159,7 @@ router.post('/movie_rating/update_comments/:key',function(req, res, next){
     var now = new Date();
     var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
     var query_string = "INSERT INTO Movie_Ratings SET ? "
-        + "ON DUPLICATE KEY UPDATE comments='" + comments + "', timestamp='" + timestamp + "'";
+        + "ON DUPLICATE KEY UPDATE comments=\"" + comments + "\", timestamp='" + timestamp + "'";
     db.get().query(query_string,{
             uid: uid,
             mid: req.params.key,
@@ -222,7 +222,7 @@ router.post('/director_rating/update_comments/:key',function(req, res, next){
     var now = new Date();
     var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
     var query_string = "INSERT INTO Director_Ratings SET ? "
-        + "ON DUPLICATE KEY UPDATE comments='" + comments + "', timestamp='" + timestamp + "'";
+        + "ON DUPLICATE KEY UPDATE comments=\"" + comments + "\", timestamp='" + timestamp + "'";
     db.get().query(query_string,{
             uid: uid,
             did: req.params.key,
@@ -285,15 +285,19 @@ router.post('/actor_rating/update_comments/:key',function(req, res, next){
     var now = new Date();
     var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
     var query_string = "INSERT INTO Actor_Ratings SET ? "
-        + "ON DUPLICATE KEY UPDATE comments='" + comments + "', timestamp='" + timestamp + "'";
+        + "ON DUPLICATE KEY UPDATE comments=\"" + comments + "\", timestamp='" + timestamp + "'";
     db.get().query(query_string,{
             uid: uid,
             aid: req.params.key,
             timestamp: timestamp,
             comments: comments
         },function(err,results){
-            if (err) res.status(400).send("Error updating rating!");
-            res.status(200).send("Comments Updated!");
+            if (err) {
+                res.status(400).send("Error updating rating!");
+                console.log(err);
+            } else{
+                res.status(200).send("Comments Updated!");
+            }
         });
 });
 
