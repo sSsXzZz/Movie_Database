@@ -20,7 +20,7 @@ router.get("/:key", function(req, res, next) {
         var director = {
             did: rows[0].did,
             name: rows[0].director_name,
-            image_url: rows[0].image_url,
+            image_url: rows[0].director_url,
         };
         rows.forEach(function(entry){
             if ( objectArrayIndexOf(actors,entry.aid,"aid") === -1){
@@ -106,7 +106,8 @@ router.post("/update/:key", function(req, res, next) {
     }
 
     // Update Actors
-    if(req.body.actors.length > 0){
+    var actors = req.body.actors.split(",");
+    if( actors.length > 0){
         db.get().beginTransaction(function(err){
             if (err) throw err;
 
@@ -119,28 +120,95 @@ router.post("/update/:key", function(req, res, next) {
                 }  
 
                 query_string = "SELECT aid, name from Actors where name=\"" + actors[0] + "\"";
-
-                /*
-                var query_string2 = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
-                var values = [];
-                req.body.keywords.split(",").forEach( function(k){
-                    values.push([ parseInt(request_key), k]);
-                });
-                db.get().query(query_string2, [values], function(err,results){
+                for (var i=1; i < actors.length; i++){
+                    query_string += " OR name=\"" + actors[i] + "\"";
+                }
+                // find all actors
+                db.get().query(query_string,function(err,rows,fields){
                     if (err) {
                         return db.get().rollback(function() {
                             throw err;
                         });
-                    }  
-                    db.get().commit(function(err){
+                    }
+
+                    // invalid actor names
+                    if (rows.length < actors.length){
+                        return db.get().rollback(function() {
+                        });
+                    }
+                    query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
+                    var values =[];
+                    rows.forEach( function(actor){
+                        values.push([ parseInt(request_key), actor.aid]);
+                    });
+                    // Insert new actors into db
+                    db.get().query(query_string, [values], function(err,results){
                         if (err) {
-                            return db.get().rollback(function(){
+                            return db.get().rollback(function() {
                                 throw err;
                             });
                         }
+                        db.get().commit(function(err){
+                            if (err) {
+                                return db.get().rollback(function(){
+                                    throw err;
+                                });
+                            }
+                        });
                     });
                 });
-                */
+            });
+        });
+    }
+
+    // Update Director
+    var director = req.body.director;
+    if( director.length > 0 ){
+        db.get().beginTransaction(function(err){
+            if (err) throw err;
+
+            query_string = "DELETE FROM Director_Movie where mid=" + request_key;
+            db.get().query(query_string, function(err,results){
+                if (err) {
+                    return db.get().rollback(function() {
+                        throw err;
+                    });
+                }
+
+                query_string = "SELECT did, name from Directors where name=\"" + director + "\"";
+
+                // find all directors
+                db.get().query(query_string,function(err,rows,fields){
+                    if (err) {
+                        return db.get().rollback(function() {
+                            throw err;
+                        });
+                    }
+                    // invalid director name
+                    if (rows.length <= 0){
+                        return db.get().rollback(function() {
+                        });
+                    }
+                    query_string = "INSERT INTO Director_Movie (mid,did) VALUES ?";
+                    var values =[];
+                    values.push([parseInt(request_key), rows[0].did]);
+
+                    // Insert new director
+                    db.get().query(query_string, [values], function(err,results){
+                        if (err) {
+                            return db.get().rollback(function() {
+                                throw err;
+                            });
+                        }
+                        db.get().commit(function(err){
+                            if (err) {
+                                return db.get().rollback(function(){
+                                    throw err;
+                                });
+                            }
+                        });
+                    });
+                });
             });
         });
     }
