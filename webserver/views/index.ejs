@@ -19,6 +19,11 @@
 <script src="javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/javascripts/update.js"></script>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+// Add the new slick-theme.css if you want the default styling
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+<script type="text/javascript" src="/javascripts/slick/slick.min.js"></script>
+
 <% include partials/essential_scripts.ejs %>
 
 <style>
@@ -205,22 +210,31 @@ body, html {
 
   $(document).ready(function() {
    
-    $("#movies").owlCarousel({
+    // $("#movies").owlCarousel({
         
-        autoPlay: 6000, //Set AutoPlay to 3 seconds
-        pagination: false,
-        items : 6,
-        itemsDesktop : [1199,3],
+    //     autoPlay: 6000, //Set AutoPlay to 3 seconds
+    //     pagination: false,
+    //     items : 6,
+    //     itemsDesktop : [1199,3],
         
-        afterUpdate: function() {
-            updateSize();
-        },
+    //     afterUpdate: function() {
+    //         updateSize();
+    //     },
 
-        afterInit: function(){
-            updateSize();
-        }
-    });
+    //     afterInit: function(){
+    //         updateSize();
+    //     }
+    // });
     
+    $("#movies").slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      centerMode: true,
+      variableWidth: true
+    })
+
     // function updateSize(){
     //     //var minHeight = parseInt($('.owl-item').eq(0).css('height'));
     //     $('.owl-item').each(function () {
