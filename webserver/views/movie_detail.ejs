@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 <link rel="stylesheet" href="/stylesheets/rating.css">
 <link rel="stylesheet" href="/stylesheets/grid.css">
-<!-- <link rel="stylesheet" href="/javascripts/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="/javascripts/owl-carousel/owl.transitions.css">
-<link rel="stylesheet" href="/javascripts/owl-carousel/owl.theme.css"> -->
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.theme.css">
 <script src="/javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
@@ -28,10 +28,6 @@
 <script src="/javascripts/charts-modal.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
 <script src="/javascripts/update.js"></script>
-<link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css"/>
-<script src="/node_modules/jquery/dist/jquery.js"></script>
-<script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
-
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
@@ -55,8 +51,9 @@ body, html {
   <% include partials/user_sidebar.ejs %>
 
 <div id="sidebar" class="side_detail" style="text-align:center;">
-  <div>
-    <img id="movie_img" src="<%= data.image_url %>" style="max-width:100%;">
+  <div style="background-color: #00BCD4;">
+    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:30px; overflow-x:visible;"></p>
+    <img id="movie_img" src="<%= data.image_url %>">
   </div>
   <div id="shop"></div>
   <div style="margin:auto; width:90%;" id="comment_text_wrapper">
@@ -92,7 +89,7 @@ body, html {
 
 
         <div class="row">
-          <div id="movies" class="owl-carousel" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
+          <div id="movies" style="width:90%; margin:auto; margin-top:0%; background-color: #FFFFFF; border-radius: 10px; z-index:1000; padding:5px;">
                   
             <% actors.forEach(function(actor){ %>
                 <div class="item" title="<%= actor.name %>">
@@ -164,11 +161,13 @@ body, html {
         <input type="text" id="u_lang" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Language"><br>
         <input type="text" id="u_length" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Length"><br>
         <input type="text" id="u_revenue" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Revenue"><br>
+        <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Image URL"><br>
         <input type="text" id="u_color" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Color">
         <p class="small">1 for Color, 0 for BW</p>
-        <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Image URL"><br>
         <input type="text" id="u_genres" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Genres">
         <p class="small">Insert genres comma delimited</p>
+        <input type="text" id="u_keywords" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Keywords">
+        <p class="small">Insert keywords comma delimited</p>
         <input type="text" id="u_actor_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Actors">
         <p class="small">Insert Actors comma delimited, in order</p>
         <input type="text" id="u_director" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Director">
@@ -217,7 +216,6 @@ $(document).ready(function () {
  
       items : 5,
       itemsDesktop : [1199,3],
-      pagination:false,
 
       afterUpdate: function () {
           updateSize();
@@ -233,7 +231,6 @@ $(document).ready(function () {
  
       items : 5,
       itemsDesktop : [1199,3],
-      pagination:false,
 
       afterUpdate: function () {
           updateSize();
@@ -455,6 +452,7 @@ $(document).ready(function(){
                 color: $("#u_color").val(),
                 image_url: $("#u_url").val(),
                 genres: $("#u_genres").val(),
+                keywords: $("#u_keywords").val(),
                 actors: $("#u_actors").val(),
                 director: $("#u_director").val(),
                 revenue: $("#u_revenue").val(),

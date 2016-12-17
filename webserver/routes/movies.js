@@ -50,7 +50,7 @@ router.get("/:key", function(req, res, next) {
 
 router.post("/update/:key", function(req, res, next) {
     var query_string = "UPDATE Movies SET ? WHERE mid=" + req.params.key;
-    var update_info = req.body;
+    var update_info = Object.assign({},req.body);
     delete update_info["uid"];
     for (var key in update_info) {
         if (update_info[key].length <= 0){
