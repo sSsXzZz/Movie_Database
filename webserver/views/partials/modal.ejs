@@ -64,12 +64,15 @@
     </div> -->
 </div>
 
-<div class="modal" id="superuser_modal" style="width:70%;"> <!-- this is the entire modal form, including the background -->
-  <div class="modal-content"> <!-- this is the container wrapper -->
+<div class="modal" id="superuser_modal"> <!-- this is the entire modal form, including the background -->
+  <div class="modal-content" style="width:70%"> <!-- this is the container wrapper -->
     <span class="close" style="float:right;" id="superuser_close">x</span>
-
     <div class="input-group scope_one" style="margin:auto;">
-      <div>
+      <button id="back_button" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
+      <button id="m_btn" class="scope_one">Movie</button>
+      <button id="m_btn" class="scope_one">Actor</button>
+      <button id="m_btn" class="scope_one">Director</button>
+      <div id="m_div" style="display:none;">
         Add a Movie:
         <input id="movie_name" type="text" class="form-control" placeholder="Movie Title" style="margin-top:5px; margin-bottom:5px">
         <input id="rating" type="text" class="form-control" placeholder="Rating" style="margin-top:5px; margin-bottom:5px">
@@ -91,7 +94,7 @@
           <button id="movie_update_button" type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Update</button>
         </div>
       </div>
-      <div>
+      <div id="a_div" style="display:none;">
         Add an Actor:
         <input id="actor_name" type="text" class="form-control" placeholder="Actor Name" style="margin-top:5px; margin-bottom:5px">
         <input id="a_img_url" type="text" class="form-control" placeholder="Rating" style="margin-top:5px; margin-bottom:5px">
@@ -99,7 +102,7 @@
           <button id="actor_update_button" type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Update</button>
         </div>
       </div>
-      <div>
+      <div id="d_div" style="display:none;">
         Add a Director:
         <input id="director_name" type="text" class="form-control" placeholder="Director Name" style="margin-top:5px; margin-bottom:5px">
         <input id="d_img_url" type="text" class="form-control" placeholder="Rating" style="margin-top:5px; margin-bottom:5px">
