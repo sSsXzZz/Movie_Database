@@ -208,10 +208,9 @@ body, html {
     $("#movies").owlCarousel({
         
         autoPlay: 6000, //Set AutoPlay to 3 seconds
-   
+        pagination: false,
         items : 6,
         itemsDesktop : [1199,3],
-        dots: false,
         
         afterUpdate: function() {
             updateSize();
