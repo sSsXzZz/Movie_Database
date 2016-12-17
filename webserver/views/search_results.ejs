@@ -144,31 +144,23 @@ $(document).ready(function () {
   });
 
   $("#actors").owlCarousel({
- 
-      items : 5,
-      itemsDesktop : [1199,3],
-      pagination:false,
-
-      afterUpdate: function () {
-          updateSize();
-      },
-      afterInit:function(){
-          updateSize();
-      }
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 200,
+    variableWidth: true,
+    autoplay: true,
+    autplaySpeed: 2000,
   });
 
   $("#directors").owlCarousel({
-
-      items : 5,
-      itemsDesktop : [1199,3],
-      pagination:false,
-
-      afterUpdate: function () {
-          updateSize();
-      },
-      afterInit:function(){
-          updateSize();
-      }
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 200,
+    variableWidth: true,
+    autoplay: true,
+    autplaySpeed: 2000,
   });
 
   // function updateSize(){
