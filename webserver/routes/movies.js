@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
+var dateFormat = require('dateformat');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
@@ -49,13 +50,16 @@ router.get("/:key", function(req, res, next) {
 
 router.post("/update/:key", function(req, res, next) {
     var query_string = "UPDATE Movies SET ? WHERE mid=" + req.params.key;
-    for (var key in req.body) {
-        if (req.body[key].length <= 0){
-            delete req.body[key];
+    var update_info = req.body;
+    delete update_info["uid"];
+    for (var key in update_info) {
+        if (update_info[key].length <= 0){
+            delete update_info[key];
         }
     }
 
-    db.get().query(query_string, req.body, function(err, results){
+    console.log(update_info);
+    db.get().query(query_string, update_info, function(err, results){
         if (err) throw err;
         var now = new Date();
         var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
