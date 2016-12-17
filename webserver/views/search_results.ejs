@@ -25,9 +25,9 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 <link rel="stylesheet" href="/stylesheets/rating.css">
 <link rel="stylesheet" href="/stylesheets/grid.css">
-<link rel="stylesheet" href="/javascripts/owl-carousel/owl.carousel.css">
+<!-- <link rel="stylesheet" href="/javascripts/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="/javascripts/owl-carousel/owl.transitions.css">
-<link rel="stylesheet" href="/javascripts/owl-carousel/owl.theme.css">
+<link rel="stylesheet" href="/javascripts/owl-carousel/owl.theme.css"> -->
 <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
 <script src="/javascripts/owl-carousel/owl.carousel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -38,6 +38,9 @@
 <link rel="stylesheet" href="/stylesheets/tipsy.css">
 <script src="/javascripts/jquery.tipsy.js"></script>
 <script src="javascripts/update.js"></script>
+<link rel="stylesheet" type="text/css" href="javascripts/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="javascripts/slick/slick-theme.css"/>
+<script type="text/javascript" src="javascripts/slick/slick.min.js"></script>
 <% include partials/essential_scripts.ejs %>
 
 <style>
@@ -130,18 +133,14 @@ $('.grid').masonry({
 
 $(document).ready(function () {
 
-  $("#movies").owlCarousel({
- 
-      items : 5,
-      itemsDesktop : [1199,3],
-      pagination:false,
-
-      afterUpdate: function () {
-          updateSize();
-      },
-      afterInit:function(){
-          updateSize();
-      }
+  $("#movies").slick({
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 200,
+    variableWidth: true,
+    autoplay: true,
+    autplaySpeed: 2000,
   });
 
   $("#actors").owlCarousel({
