@@ -51,9 +51,8 @@ body, html {
   <% include partials/user_sidebar.ejs %>
 
 <div id="sidebar" class="side_detail" style="text-align:center;">
-  <div style="background-color: #00BCD4;">
-    <p style="text-align: center; font-family: 'Open Sans', sans-serif; font-size:30px; overflow-x:visible;"></p>
-    <img id="director_img" src="<%= data.image_url %>">
+  <div>
+    <img id="director_img" src="<%= data.image_url %>" style="max-width:100%;">
   </div>
   <div id="shop"></div>
   <div style="margin:auto; width:90%;" id="comment_text_wrapper">
