@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
+var dateFormat = require('dateformat');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
@@ -31,11 +32,42 @@ router.get("/:key", function(req, res, next) {
                 });
             }
         });
-        console.log(actors);
         res.render('director_detail.ejs', {
             data: rows[0],
             actors: actors,
             movies: movies,
+        });
+    });
+});
+
+router.post("/update/:key", function(req, res, next) {
+    var query_string = "UPDATE Directors SET";
+    var comma_flag = 0;
+    if (req.body.name.length > 0 ){
+        query_string += " name='" + req.body.name + "'";
+        comma_flag = 1;
+    }
+    if (req.body.image_url.length > 0){
+        if (comma_flag){
+            query_string += ",";
+        }
+        query_string += " image_url='" + req.body.image_url + "'";
+    }
+    query_string += " WHERE did=" + req.params.key;
+    db.get().query(query_string, function(err, results){
+        if (err) throw err;
+        var now = new Date();
+        var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+        query_string = " INSERT INTO Director_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
+            + timestamp + "'";
+        var insert_info = { 
+            timestamp: timestamp,
+            uid: req.body.uid,
+            did: req.params.key
+        }
+        db.get().query(query_string, insert_info, function(err, results){
+            if (err) throw err;
+            res.status(200).send();
         });
     });
 });

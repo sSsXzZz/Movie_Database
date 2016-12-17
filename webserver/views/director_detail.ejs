@@ -109,16 +109,11 @@ body, html {
     </div>
     <div class="row" >
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px; text-align:center; padding-bottom:20px;">
+        <h2>Update Fields</h2>
         <button id="back_btn" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
-        <input type="text" id="u_name" class="form-control" style="font-size: 20px; display:inline-block; margin-left:10px; margin-bottom: 0%; margin-top:1.5%; width:400px;" placeholder="Actor Name"><br>
+        <input type="text" id="u_name" class="form-control" style="font-size: 20px; display:inline-block; margin-left:10px; margin-bottom: 0%; margin-top:1.5%; width:400px;" placeholder="Name"><br>
         <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Img URL"><br>
-        <input type="text" id="u_movie_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Movies"><br>
-        <button class="btn btn-default" style="margin-top:1.5%">Submit</button>
-        <p class="small">Insert Movies comma delimited, in order</p>
-<!--         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Action</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Horror</div> -->
+        <button class="btn btn-default" style="margin-top:1.5%" id="button_update_fields">Submit</button>
      </div>
      <div class="col-md-4">
      </div>
@@ -256,6 +251,24 @@ $(document).ready(function(){
       };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
+
+  $("#button_update_fields").click(function(){
+        $.ajax({
+            url: "/directors/update/" + did,
+            type: "POST",
+            data: {
+                name: $("#u_name").val(),
+                image_url: $("#u_url").val(),
+                uid: Cookies.get('uid'),
+            },
+            success: function(data, textStatus, jqXHR){
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+  });
+
 });
 </script>
 <!-- Add Google Maps -->
@@ -317,6 +330,7 @@ $(document).ready(function () {
   $('#u_submit').click(function(){
     //Ajax submit and do your reload or whatever
   });
+
 });
 
 
