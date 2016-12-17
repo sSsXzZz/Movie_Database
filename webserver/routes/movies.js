@@ -47,6 +47,32 @@ router.get("/:key", function(req, res, next) {
     });
 });
 
+router.post("/update/:key", function(req, res, next) {
+    var query_string = "UPDATE Movies SET ? WHERE mid=" + req.params.key;
+    console.log(req.body);
+
+    // TODO
+    res.status(400).send();
+    return;
+
+    db.get().query(query_string, function(err, results){
+        if (err) throw err;
+        var now = new Date();
+        var timestamp = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+        query_string = " INSERT INTO Director_Edits SET ? ON DUPLICATE KEY UPDATE timestamp='"
+            + timestamp + "'";
+        var insert_info = { 
+            timestamp: timestamp,
+            uid: req.body.uid,
+            did: req.params.key
+        }
+        db.get().query(query_string, insert_info, function(err, results){
+            if (err) throw err;
+            res.status(200).send();
+        });
+    });
+});
+
 function objectArrayIndexOf(myArray, searchTerm, property) {
     for(var i = 0, len = myArray.length; i < len; i++) {
         if (myArray[i][property] === searchTerm) return i;

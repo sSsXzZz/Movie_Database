@@ -140,13 +140,7 @@ body, html {
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
           <div style="text-align:center">
-            <button title="info" type="button" id="length" class="btn btn-default glyph"><span class="glyphicon glyphicon-info-sign"></span></button>
             <button title="settings" type="button" id="settings" class="btn btn-default glyph"><span class="glyphicon glyphicon-cog"></span></button>
-<!--             <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-usd"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-calendar"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-globe"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-star-empty"></span></button>
-            <button type="button" class="btn btn-default glyph"><span class="glyphicon glyphicon-tags"></span></button> -->
           </div>
         </div>
       </div>
@@ -162,20 +156,20 @@ body, html {
       <div class="col-md-8 source_sans" style="margin-left:5%; background-color: #E0F7FA; border-radius:5px; text-align:center; padding-bottom:20px;">
         <button id="back_btn" type="button" class="btn btn-default" style="position:absolute; float:right; right:0; top:0;"><span class="glyphicon glyphicon-chevron-left"></span></button>
         <input type="text" id="u_title" class="form-control" style="font-size: 20px; display:inline-block; margin-left:10px; margin-bottom: 0%; margin-top:1.5%; width:400px;" placeholder="Title"><br>
-        <input type="text" id="u_content" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; margin-top: 1.5%; margin-right:0%; width:400px;" placeholder="PG-13"><br>
-        <input type="text" id="u_year"class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="2013"><br>
-        <input type="text" id="u_lang" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="English"><br>
-        <input type="text" id="u_length" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="115"><br>
+        <input type="text" id="u_rating" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; margin-top: 1.5%; margin-right:0%; width:400px;" placeholder="Rating"><br>
+        <input type="text" id="u_year"class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Year"><br>
+        <input type="text" id="u_lang" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Language"><br>
+        <input type="text" id="u_length" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Length"><br>
         <input type="text" id="u_color" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Color">
-        <br>
-        <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Img URL"><br>
+        <p class="small">1 for Color, 0 for BW</p>
+        <input type="text" id="u_url" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Image URL"><br>
         <input type="text" id="u_genres" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Genres">
         <p class="small">Insert genres comma delimited</p>
         <input type="text" id="u_actor_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Actors">
         <p class="small">Insert Actors comma delimited, in order</p>
-        <input type="text" id="u_actor_list" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Director">
+        <input type="text" id="u_director" class="form-control" style="font-size:20px; display:inline-block; margin-left:10px; width:400px; margin-top:1.5%;" placeholder="Director">
         <p class="small">Insert Director Name</p>
-        <button id="u_submit" class="btn btn-default">Submit</button>
+        <button id="button_update_fields" class="btn btn-default">Submit</button>
 <!--         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin: 1.5% 1.5% 1.5% 1.5%; margin-top: 0%; margin-right:0%;">Action</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Sports</div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;">Medicine</div>
@@ -437,6 +431,36 @@ $(document).ready(function(){
       };
       var r = rating(ratingElement, currentRating, maxRating, callback);
     }
+
+  if (typeof Cookies.get('super_user') === "undefined" || Cookies.get('super_user') != 1){
+    $('#settings').hide();
+  }
+
+  $("#button_update_fields").click(function(){
+        $.ajax({
+            url: "/movies/update/" + mid,
+            type: "POST",
+            data: {
+                movie_title: $("#u_title").val(),
+                rating: $("#u_rating").val(),
+                year: $("#u_year").val(),
+                language: $("#u_lang").val(),
+                length: $("#u_length").val(),
+                color: $("#u_color").val(),
+                image_url: $("#u_url").val(),
+                genres: $("#u_genres").val(),
+                actors: $("#u_actors").val(),
+                director: $("#u_director").val(),
+                uid: Cookies.get('uid'),
+            },
+            success: function(data, textStatus, jqXHR){
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+  });
+
 });
 </script>
 
