@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db');
 var dateFormat = require('dateformat');
+var sleep = require('sleep');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
@@ -75,91 +76,66 @@ router.post("/update/:key", function(req, res, next) {
     // Update keywords
     var request_key = req.params.key;
     if (req.body.keywords.length > 0){
-        db.get().beginTransaction(function(err){
-            if (err) throw err;
 
-            query_string = "DELETE FROM Movie_Keywords where mid=" + request_key;
-            db.get().query(query_string, function(err,results){
+        query_string = "DELETE FROM Movie_Keywords where mid=" + request_key;
+        database = db.get();
+        database.query(query_string, function(err,results){
+            if (err) {
+                throw err;
+            }  
+
+            var query_string2 = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
+            var values = [];
+            req.body.keywords.split(",").forEach( function(k){
+                values.push([ parseInt(request_key), k]);
+            });
+            database.query(query_string2, [values], function(err,results){
                 if (err) {
-                    return db.get().rollback(function() {
-                        throw err;
-                    });
+                    throw err;
                 }  
-
-                var query_string2 = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
-                var values = [];
-                req.body.keywords.split(",").forEach( function(k){
-                    values.push([ parseInt(request_key), k]);
-                });
-                db.get().query(query_string2, [values], function(err,results){
-                    if (err) {
-                        return db.get().rollback(function() {
-                            throw err;
-                        });
-                    }  
-                    db.get().commit(function(err){
-                        if (err) {
-                            return db.get().rollback(function(){
-                                throw err;
-                            });
-                        }
-                    });
-                });
             });
         });
     }
 
     // Update Actors
-    var actors = req.body.actors.split(",");
-    if( actors.length > 0){
-        db.get().beginTransaction(function(err){
-            if (err) throw err;
+    if( req.body.actors.length > 0){
+
+        var actors = req.body.actors.split(",");
+
+        query_string = "SELECT aid, name from Actors where name=\"" + actors[0] + "\"";
+        for (var i=1; i < actors.length; i++){
+            query_string += " OR name=\"" + actors[i] + "\"";
+        }
+        // find all actors
+        db.get().query(query_string,function(err,rows,fields){
+            if (err) {
+                throw err;
+            }  
+
+            // invalid actor names
+            if (rows.length < actors.length){
+                console.log("Invalid actor listed!");
+                return;
+            }
+            var values =[];
+            rows.forEach( function(actor){
+                values.push([ parseInt(request_key), actor.aid]);
+            });
 
             query_string = "DELETE FROM Actor_Movie where mid=" + request_key;
+
+            // delete old ones
             db.get().query(query_string, function(err,results){
                 if (err) {
-                    return db.get().rollback(function() {
-                        throw err;
-                    });
-                }  
-
-                query_string = "SELECT aid, name from Actors where name=\"" + actors[0] + "\"";
-                for (var i=1; i < actors.length; i++){
-                    query_string += " OR name=\"" + actors[i] + "\"";
+                    throw err;
                 }
-                // find all actors
-                db.get().query(query_string,function(err,rows,fields){
-                    if (err) {
-                        return db.get().rollback(function() {
-                            throw err;
-                        });
-                    }
 
-                    // invalid actor names
-                    if (rows.length < actors.length){
-                        return db.get().rollback(function() {
-                        });
+                query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
+                // Insert new actors into db
+                db.get().query(query_string, [values], function(err,results){
+                    if (err) {
+                        throw err;
                     }
-                    query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
-                    var values =[];
-                    rows.forEach( function(actor){
-                        values.push([ parseInt(request_key), actor.aid]);
-                    });
-                    // Insert new actors into db
-                    db.get().query(query_string, [values], function(err,results){
-                        if (err) {
-                            return db.get().rollback(function() {
-                                throw err;
-                            });
-                        }
-                        db.get().commit(function(err){
-                            if (err) {
-                                return db.get().rollback(function(){
-                                    throw err;
-                                });
-                            }
-                        });
-                    });
                 });
             });
         });
@@ -168,63 +144,55 @@ router.post("/update/:key", function(req, res, next) {
     // Update Director
     var director = req.body.director;
     if( director.length > 0 ){
-        db.get().beginTransaction(function(err){
-            if (err) throw err;
+        console.log("UPDATING DIRECTORS!");
+        query_string = "SELECT did, name from Directors where name=\"" + director + "\"";
 
-            query_string = "DELETE FROM Director_Movie where mid=" + request_key;
-            db.get().query(query_string, function(err,results){
+        // find all directors
+        db.get().query(query_string,function(err,rows,fields){
+            if (err) {
+                throw err;
+            }
+            // invalid director name
+            if (rows.length <= 0){
+            }
+            query_string = "UPDATE Director_Movie SET ? WHERE mid=" + request_key;
+            var insert_value ={
+                did: rows[0].did,
+                mid: parseInt(request_key),
+            };
+
+            // Insert new director
+            db.get().query(query_string, insert_value, function(err,results){
                 if (err) {
-                    return db.get().rollback(function() {
-                        throw err;
-                    });
+                    throw err;
                 }
-                console.log("TEST");
-                console.log(results);
-
-                query_string = "SELECT did, name from Directors where name=\"" + director + "\"";
-
-                // find all directors
-                db.get().query(query_string,function(err,rows,fields){
-                    if (err) {
-                        return db.get().rollback(function() {
-                            throw err;
-                        });
-                    }
-                    // invalid director name
-                    if (rows.length <= 0){
-                        return db.get().rollback(function() {
-                        });
-                    }
-                    console.log("TEST2");
-                    console.log(rows);
-                    query_string = "INSERT INTO Director_Movie SET ? ON DUPLICATE KEY UPDATE"
-                        + " did=" + rows[0].did;
-                    var insert_value ={
-                        did: rows[0].did,
-                        mid: request_key,
-                    };
-
-                    // Insert new director
-                    db.get().query(query_string, insert_value, insert_value, function(err,results){
-                        if (err) {
-                            console.log("I GUESS WE GOT IT");
-                            return db.get().rollback(function() {
-                                throw err;
-                            });
-                        }
-                        console.log(results);
-                        db.get().commit(function(err){
-                            if (err) {
-                                return db.get().rollback(function(){
-                                    throw err;
-                                });
-                            }
-                        });
-                    });
-                });
             });
         });
     }
+
+    // Update Genres
+    var genres = req.body.genres.split(",");
+    if( req.body.genres.length > 0 ){
+        query_string = "DELETE FROM Genres where mid=" + request_key;
+        database = db.get();
+        database.query(query_string, function(err,results){
+            if (err) {
+                throw err;
+            }  
+
+            var query_string2 = "INSERT INTO Genres (mid,name) VALUES ?";
+            var values = [];
+            genres.forEach( function(g){
+                values.push([ parseInt(request_key), g]);
+            });
+            database.query(query_string2, [values], function(err,results){
+                if (err) {
+                    throw err;
+                }  
+            });
+        });
+    }
+
 
     // add log in Movie_Edits
     var now = new Date();
