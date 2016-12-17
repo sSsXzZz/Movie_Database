@@ -22,16 +22,35 @@ router.get('/', function(req, res, next) {
                 id_field = "did";
                 name_field = "name";
             }
-            sql_query += ( multiple_tables ? " UNION " : "")
-                + "SELECT "
-                + name_field
-                + ( name_field ==="movie_title" ? " AS name" : "")
-                + ", \"" + param + "\" as source"
-                + ", " + id_field + " as id"
-                + ", image_url"
-                + " FROM " +  param
-                + " WHERE " + name_field
-                + " LIKE \"%" + req.query['q'] + "%\"";
+
+            if (param==="Movies"){
+                sql_query += ( multiple_tables ? " UNION " : "")
+                    + "SELECT movie_title as name"
+                    + ", \"" + param + "\" as source"
+                    + ", " + id_field + " as id"
+                    + ", image_url"
+                    + " FROM " +  param
+                    + " WHERE " + name_field
+                    + " LIKE \"%" + req.query['q'] + "%\"";
+                sql_query += " UNION "
+                    + "SELECT M.movie_title AS name"
+                    + ", \"" + param + "\" as source"
+                    + ", M." + id_field + " as id"
+                    + ", M.image_url"
+                    + " FROM Movies M, Movie_Keywords K"
+                    + " WHERE M.mid=K.mid AND K.keyword"
+                    + " LIKE \"%" + req.query['q'] + "%\"";
+            } else{
+                sql_query += ( multiple_tables ? " UNION " : "")
+                    + "SELECT "
+                    + name_field
+                    + ", \"" + param + "\" as source"
+                    + ", " + id_field + " as id"
+                    + ", image_url"
+                    + " FROM " +  param
+                    + " WHERE " + name_field
+                    + " LIKE \"%" + req.query['q'] + "%\"";
+            }
             multiple_tables = true;
         }
     }
