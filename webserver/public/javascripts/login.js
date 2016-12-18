@@ -37,6 +37,9 @@ $(document).ready(function(){
         changeLoginToLogout();
         var username = Cookies.get('username');
         $("#sidebar_username").text(username);
+        if( Cookies.get('super_user') === "0"){
+            $('#superuser_button').hide();
+        }
     }
 
     // logout
