@@ -81,6 +81,26 @@ router.post("/update/:key", function(req, res, next) {
     });
 });
 
+router.post("/new", function(req, res, next) {
+    var query_string = "SELECT 1 from Directors where name=\"" + req.body.name + "\"";
+    db.get().query(query_string, function(err, rows, fields){
+        if (err) throw err;
+        if (rows.length > 0){
+            res.status(400).send("A director by this name already exists!");
+            return;
+        }
+        query_string = "INSERT INTO Directors SET ?";
+        var data = {};
+        data["name"] = req.body.name;
+        data["image_url"] = req.body.image_url;
+        db.get().query(query_string, data, function(err, results){
+            if (err) throw err;
+            res.status(200).send();
+        });
+    });
+
+});
+
 function objectArrayIndexOf(myArray, searchTerm, property) {
     for(var i = 0, len = myArray.length; i < len; i++) {
         if (myArray[i][property] === searchTerm) return i;

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db');
 var dateFormat = require('dateformat');
+var async = require('async');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
@@ -216,6 +217,120 @@ router.post("/update/:key", function(req, res, next) {
         if (err) throw err;
         res.status(200).send();
     });
+});
+
+router.post("/new", function(req, res, next) {
+
+    var update_info = Object.assign({},req.body);
+    delete update_info["uid"];
+    delete update_info["genres"];
+    delete update_info["actors"];
+    delete update_info["director"];
+    delete update_info["keywords"];
+
+    var request_key = req.params.key;
+
+    async.waterfall([
+        function(callback){
+            var actors = req.body.actors.split(",");
+            query_string = "SELECT aid, name from Actors where name=\"" + actors[0] + "\"";
+            for (var i=1; i < actors.length; i++){
+                query_string += " OR name=\"" + actors[i] + "\"";
+            }
+            // find all actors
+            db.get().query(query_string,function(err,rows,fields){
+                if (err) {
+                    throw err;
+                }  
+
+                // invalid actor names
+                if (rows.length < actors.length){
+                    callback("Invalid actors listed!");
+                }
+
+                callback(null,rows);
+            });
+        },
+        function(aid,callback){
+            var director = req.body.director;
+            query_string = "SELECT did, name from Directors where name=\"" + director + "\"";
+            db.get().query(query_string,function(err,rows,fields){
+                if (err) {
+                    throw err;
+                }  
+
+                // invalid director names
+                if (rows.length <= 0){
+                    callback("Invalid director listed!");
+                }
+
+                callback(null,aid,rows[0].did);
+            });
+        },
+        function(aid,did,callback){
+            var query_string = "INSERT INTO Movies SET ?";
+            db.get().query(query_string, update_info, function(err, results){
+                callback(null,aid,did,results.insertId.toString());
+            });
+        },
+        function(aid,did,mid,callback){
+            var query_string = "INSERT INTO Movie_Keywords (mid,keyword) VALUES ?";
+            var values = [];
+            req.body.keywords.split(",").forEach( function(k){
+                values.push([ mid, k]);
+            });
+            db.get().query(query_string, [values], function(err,results){
+                if (err) {
+                    throw err;
+                }  
+                callback(null,aid,did,mid);
+            });
+        },
+        function(aid,did,mid,callback){
+            var query_string = "INSERT INTO Genres (mid,name) VALUES ?";
+            var values = [];
+            req.body.genres.split(",").forEach( function(g){
+                values.push([ mid, g]);
+            });
+            db.get().query(query_string, [values], function(err,results){
+                if (err) {
+                    throw err;
+                }  
+                callback(null,aid,did,mid);
+            });
+        },
+        function(aid,did,mid, callback){
+            var values =[];
+            aid.forEach( function(actor){
+                values.push([ mid, actor.aid]);
+            });
+
+            query_string = "INSERT INTO Actor_Movie (mid,aid) VALUES ?";
+            db.get().query(query_string, [values], function(err,results){
+                if (err) {
+                    throw err;
+                }
+                callback(null,aid,did,mid);
+            });
+        },
+        function(aid,did,mid, callback){
+            query_string = "INSERT INTO Director_Movie SET ?";
+            var insert_data = {
+                did: parseInt(did),
+                mid: parseInt(mid)
+            }
+            db.get().query(query_string, insert_data, function(err,results){
+                if (err) {
+                    throw err;
+                }
+                callback(null);
+            });
+        },
+    ], function(err,results){
+        if (err) throw err;
+        res.status(400).send();
+    });
+    res.status(200).send();
 });
 
 function objectArrayIndexOf(myArray, searchTerm, property) {
