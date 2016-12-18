@@ -154,6 +154,7 @@ body, html {
           <div style="text-align:center">
             <button title="settings" type="button" id="settings" class="btn btn-default glyph item"><span class="glyphicon glyphicon-cog"></span></button>
             <button title="comments" type="button" id="comments" class="btn btn-default glyph item"><span class="glyphicon glyphicon-envelope"></span></button>
+            <button title="delete" type="button" id="delete" class="btn btn-default glyph item"><span class="glyphicon glyphicon-minus"></span></button>
           </div>
         </div>
       </div>
@@ -223,7 +224,7 @@ $(".type, .item_hoverable, .item, .item-director").tipsy({gravity: "n"});
 $(document).ready(function () {
 
   $("#movies").slick({
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 300,
     slidesToShow: 1,
@@ -235,7 +236,7 @@ $(document).ready(function () {
   });
 
   $("#actors").slick({
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 300,
     slidesToShow: 1,

@@ -90,7 +90,7 @@
         <p class="small">Insert Keywords comma delimited</p>
         <input id="actors" type="text" class="form-control" placeholder="Actors" style="margin-top:5px; margin-bottom:5px">
         <p class="small">Insert Actors comma delimited, must already be in the database</p>
-        <input id="directors" type="text" class="form-control" placeholder="Directors" style="margin-top:5px; margin-bottom:5px">
+        <input id="director" type="text" class="form-control" placeholder="Directors" style="margin-top:5px; margin-bottom:5px">
         <p class="small">Insert Directors comma delimited, must already be in the database</p>
         <div style="float:left;">
           <button id="movie_update_button" type="button" class="btn btn-default scope_one" style="display:block;margin:auto; margin-top:10px;">Update</button>
@@ -132,6 +132,100 @@
       $("#a_div").css('display', 'none');
       $("#m_div").css('display', 'none');
       $("#d_div").css('display', 'block');
+    });
+
+    $("#movie_update_button").click(function(){
+        var data = {
+            movie_title: $("#movie_name").val(),
+            content_rating: $("#rating").val(),
+            year: $("#year").val(),
+            language: $("#language").val(),
+            duration: $("#duration").val(),
+            color: $("#color").val(),
+            image_url: $("#m_img_url").val(),
+            genres: $("#genres").val(),
+            keywords: $("#keywords").val(),
+            actors: $("#actors").val(),
+            director: $("#director").val(),
+            revenue: $("#revenue").val(),
+            uid: Cookies.get('uid'),
+        }
+        var empty_flag = 0;
+        for (var key in data){
+            if (data[key].length <= 0){
+                alert("Please fill in all fields!");
+                empty_flag = 1;
+                break;
+            }
+        }
+        if (!empty_flag){
+            $.ajax({
+                url: "/movies/new",
+                type: "POST",
+                data: data,
+                success: function(data, textStatus, jqXHR){
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
+    });
+
+    $("#actor_update_button").click(function(){
+        var data = {
+            name: $("#actor_name").val(),
+            image_url: $("#a_img_url").val(),
+            uid: Cookies.get('uid'),
+        }
+        var empty_flag = 0;
+        for (var key in data){
+            if (data[key].length <= 0){
+                alert("Please fill in all fields!");
+                empty_flag = 1;
+                break;
+            }
+        }
+        if (!empty_flag){
+            $.ajax({
+                url: "/actors/new",
+                type: "POST",
+                data: data,
+                success: function(data, textStatus, jqXHR){
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
+    });
+
+    $("#director_update_button").click(function(){
+        var data = {
+            name: $("#director_name").val(),
+            image_url: $("#d_img_url").val(),
+            uid: Cookies.get('uid'),
+        }
+        var empty_flag = 0;
+        for (var key in data){
+            if (data[key].length <= 0){
+                alert("Please fill in all fields!");
+                empty_flag = 1;
+                break;
+            }
+        }
+        if (!empty_flag){
+            $.ajax({
+                url: "/directors/new",
+                type: "POST",
+                data: data,
+                success: function(data, textStatus, jqXHR){
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
     });
   </script>
 <!--    <div class="input-group" style="margin:auto; display:none" id="register_div">
