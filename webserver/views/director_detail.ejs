@@ -95,14 +95,15 @@ body, html {
             <% }); %>
           </div>
         </div>
-        <div class="row">
-            <div class="item_hoverable" style="font-size:20px; text-align:center" title="Avg Rating">
-            </div>
+        <div>
+          <div class="item_hoverable" style="font-size:20px; text-align:center" title="Avg Rating"><%= avg_rating ? avg_rating : 0%>/5 Stars (<%= rating_count %> Reviews)
+          </div>
         </div>
         <div class="row" style="margin-top:2.5%; margin-bottom:2.5%">
           <div style="text-align:center">
             <button title="settings" type="button" id="settings" class="btn btn-default glyph"><span class="glyphicon glyphicon-cog"></span></button>
             <button title="comments" type="button" id="comments" class="btn btn-default glyph"><span class="glyphicon glyphicon-envelope"></span></button>
+            <button title="delete" type="button" id="delete" class="btn btn-default glyph item"><span class="glyphicon glyphicon-minus"></span></button>
           </div>
         </div>
       </div>
@@ -262,6 +263,7 @@ $(document).ready(function(){
 
   if (typeof Cookies.get('super_user') === "undefined" || Cookies.get('super_user') != 1){
     $('#settings').hide();
+    $('#delete').hide();
   }
 
   $("#button_update_fields").click(function(){
@@ -281,6 +283,22 @@ $(document).ready(function(){
         });
   });
 
+  $("#delete").click(function(){
+        $.ajax({
+            url: "/directors/delete/" + did,
+            type: "POST",
+            data: {
+                did: did
+            },
+            success: function(data, textStatus, jqXHR){
+                window.location.replace("/");
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+  });
+
 });
 </script>
 <!-- Add Google Maps -->
@@ -289,7 +307,7 @@ $(document).ready(function(){
 $(document).ready(function () {
 
   $("#movies").slick({
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 300,
     slidesToShow: 1,
@@ -301,7 +319,7 @@ $(document).ready(function () {
   });
 
   $("#actors").slick({
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 300,
     slidesToShow: 1,

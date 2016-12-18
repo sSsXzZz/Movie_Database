@@ -40,6 +40,8 @@ router.get("/:key", function(req, res, next) {
         function(data,callback){
             var query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Director_Ratings WHERE did=" + data.data.did + ") t1";
             db.get().query(query_string, function(err,rows, fields){
+                data["avg_rating"] = rows[0].avg_rating;
+                data["rating_count"] = rows[0].count;
                 res.render('director_detail.ejs', data);
                 callback(null);
             });
@@ -99,6 +101,14 @@ router.post("/new", function(req, res, next) {
         });
     });
 
+});
+
+router.post("/delete/:key", function(req, res, next) {
+    var query_string = "DELETE FROM Directors WHERE did=" + req.body.did;
+    db.get().query(query_string, function(err, results){
+        if (err) throw err;
+        res.status(200).send();
+    });
 });
 
 function objectArrayIndexOf(myArray, searchTerm, property) {

@@ -333,6 +333,14 @@ router.post("/new", function(req, res, next) {
     res.status(200).send();
 });
 
+router.post("/delete/:key", function(req, res, next) {
+    var query_string = "DELETE FROM Movies WHERE mid=" + req.body.mid;
+    db.get().query(query_string, function(err, results){
+        if (err) throw err;
+        res.status(200).send();
+    });
+});
+
 function objectArrayIndexOf(myArray, searchTerm, property) {
     for(var i = 0, len = myArray.length; i < len; i++) {
         if (myArray[i][property] === searchTerm) return i;

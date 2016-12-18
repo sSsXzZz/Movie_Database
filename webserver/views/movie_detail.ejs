@@ -443,7 +443,24 @@ $(document).ready(function(){
 
   if (typeof Cookies.get('super_user') === "undefined" || Cookies.get('super_user') != 1){
     $('#settings').hide();
+    $('#delete').hide();
   }
+
+  $("#delete").click(function(){
+        $.ajax({
+            url: "/movies/delete/" + mid,
+            type: "POST",
+            data: {
+                mid: mid
+            },
+            success: function(data, textStatus, jqXHR){
+                window.location.replace("/");
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(jqXHR.responseText);
+            },
+        });
+  });
 
   $("#button_update_fields").click(function(){
         $.ajax({
