@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db');
 var dateFormat = require('dateformat');
+var async = require('async');
 
 router.get("/:key", function(req, res, next) {
     var moviekey = parseInt(req.params.key, 10);
@@ -9,40 +10,42 @@ router.get("/:key", function(req, res, next) {
         res.status(400).send("Requested movie does not exist!");
         return;
     }
-    var query_string = "SELECT D.*, M.movie_title, M.mid, M.image_url as \"movie_url\", A.name as \"actor_name\", A.aid, A.image_url as \"actor_url\""
-        + " FROM Directors D, Movies M, Actors A, Director_Movie DM, Actor_Movie AM"
-        + " WHERE D.did=" + req.params.key + " AND DM.did=" + req.params.key + " AND DM.mid=M.mid AND AM.mid=DM.mid AND A.aid=AM.aid";
-    db.get().query(query_string,function(err,rows, fields){
-        if (err) throw err;
-        var actors = [];
-        var movies = [];
-        rows.forEach(function(entry){
-            if (objectArrayIndexOf(actors,entry.aid,"aid") === -1){
-                actors.push({
-                    name: entry.actor_name,
-                    aid: entry.aid,
-                    image_url: entry.actor_url
-                });
-            }
-            if (objectArrayIndexOf(movies,entry.mid,"mid") === -1){
-                movies.push({
-                    movie_title: entry.movie_title,
-                    mid: entry.mid,
-                    image_url: entry.movie_url,
-                });
-            }
-        });
-        var director_data = rows[0];
-        query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Director_Ratings WHERE did=" + moviekey + ") t1";
-        db.get().query(query_string, function(err,rows, fields){
-            res.render('director_detail.ejs', {
-                data: director_data,
-                actors: actors,
-                movies: movies,
-                avg_rating: rows[0].avg_rating,
-                rating_count: rows[0].count
+    var key = req.params.key;
+    async.waterfall([
+        function(callback){
+            var query_string = "SELECT DISTINCT D.* FROM Directors D WHERE D.did=" + key;
+            db.get().query(query_string, function(err,rows,fields){
+                var data = {
+                    data: rows[0]
+                };
+                callback(null,data);
             });
-        });
+        },
+        function(data,callback){
+            var query_string = "SELECT DISTINCT M.movie_title, M.mid, M.image_url FROM Movies M, Director_Movie DM WHERE M.mid=DM.mid AND DM.did=" + data.data.did;
+            db.get().query(query_string, function(err,rows,fields){
+                data["movies"] = rows;
+                callback(null,data);
+            });
+        },
+        function(data,callback){
+            var query_string = "SELECT DISTINCT A.name, A.aid, A.image_url FROM Actors A, Director_Movie DM, Actor_Movie AM WHERE DM.did="
+                + data.data.did
+                + " AND DM.mid=AM.mid AND AM.aid=A.aid";
+            db.get().query(query_string, function(err,rows,fields){
+                data["actors"] = rows;
+                callback(null,data);
+            });
+        },
+        function(data,callback){
+            var query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Director_Ratings WHERE did=" + data.data.did + ") t1";
+            db.get().query(query_string, function(err,rows, fields){
+                res.render('director_detail.ejs', data);
+                callback(null);
+            });
+        }
+    ], function(err,results){
+        if (err) throw err;
     });
 });
 
