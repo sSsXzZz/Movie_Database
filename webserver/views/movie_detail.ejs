@@ -83,15 +83,15 @@ body, html {
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Year"><%= data.year %></div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Language"><%= data.language %></div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Duration"><%= data.duration %>Min</div>
-        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue"><%= data.revenue ? "$" + data.revenue : "Revenue N/A" %></div>
+        <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="Revenue"><%= typeof data.revenue !== "undefined" ? "$" + data.revenue : "Revenue N/A" %></div>
         <div class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:10px;" title="BW vs Color"><%= data.color ? "Color" : "BW" %></div>
         <br>
         <% genres.forEach(function(genre){ %>
-            <div title="Genre" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= genre %></div>
+            <div title="Genre" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= genre.name %></div>
         <% }); %>
         <br>
         <% keywords.forEach(function(keyword){ %>
-            <div title="Keyword" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= keyword %></div>
+            <div title="Keyword" class="item_hoverable" style="font-size:20px; display:inline-block; margin-left:1.5%; margin-bottom: 1.5%"><%= keyword.keyword %></div>
         <% }); %>
 
 

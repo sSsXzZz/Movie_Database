@@ -10,17 +10,63 @@ router.get("/:key", function(req, res, next) {
         res.status(400).send("Requested movie does not exist!");
         return;
     }
+    /*
     var query_string = "SELECT M.*, A.name as \"actor_name\", A.aid, A.image_url as \"actor_url\", D.name as \"director_name\", D.did, D.image_url as \"director_url\", G.name as \"genre\", K.keyword " 
     + "FROM Movies M, Actors A, Actor_Movie AM, Directors D, Director_Movie DM, Genres G, Movie_Keywords K " 
     + "WHERE M.mid=" + moviekey + " AND AM.mid=" + moviekey + " AND A.aid=AM.aid" + " AND DM.mid=" + moviekey + " AND D.did=DM.did" + " AND G.mid=" + moviekey + " AND K.mid=" + moviekey;
-    db.get().query(query_string,function(err,rows, fields){
+    */
+    async.waterfall([
+        function(callback){
+            var query_string = "SELECT * FROM Movies WHERE mid=" + moviekey;
+            db.get().query(query_string,function(err,rows,field){
+                var movie_data = {
+                    data: rows[0]
+                }
+                callback(null,movie_data);
+            });
+        },
+        function(movie_data,callback){
+            var query_string = "SELECT DISTINCT A.aid, A.name, A.image_url FROM Actors A, Actor_Movie AM WHERE AM.aid=A.aid AND AM.mid=" + moviekey;
+            db.get().query(query_string,function(err,rows,field){
+                movie_data["actors"]= rows;
+                callback(null,movie_data);
+            });
+        },
+        function(movie_data,callback){
+            var query_string = "SELECT DISTINCT D.did, D.name, D.image_url FROM Directors D, Director_Movie DM WHERE DM.did=D.did AND DM.mid=" + moviekey;
+            db.get().query(query_string,function(err,rows,field){
+                movie_data["director"]= rows[0];
+                callback(null,movie_data);
+            });
+        },
+        function(movie_data,callback){
+            var query_string = "SELECT keyword FROM Movie_Keywords WHERE mid=" + moviekey;
+            db.get().query(query_string,function(err,rows,field){
+                movie_data["keywords"]= rows;
+                callback(null,movie_data);
+            });
+        },
+        function(movie_data,callback){
+            var query_string = "SELECT name FROM Genres WHERE mid=" + moviekey;
+            db.get().query(query_string,function(err,rows,field){
+                movie_data["genres"]= rows;
+                callback(null,movie_data);
+            });
+        },
+        function(movie_data,callback){
+            var query_string = "SELECT AVG(rating) AS avg_rating, COUNT(rating) as count FROM (SELECT rating FROM Movie_Ratings WHERE mid=" + moviekey + ") t1";
+            db.get().query(query_string, function(err,rows, fields){
+                movie_data["avg_rating"] = rows[0].avg_rating;
+                movie_data["rating_count"] = rows[0].count;
+                console.log(movie_data);
+                res.render('movie_detail.ejs', movie_data);
+            });
+        },
+    ],  function(err,results){
         if (err) throw err;
-
-        if (rows <= 0){
-            res.status(400).send("Couldn't load all the information for the movie!");
-            return;
-        }
-
+    });
+    /*
+    db.get().query(query_string,function(err,rows, fields){
         var actors = [];
         var genres = [];
         var keywords = [];
@@ -59,6 +105,7 @@ router.get("/:key", function(req, res, next) {
             });
         });
     });
+    */
 });
 
 router.post("/update/:key", function(req, res, next) {
