@@ -150,8 +150,8 @@ router.post("/delete/:key", function(req, res, next) {
 });
 
 router.post('/rating_history/:key', function(req,res,next){
-    var query_string = "SELECT A.name, A.image_url, AR.rating, AR.comments, AR.timestamp"
-        + " FROM Actors A, Actor_Ratings AR WHERE AR.aid=A.aid"
+    var query_string = "SELECT A.name, A.image_url, AR.rating, AR.comments, AR.timestamp, U.username"
+        + " FROM Actors A, Actor_Ratings AR, Users U WHERE AR.aid=A.aid AND U.uid=AR.uid"
         + " AND A.aid=" + req.params.key + " ORDER BY timestamp DESC";
     db.get().query(query_string, function(err,rows,fields){
         if (err) throw err;

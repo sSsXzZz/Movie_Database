@@ -389,8 +389,8 @@ router.post("/delete/:key", function(req, res, next) {
 });
 
 router.post('/rating_history/:key', function(req,res,next){
-    var query_string = "SELECT M.movie_title as 'name', M.image_url, MR.rating, MR.comments, MR.timestamp"
-        + " FROM Movies M, Movie_Ratings MR WHERE MR.mid=M.mid"
+    var query_string = "SELECT M.movie_title as 'name', M.image_url, MR.rating, MR.comments, MR.timestamp, U.username"
+        + " FROM Movies M, Movie_Ratings MR, Users U WHERE MR.mid=M.mid AND U.uid=MR.uid"
         + " AND M.mid=" + req.params.key + " ORDER BY timestamp DESC";
     db.get().query(query_string, function(err,rows,fields){
         if (err) throw err;

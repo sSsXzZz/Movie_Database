@@ -323,10 +323,11 @@ $(document).ready(function(){
             var image_url = data[i].image_url;
             var timestamp = data[i].timestamp.split("T0").join(" ").split("Z").join(" ");
             var comments = data[i].comments;
+            var username = data[i].username;
             var html = "<div class=\"row history_item\" style=\"margin-top: 2.5%; padding-bottom: 1.5%\"><div class=\"col-md-12\" style=\"text-align: center; background-color: #80DEEA; margin-bottom: 1.5%\"> <i>" + timestamp
                 + "</i> </div> <div class=\"col-md-3\"> <img src=\"" + image_url 
                 + "\" style=\"width:70%; height: 100%; border-radius: 5px;\"> </div> <div class=\"col-md-3\"> <canvas id=\"myChart" + i
-                + "\" width=\"200\" height=\"200\"></canvas></div> <div class=\"col-md-6\" style=\"text-align: left; font-size: 25px;\"> <h2 style=\" font-weight: bold;\">" + name
+                + "\" width=\"200\" height=\"200\"></canvas></div> <div class=\"col-md-6\" style=\"text-align: left; font-size: 25px;\"> <h2 style=\" font-weight: bold;\">" + username
                 + "</h2>" + comments
                 + "</div> </div>";
             $("#comments_modal_wrapper").append(html);
