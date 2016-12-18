@@ -1,14 +1,18 @@
 $(document).ready(function(){
+    var history_load = 0;
     $("#history_button").on('click', function(){
-        $.ajax({
-            url: "/users/rating_history",
-            type: "POST",
-            data: {
-                uid: Cookies.get('uid')
-            },
-            success: ratingHistorySuccess,
-            error: alertError
-        });
+        if (history_load === 0 ){
+            $.ajax({
+                url: "/users/rating_history",
+                type: "POST",
+                data: {
+                    uid: Cookies.get('uid')
+                },
+                success: ratingHistorySuccess,
+                error: alertError
+            });
+            history_load = 1;
+        }
     });
 });
 
