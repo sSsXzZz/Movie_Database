@@ -489,15 +489,19 @@ $(document).ready(function(){
         });
   });
 
+    var clicked = 0;
     $("#comments").on('click', function(){
-        $.ajax({
-            url: "/movies/rating_history/" + mid,
-            type: "POST",
-            data: {
-            },
-            success: ratingHistorySuccess,
-            error: alertError
-        });
+        if (clicked === 0){
+            $.ajax({
+                url: "/movies/rating_history/" + mid,
+                type: "POST",
+                data: {
+                },
+                success: ratingHistorySuccess,
+                error: alertError
+            });
+            clicked = 1;
+        }
     });
 
 });

@@ -301,15 +301,19 @@ $(document).ready(function(){
         });
   });
 
+    var clicked = 0;
     $("#comments").on('click', function(){
-        $.ajax({
-            url: "/actors/rating_history/" + aid,
-            type: "POST",
-            data: {
-            },
-            success: ratingHistorySuccess,
-            error: alertError
-        });
+        if (clicked === 0){
+            $.ajax({
+                url: "/actors/rating_history/" + aid,
+                type: "POST",
+                data: {
+                },
+                success: ratingHistorySuccess,
+                error: alertError
+            });
+            clicked = 1;
+        }
     });
 
     function ratingHistorySuccess(data, textStatus, jqXHR){
