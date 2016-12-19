@@ -3,7 +3,7 @@ import json
 import MySQLdb
 import time
 
-db = MySQLdb.connect("localhost","root","vishnu1","imdb")
+db = MySQLdb.connect(host="199.98.20.114", port=3306, user="yash", passwd="cheese", db="imdb")
 x = db.cursor()
 
 sql_query = "SELECT movie_title FROM Movies"
