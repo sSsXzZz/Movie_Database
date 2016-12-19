@@ -58,7 +58,6 @@ router.get("/:key", function(req, res, next) {
             db.get().query(query_string, function(err,rows, fields){
                 movie_data["avg_rating"] = rows[0].avg_rating;
                 movie_data["rating_count"] = rows[0].count;
-                console.log(movie_data);
                 res.render('movie_detail.ejs', movie_data);
             });
         },
