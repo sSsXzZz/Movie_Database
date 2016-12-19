@@ -8,7 +8,7 @@ $(document).ready(function(){
                 data: {
                     uid: Cookies.get('uid')
                 },
-                success: ratingHistorySuccess,
+                success: ratingUserHistorySuccess,
                 error: alertError
             });
             history_load = 1;
@@ -16,7 +16,7 @@ $(document).ready(function(){
     });
 });
 
-function ratingHistorySuccess(data, textStatus, jqXHR){
+function ratingUserHistorySuccess(data, textStatus, jqXHR){
     for(i=0; i < data.length; i++){
         var rating = data[i].rating;
         var name = data[i].name;
